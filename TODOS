@@ -1,0 +1,12 @@
+problems:
+- refernce is not passing when creatin notes
+- remove perms from "any" in appwrite console 
+- POSTCARD: 9.30 24/34 
+- routes 
+- edit notes
+
+tasks
+- react loading bar
+- dropdiwn menu fr acou settings like google 
+
+properly set cors in appwrite platofrm '*` is not a good practice
