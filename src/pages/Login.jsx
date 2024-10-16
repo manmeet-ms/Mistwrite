@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 // import InputwRef from "../components/InputwRef";
 import Header from "../components/Header/Header";
 import LoginFormUnit from "../components/LoginFormUnit";
+import { ThemeProvider } from '@/components/theme-provider';
 
 const Login = () => {
   // const navigate = useNavigate();
@@ -37,8 +38,11 @@ const Login = () => {
   // };
   return (
     <>
+<ThemeProvider>
       <Header />
   <LoginFormUnit/>
+
+  </ThemeProvider>
     </>
   );
 };

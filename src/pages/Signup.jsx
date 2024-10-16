@@ -9,6 +9,7 @@ import authService from "../appwrite/auth";
 import { login as storeAuthLogin } from "../store/authSlice";
 import InputwRef from "../components/InputwRef";
 import Header from '../components/Header/Header' 
+import { ThemeProvider } from '@/components/theme-provider';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -36,6 +37,7 @@ const Signup = () => {
 
   return (
     <>
+<ThemeProvider>
 
     <Header/>
       <section>
@@ -56,7 +58,7 @@ const Signup = () => {
             {...register("name", {
               required: true,
             })}
-          />
+            />
           <InputwRef
             label="email"
             ref={register}
@@ -67,7 +69,7 @@ const Signup = () => {
             {...register("email", {
               required: true,
             })}
-          />
+            />
           <InputwRef
             label="password"
             ref={register}
@@ -82,6 +84,7 @@ const Signup = () => {
           <Button type="submit" >Create Account</Button>
         </form>
       </section>
+</ThemeProvider>
     </>
   );
 };
@@ -93,7 +96,7 @@ export default Signup;
 
 // import Signup from '../components/Signup'
 // const Signup = () => {
-//   return (
+  //   return (
 // <div className="px-4">
 // <Signup/>
 // </div>

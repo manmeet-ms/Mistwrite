@@ -1,14 +1,18 @@
 problems:
-<!-- - refernce is not passing when creatin notes -->
-<!-- - remove perms from "any" in appwrite console  -->
-- POSTCARD: 9.30 24/34 
-- routes 
-- edit notes
-- currentUSer can all allUsers notes 😝
-tasks
-- react loading bar
-- intuitive loader
-- animations real feel like an app
-- dropdiwn menu fr acou settings like google 
+<!-- [ ] - [ ] refernce is not passing when creatin notes -->
+<!-- [ ] - [ ] remove perms from "any" in appwrite console  -->
+- [ ] POSTCARD: 9.30 24/34 
+- [ ] routes 
+- [ ] edit notes
+- [ ] currentUSer can all allUsers notes 😝
+- [ ] html parsing
 
+tasks
+- [ ] react loading bars
+- breadcrusb in heaader 
+
+- [ ] intuitive loader
+- [ ] animations real feel like an app
+- [ ] dropdiwn menu fr acou settings like google 
+- [x] masonry (done)
 properly set cors in appwrite platofrm '*` is not a good practice

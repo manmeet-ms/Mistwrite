@@ -84,7 +84,7 @@ const CreateNote = ({ post }) => {
       <Dialog>
         <DialogTrigger asChild>
           <span
-            className={`flex flex-col items-center font-medium fixed bottom-24 right-4 text-green-950 bg-green-400 rounded-2xl p-4`}
+            className={`flex flex-col items-center font-medium fixed bottom-24 right-4 text-blue-950 bg-blue-400 rounded-2xl p-4`}
           >
             {/* <AddOutlined className="" sx={{ fontSize: 24 }} /> */}
             create

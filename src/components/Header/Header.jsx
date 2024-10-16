@@ -83,7 +83,7 @@ const Header = () => {
                     Burning Notes
                     <img
                       className="w-6 h-6"
-                      src="https://cdn3.emoji.gg/emojis/7251-green-flames.gif"
+                      src="https://cdn3.emoji.gg/emojis/7251-blue-flames.gif"
                       alt=""
                     />
                   </div>
@@ -120,14 +120,14 @@ const Header = () => {
                   Burning Notes
                   <img
                     className="w-6 h-6"
-                    src="https://cdn3.emoji.gg/emojis/7251-green-flames.gif"
+                    src="https://cdn3.emoji.gg/emojis/7251-blue-flames.gif"
                     alt=""
                   />
                 </div> */}
         <Link to="/">
           <div className="flex">
             Burning Notes
-            <LocalFireDepartmentOutlined className="text-green-400 ml-1" />
+            <LocalFireDepartmentOutlined className="text-blue-400 ml-1" />
           </div>
         </Link> 
 
@@ -136,7 +136,7 @@ const Header = () => {
                   Burning Notes
                   <img
                     className="w-6 h-6"
-                    src="https://cdn3.emoji.gg/emojis/7251-green-flames.gif"
+                    src="https://cdn3.emoji.gg/emojis/7251-blue-flames.gif"
                     alt=""
                   />
                 </div> */}

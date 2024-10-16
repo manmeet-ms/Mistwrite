@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { useDispatch } from 'react-redux';
 import authService, { AuthService } from './appwrite/auth';
 import { login, logout } from './store/authSlice';
 import { ThemeProvider } from '@/components/theme-provider';
+
 import Header from './components/Header/Header';
 import AddNote from './pages/AddNote';
-
+import Masonry from '@mui/lab/Masonry';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import NoteCard from './components/NoteCard';
@@ -18,8 +19,10 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import LoginFormUnit from './components/LoginFormUnit';
 import { Query } from 'appwrite';
+import LoadingBar from 'react-top-loading-bar'
 
 function App() {
+    const ref = useRef(null)
     const authStatus = useSelector((state) => state.auth.status);
     const [notes, setNotes] = useState([]);
     useEffect(() => {
@@ -78,13 +81,13 @@ function App() {
 
         await appwriteNoteService.createNote({
             title: 'To-Do List',
-            content: '1. Buy groceries 2. Pick up laundry 3. Call the plumber',
+            content: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis modi asperiores quod deserunt! Voluptas, expedita.<br><ol><li>Buy groceries</li><li>Pick up laundry</li><li>Call the plumber</li><li>Buy groceries</li><li>Pick up laundry</li><li>Call the plumber</li></ol> ',
             userId: userData.$id,
         });
 
         await appwriteNoteService.createNote({
             title: 'Dinner Plans',
-            content: 'Book a table at the new Italian restaurant for Saturday night.',
+            content: 'Book a table at the new <i>Italian</i> restaurant for <b>Saturday night</b>.',
             userId: userData.$id,
         });
 
@@ -102,7 +105,7 @@ function App() {
 
         await appwriteNoteService.createNote({
             title: 'Tomorrow’s Focus',
-            content: 'Work on the business proposal and finalize the marketing plan.',
+            content: 'Work on the business Work on the business proposal and finalize the marketing plan proposal and finalize the marketing plan.',
             userId: userData.$id,
         });
 
@@ -114,13 +117,7 @@ function App() {
 
         await appwriteNoteService.createNote({
             title: 'Daily Inspiration',
-            content: 'The only limit to our realization of tomorrow is our doubts of today. Keep pushing forward, no matter how challenging things seem. Trust in your efforts, and the results will follow.',
-            userId: userData.$id,
-        });
-
-        await appwriteNoteService.createNote({
-            title: 'Quote of the Day',
-            content: 'The future depends on what we do in the present. - Gandhi',
+            content: '<blockquote>The only limit to our realization of tomorrow is our doubts of today. Keep pushing forward, no matter how challenging things seem. Trust in your efforts, and the results will follow.</blockquote> ',
             userId: userData.$id,
         });
 
@@ -136,42 +133,40 @@ function App() {
             userId: userData.$id,
         });
 
-        await appwriteNoteService.createNote({
-            title: 'Inspiration',
-            content: 'Success is not final, failure is not fatal: it is the courage to continue that counts. - Winston Churchill',
-            userId: userData.$id,
-        });
-
-        await appwriteNoteService.createNote({
-            title: 'Inspiration',
-            content: 'Success is not final, failure is not fatal: it is the courage to continue that counts. - Winston Churchill',
-            userId: userData.$id,
-        });
+       
     };
 
     return !loading ? (
         <>
             <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
                 <Header />
+                <LoadingBar color='#4ade80' ref={ref} />
+     
                 {authStatus ? (
                     <>
-                        <div className="masonary transition-all duration-500">
-                            {notes.map((notesIdx) => {
-                                // console.log(notesIdx);
-                                // console.log(notesIdx.title);
-                                // console.log(notesIdx.content);
-                                // console.log(notesIdx.userId);
-                                // console.log(notesIdx.slug);
-                                // console.log(notesIdx.$id);
-                                // console.log(notesIdx.$createdAt);
-                                // console.log(notesIdx.$createdAt);
+                        {/* <div className="masonary transition-all duration-500"> */}
+                        <div className="transition-all duration-500">
+                        <Masonry columns={{ xs: 2, sm: 3, md:4, lg:5 }}  spacing={1}>
+                                {notes.map((notesIdx) => {
+                                    // console.log(notesIdx);
+                                    // console.log(notesIdx.title);
+                                    // console.log(notesIdx.content);
+                                    // console.log(notesIdx.userId);
+                                    // console.log(notesIdx.slug);
+                                    // console.log(notesIdx.$id);
+                                    // console.log(notesIdx.$createdAt);
+                                    // console.log(notesIdx.$createdAt);
 
-                                return <NoteCard key={notesIdx.$id} noteId={String(notesIdx.$id)} title={notesIdx.title} content={notesIdx.content} userId={notesIdx.userId} createdAt={notesIdx.$createdAt} />;
-                            })}
+                                    return <NoteCard key={notesIdx.$id} noteId={String(notesIdx.$id)} title={notesIdx.title} content={notesIdx.content} userId={notesIdx.userId} createdAt={notesIdx.$createdAt} />;
+                                })}
+                            </Masonry>
                         </div>
                         <AddNote />
 
-                        <Button onClick={generateTestData}>Generate Test Data</Button>
+                        
+                            {/* <Button onClick={ ()=>{  generateTestData();ref.current.continuousStart()}}>Generate Test Data</Button> */}
+                            <Button onClick={generateTestData}>Generate Test Data</Button>
+
                     </>
                 ) : (
                     <LoginFormUnit />
