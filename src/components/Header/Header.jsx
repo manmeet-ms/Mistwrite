@@ -148,10 +148,10 @@ const Header = () => {
 
         {authStatus ? (
           <LogoutButton />
-        ) : (
-          <Button variant="ghost">
-            <Link to="/login">Login</Link>
-          </Button>
+        ) : (null
+          // <Button variant="ghost">
+          //   <Link to="/login">Login</Link>
+          // </Button>
         )}
         {/* {authStatus && (
           <Button variant="ghost">

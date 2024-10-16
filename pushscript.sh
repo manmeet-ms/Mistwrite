@@ -1,5 +1,4 @@
 git status --short
 git add -A
-read MSG 
-git commit -m "$MSG"
+git commit -m "tested app shortcuts"
 git push origin main

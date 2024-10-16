@@ -16,17 +16,31 @@ import appwriteNoteService from './appwrite/config';
 import { Add } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import LoginFormUnit from './components/LoginFormUnit';
+import { Query } from 'appwrite';
 
 function App() {
+    const authStatus = useSelector((state) => state.auth.status);
     const [notes, setNotes] = useState([]);
     useEffect(() => {
-        // queries could be passd in this empty array
-        appwriteNoteService.getEveryNote([]).then((reterivedNotes) => {
-            if (reterivedNotes) {
-                // console.log("reterivedNotes", reterivedNotes.documents);
-                setNotes(reterivedNotes.documents); // as it will list of notes as arrays, which will be passed
+        const fetchNotes = async () => {
+            try {
+                let queryPass = [];
+                // queryPass = [Query.equal("userId", ["6706c0ee0031b3618b30"])];
+                // queryPass = [Query.equal("userId", ["670f2c71002cf54a81ab"])];
+                const fetchedNotes = await appwriteNoteService.getEveryNote(queryPass);
+                if (fetchedNotes && fetchedNotes.documents) {
+                    // console.log("reterivedNotes", reterivedNotes.documents);
+                    setNotes(fetchedNotes.documents);
+                }
+            } catch (error) {
+                console.error('Error fetching notes:', error);
+            } finally {
+                setloading(false);
             }
-        });
+        };
+
+        fetchNotes();
     }, []);
 
     //  to overcome network delays when interactive with data from server
@@ -139,22 +153,30 @@ function App() {
         <>
             <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
                 <Header />
-                <div className="masonary">
-                    {notes.map((notesIdx) => {
-                        // console.log(notesIdx);
-                        // console.log(notesIdx.title);
-                        // console.log(notesIdx.content);
-                        // console.log(notesIdx.userId);
-                        // console.log(notesIdx.slug);
-                        // console.log(notesIdx.$id);
-                        // console.log(notesIdx.$createdAt);
+                {authStatus ? (
+                    <>
+                        <div className="masonary transition-all duration-500">
+                            {notes.map((notesIdx) => {
+                                // console.log(notesIdx);
+                                // console.log(notesIdx.title);
+                                // console.log(notesIdx.content);
+                                // console.log(notesIdx.userId);
+                                // console.log(notesIdx.slug);
+                                // console.log(notesIdx.$id);
+                                // console.log(notesIdx.$createdAt);
+                                // console.log(notesIdx.$createdAt);
 
-                        return <NoteCard key={notesIdx.$id} noteId={String(notesIdx.$id)} title={notesIdx.title} content={notesIdx.content} userID={notesIdx.content} userId={notesIdx.$id} createdAt={notesIdx.$createdAt} />;
-                    })}
-                </div>
-                <AddNote />
+                                return <NoteCard key={notesIdx.$id} noteId={String(notesIdx.$id)} title={notesIdx.title} content={notesIdx.content} userId={notesIdx.userId} createdAt={notesIdx.$createdAt} />;
+                            })}
+                        </div>
+                        <AddNote />
 
-                <Button onClick={generateTestData}>Generate Test Data</Button>
+                        <Button onClick={generateTestData}>Generate Test Data</Button>
+                    </>
+                ) : (
+                    <LoginFormUnit />
+                )}
+
                 {/* <span
         className={`fixed bottom-8 right-4 text-green-950 bg-green-400 rounded-2xl p-4`}
       >

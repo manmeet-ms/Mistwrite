@@ -6,6 +6,7 @@ import {createBrowserRouter,RouterProvider} from "react-router-dom";
 
 import App from './App.jsx'
 import './index.css'
+import './App.css'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import AddNote from './pages/AddNote'
@@ -43,7 +44,7 @@ const router = createBrowserRouter([
             path: "/notes",
             element: (
                 <AuthLayout authentication>
-                    <AllNotes />
+                    <App />
                 </AuthLayout>
             ),
         },

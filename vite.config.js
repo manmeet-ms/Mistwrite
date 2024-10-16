@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [react(), VitePWA({
     registerType: 'autoUpdate',
     injectRegister: false,
-
+   
     pwaAssets: {
       disabled: false,
       config: true,
@@ -19,6 +19,19 @@ export default defineConfig({
       short_name: 'burningnotes',
       description: 'Burning Notes',
       theme_color: '#111827',
+      display: "standalone", // from resources
+      shortcuts : [
+          {
+              "name": "Create Note",
+              "url": "/add-note",
+              "description": "Create new note quickly"
+          },
+          {
+              "name": "Settings",
+              "url": "/settings"
+          }
+        
+      ]
     },
 
     workbox: {

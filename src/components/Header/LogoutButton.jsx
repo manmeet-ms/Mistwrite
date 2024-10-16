@@ -15,7 +15,8 @@ const LogoutButton = () => {
       .logout()
       .then(() => {
         dispatch(logout());
-        navigate("/signup")
+        // navigate("/signup")
+        navigate("/login")
       })
       .catch((e) => {
         console.log("Error found - logoutBtncomponentHeader", e);

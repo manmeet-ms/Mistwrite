@@ -22,7 +22,7 @@ export class AppwriteNoteService {
         data
       );
     } catch (error) {
-      alert(error);
+      // alert(error);
       console.error('Error creating note:', error);
       throw error;
     }
@@ -37,7 +37,7 @@ export class AppwriteNoteService {
         data
       );
     } catch (error) {
-      alert(error);
+      // alert(error);
       console.error('Error updating note:', error);
       throw error;
     }
@@ -59,7 +59,7 @@ export class AppwriteNoteService {
   //       }
   //     );
   //   } catch (errorFound) {
-  //alert(errorFound);
+  // alert(errorFound);
   //     console.log(
   //       "Appwrite-NoteService error :: at createNote() :: ",
   //       errorFound
@@ -75,7 +75,7 @@ async readNote(slug) {
         slug
       );
     } catch (errorFound) {
-      alert(errorFound);
+      // alert(errorFound);
       console.log(
         "Appwrite-NoteService error :: at readNote() :: ",
         errorFound
@@ -83,18 +83,18 @@ async readNote(slug) {
     }
   }
   //----  DISPLAYS EVERY SINGLE NOTE REGARDLESS OF WHETHER STAUS IS SET TO TEMP/PERMANENT ----*/
-  async getEveryNote() {
+  async getEveryNote(queries) {
     try {
       const getEveryNoteResult = await this.database.listDocuments(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
-        [] // queries (optional)
+        queries // get all notes of currently logged in user
       );
       console.log("getEveryNoteResult() config.js: ",getEveryNoteResult);
       
       return getEveryNoteResult;
     } catch (errorFound) {
-      alert(errorFound);
+      // alert(errorFound);
       console.log(
         "Appwrite-NoteService error config.js :: at getEveryNote() :: ",
         errorFound
@@ -110,7 +110,7 @@ async readNote(slug) {
         [Query.equal("status_idx", ["permanent"])] // queries (optional)
       );
     } catch (errorFound) {
-      alert(errorFound);
+      // alert(errorFound);
       console.log(
         "Appwrite-NoteService error config.js :: at getSavedNotes() :: ",
         errorFound
@@ -126,7 +126,7 @@ async readNote(slug) {
         [Query.equal("status_idx", ["burn"])] // queries (optional)
       );
     } catch (errorFound) {
-      alert(errorFound);
+      // alert(errorFound);
       console.log(
         "Appwrite-NoteService error config.js :: at getBurningNotes() :: ",
         errorFound
@@ -144,7 +144,7 @@ async readNote(slug) {
   //       { title, content, status }
   //     );
   //   } catch (errorFound) {
-  //alert(errorFound);
+  // alert(errorFound);
   //     console.log(
   //       "Appwrite-NoteService error :: at updateNote() :: ",
   //       errorFound
@@ -162,7 +162,7 @@ async readNote(slug) {
         noteId       
       );
     } catch (errorFound) {
-      alert(errorFound);
+      // alert(errorFound);
       console.log("Appwrite-NoteService error :: at deleteNote() :: ",errorFound);
       return false;
     }
