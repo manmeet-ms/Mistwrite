@@ -5,7 +5,9 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), VitePWA({
+  plugins: [
+    react(),
+    VitePWA({
     registerType: 'autoUpdate',
     injectRegister: false,
    
@@ -17,9 +19,26 @@ export default defineConfig({
     manifest: {
       name: 'Burning Notes',
       short_name: 'burningnotes',
-      description: 'Burning Notes',
+      description: 'A minimalist digital notebook for jotting down quick thoughts and organizing your mind.',
       theme_color: '#111827',
       display: "standalone", // from resources
+      "icons": [
+    {
+      "src": "/icons/burningnotes-icon-144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/burningnotes-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/burningnotes-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
       shortcuts : [
           {
               "name": "Create Note",
@@ -28,7 +47,7 @@ export default defineConfig({
           },
           {
               "name": "Settings",
-              "url": "/settings"
+              "url": "/"
           }
         
       ]
