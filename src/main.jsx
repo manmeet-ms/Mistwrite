@@ -1,19 +1,19 @@
-import React from 'react'
-import { createRoot } from 'react-dom/client'
-import { Provider } from 'react-redux'
-import store from './store/store.js' 
-import {createBrowserRouter,RouterProvider} from "react-router-dom";
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import store from './store/store.js';
 
-import App from './App.jsx'
-import './index.css'
-import './App.css'
-import Login from './pages/Login'
-import Signup from './pages/Signup'
-import AddNote from './pages/AddNote'
-import AllNotes from './pages/AllNotes'
-import EditNotes from './pages/EditPosts'
+import App from './App.jsx';
+import AuthLayout from './components/AuthLayout';
+import Loader from './components/Loader.jsx';
 import NoteCard from './components/NoteCard';
-import AuthLayout from './components/AuthLayout'
+import './index.css';
+import AddNote from './pages/AddNote';
+import EditNotes from './pages/EditPosts';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import './style.css';
 
 const router = createBrowserRouter([
   // {
@@ -54,6 +54,12 @@ const router = createBrowserRouter([
                 <AuthLayout authentication>
                     <AddNote />
                 </AuthLayout>
+            ),
+        },
+        {
+            path: "/loader",
+            element: (
+<Loader/>
             ),
         },
         {

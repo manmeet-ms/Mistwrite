@@ -6,13 +6,17 @@ problems:
 - [ ] edit notes
 - [ ] currentUSer can all allUsers notes 😝
 - [ ] html parsing
-
+- [ ] smart render upon data change anywhere
+- [ ] 
+- [ ] 
+- [ ] 
 tasks
 - [ ] react loading bars
 - breadcrusb in heaader 
-
+- [ ] ligh/dark mode switch
 - [ ] intuitive loader
 - [ ] animations real feel like an app
 - [ ] dropdiwn menu fr acou settings like google 
 - [x] masonry (done)
+- [ ] remove loader as dependency (an implement you own style)
 properly set cors in appwrite platofrm '*` is not a good practice
