@@ -1,3 +1,17 @@
+tasks
+dark mode switch
+toast
+light mnode color  balance 
+- [ ] react loading bars
+- breadcrusb in heaader 
+- [ ] ligh/dark mode switch
+- [ ] intuitive loader
+- [ ] animations real feel like an app
+- [ ] dropdiwn menu fr acou settings like google 
+- [x] masonry (done)
+- [ ] remove loader as dependency (an implement you own style)
+properly set cors in appwrite platofrm '*` is not a good practice
+
 problems:
 <!-- [ ] - [ ] refernce is not passing when creatin notes -->
 <!-- [ ] - [ ] remove perms from "any" in appwrite console  -->
@@ -10,13 +24,3 @@ problems:
 - [ ] 
 - [ ] 
 - [ ] 
-tasks
-- [ ] react loading bars
-- breadcrusb in heaader 
-- [ ] ligh/dark mode switch
-- [ ] intuitive loader
-- [ ] animations real feel like an app
-- [ ] dropdiwn menu fr acou settings like google 
-- [x] masonry (done)
-- [ ] remove loader as dependency (an implement you own style)
-properly set cors in appwrite platofrm '*` is not a good practice

@@ -1,6 +1,6 @@
 import { ThemeProvider } from '@/components/theme-provider';
 import { Button } from '@/components/ui/button';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import authService from './appwrite/auth';
 import { login, logout } from './store/authSlice';
@@ -20,27 +20,30 @@ function App() {
     const ref = useRef(null);
     const authStatus = useSelector((state) => state.auth.status);
     const [notes, setNotes] = useState([]);
-    useEffect(() => {
-        const fetchNotes = async () => {
-            try {
-                let queryPass = [];
-                // queryPass = [Query.equal("userId", ["6706c0ee0031b3618b30"])];
-                // queryPass = [Query.equal("userId", ["670f2c71002cf54a81ab"])];
-                const fetchedNotes = await appwriteNoteService.getEveryNote(queryPass);
-                if (fetchedNotes && fetchedNotes.documents) {
-                    // console.log("reterivedNotes", fetchedNotes.documents);
-                    setNotes(fetchedNotes.documents);
-
-                }
-            } catch (error) {
-                console.error('Error fetching notes:', error);
-            } finally {
-                setloading(false);
+    const fetchNotes = useCallback(async () => {
+        try {
+            let queryPass = [];
+            const fetchedNotes = await appwriteNoteService.getEveryNote(queryPass);
+            if (fetchedNotes && fetchedNotes.documents) {
+                setNotes(fetchedNotes.documents);
+                
             }
-        };
+        } catch (error) {
+            console.error('Error fetching notes:', error);
+        } finally {
+            setloading(false);
+        }
+    }, []);  
 
-        fetchNotes();
-    }, []);
+useEffect(() => {
+  fetchNotes()
+
+//   return () => {
+//     second
+//   }
+// }, [notes]) //adding notes keeps on 'infinitely' rendering 
+}, [fetchNotes,setNotes]) 
+
 
     //  to overcome network delays when interactive with data from server
     const [loading, setloading] = useState(true);
@@ -133,7 +136,7 @@ function App() {
 
     return !loading ? (
         <>
-            <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+            <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
                 <Header />
                 <LoadingBar color="#4ade80" ref={ref} />
 
