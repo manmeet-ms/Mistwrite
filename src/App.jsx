@@ -81,7 +81,7 @@ useEffect(() => {
         await appwriteNoteService.createNote({
             title: 'To-Do List',
             content:
-                'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis modi asperiores quod deserunt! Voluptas, expedita.<br><ol><li>Buy groceries</li><li>Pick up laundry</li><li>Call the plumber</li><li>Buy groceries</li><li>Pick up laundry</li><li>Call the plumber</li></ol> ',
+                'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis modi asperiores quod deserunt! Voluptas, expedita.<br><li>Buy groceries</li><li>Pick up laundry</li><li>Call the plumber</li><li>Buy groceries</li><li>Pick up laundry</li><li>Call the plumber</li> ',
             userId: userData.$id,
         });
 
@@ -117,7 +117,7 @@ useEffect(() => {
 
         await appwriteNoteService.createNote({
             title: 'Daily Inspiration',
-            content: '<blockquote>The only limit to our realization of tomorrow is our doubts of today. Keep pushing forward, no matter how challenging things seem. Trust in your efforts, and the results will follow.</blockquote> ',
+            content: '<>The only limit to our realization of tomorrow is our doubts of today. Keep pushing forward, no matter how challenging things seem. Trust in your efforts, and the results will follow.</> ',
             userId: userData.$id,
         });
 

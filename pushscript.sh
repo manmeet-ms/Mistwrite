@@ -1,4 +1,4 @@
 git status --short
 git add -A
-git commit -m "create-delete:working masonry-layout:responsive date-parsing-calculation:fit"
+git commit -m "mvp complete create-delete working, ui settled :: migrated to arch"
 git push origin main

@@ -34,30 +34,33 @@ const NoteCard = ({ title, noteId = $id, content, createdAt }, ...props) => {
             console.log('Note card delete function error: ', error);
         }
     };
-
+    
     const calculateTimeLeft = (createdDate, burnDate) => {
-        const deleteThisNote = async () => {
-            await appwriteNoteService.deleteNote(noteId);
-            return result;
-        };
         // let burnDateIntoTime = burnDate.getTime() + 12 * 60 * 60 * 1000; // by default 12H
         let burnDateIntoTime = burnDate.getTime(); // by default 12H
         const diffInMs = parseInt(burnDateIntoTime) - parseInt(Date.now());
-        if (diffInMs === 0) {
-            deleteThisNote()
+        if (diffInMs <= 0) {
+            // const deleteExpiredNote = async () => {
+            //     console.log('id passed calculate time left:', noteId);
+            //     await appwriteNoteService.deleteNote(noteId);
+            //     return result;
+            // };
+            // deleteExpiredNote()
+            console.log("Result of expiration :: note deleted :: ",deleteOnClickButton());
+            
         }
         let days, hours, minutes;
         // if (diffInMs > 0) {
         days = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
         hours = Math.floor((diffInMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         minutes = Math.floor((diffInMs % (1000 * 60 * 60)) / (1000 * 60));
-        return `${hours}h ${minutes}m`;
-        // return `${days}d ${hours}h ${minutes}m`;
+        // return `${hours}h ${minutes}m`;
+        return `${days}d ${hours}h ${minutes}m`;
     };
     const noteCreated = new Date(createdAt);
-    let noteBurn = new Date(new Date(createdAt).getTime()+12*60*60*1000);
+    let noteBurn = new Date(new Date(createdAt).getTime() + 12 * 60 * 60 * 1000);
     //  noteBurn = new Date(new Date(createdAt).getTime()+ (2*60*60*1000));
-    const todayDateNow= Date.now()
+    const todayDateNow = Date.now();
     // const noteBurn = new Date(createdAt);
 
     const timeLeft = calculateTimeLeft(noteCreated, noteBurn);
@@ -84,11 +87,11 @@ const NoteCard = ({ title, noteId = $id, content, createdAt }, ...props) => {
 
                 {/* CONDITIONAL DISPLAY OF TIMELEFT BADGE */}
                 <div className="flex flex-col text-xs text-slate-600 break-all">
-                    <span>Created: {formatDate(noteCreated)} </span> 
-                    <span>Burn: {formatDate(noteBurn)} </span> 
+                    <span>Created: {formatDate(noteCreated)} </span>
+                    <span>Burn: {formatDate(noteBurn)} </span>
                     <span>Now: {formatDate(todayDateNow)} </span>
                     <span>Now: {moment(noteCreated.getTime()).fromNow()} </span>
-                    </div>
+                </div>
                 {/* <div className=" text-xs text-slate-600 break-all">{`Created: ${new Date(createdAt)} BurnDate:${(new Date(((new Date(createdAt)).getTime()+12*60*60*1000))).toString()}`}</div> */}
 
                 {timeLeft ? (
