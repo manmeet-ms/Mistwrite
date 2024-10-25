@@ -1,4 +1,4 @@
 git status --short
 git add -A
-git commit -m "mvp complete create-delete working, ui settled :: migrated to arch"
+git commit -m "almost working:: notes account apeparation working :: deletion :: autodeleteion"
 git push origin main

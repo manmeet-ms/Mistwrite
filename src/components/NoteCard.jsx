@@ -2,7 +2,7 @@
 TODO:all header, all thigns shoul be visible in individual card page, somehow disable Link for now /n/$id is working btw
 TODO: simplyfy date parsing, passing logic , declutter*/
 // burn time left calculation, and creeate-burn variable diplay to notes as hover card
-
+'use client';
 import React, { useState } from 'react';
 import { Calendar, CalendarDays, Delete, Flame } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -15,26 +15,32 @@ import conf from '../conf/conf';
 import moment from 'moment';
 import authService from '../appwrite/auth';
 import { Button } from '@/components/ui/button';
+import { useToast } from '@/hooks/use-toast';
+import { ToastAction } from '@/components/ui/toast';
 
 //  else {
 //     return "Expired";
 //   }
 // };
 const NoteCard = ({ title, noteId = $id, content, createdAt }, ...props) => {
+    const { toast } = useToast();
+
     const formatDate = (dateStringPassed) => {
         return dateStringPassed ? `${moment(dateStringPassed).format('MMM DD, YYYY')} at ${moment(dateStringPassed).format('HH:mm')}` : 'Invalid Date';
     };
-    const deleteOnClickButton = async () => {
+
+    const deleteNoteOperation = async () => {
         console.log('id passed:', noteId);
         try {
-            console.log('id passed undertryblock:', noteId);
+            // console.log('id passed undertryblock:', noteId);
             const result = await appwriteNoteService.deleteNote(noteId);
             console.log('note deletion result:', result);
+            // await appwriteNoteService.getEveryNote()
         } catch (error) {
-            console.log('Note card delete function error: ', error);
+            console.log('Note card delete function error:: NoteCard.jsx', error);
         }
     };
-    
+
     const calculateTimeLeft = (createdDate, burnDate) => {
         // let burnDateIntoTime = burnDate.getTime() + 12 * 60 * 60 * 1000; // by default 12H
         let burnDateIntoTime = burnDate.getTime(); // by default 12H
@@ -46,8 +52,7 @@ const NoteCard = ({ title, noteId = $id, content, createdAt }, ...props) => {
             //     return result;
             // };
             // deleteExpiredNote()
-            console.log("Result of expiration :: note deleted :: ",deleteOnClickButton());
-            
+            console.log('Result of expiration :: note deleted :: ', deleteNoteOperation());
         }
         let days, hours, minutes;
         // if (diffInMs > 0) {
@@ -67,17 +72,28 @@ const NoteCard = ({ title, noteId = $id, content, createdAt }, ...props) => {
 
     return (
         // <Link to={`/n/${noteId}`}>
-        <section className="pt-4 pr-2 pl-4 pb-2 my-2 mx-1 bg-slate-800/50 border border-slate-500/0 rounded-lg">
+        <section className="pt-4 pr-2 pl-4 pb-2 my-2 mx-1 bg-slate-800/50 border border-slate-500/0 rounded-xl">
             <div className="space-y-2">
+       
                 <div className="flex justify-between ">
                     <h4 className="text-slate-200 break-words truncate">{title}</h4>
                     {/* fun, if you want all tehnotes to be deleted once the pages is rendered  */}
                     {/* <Button className='p-2' variant ="ghost" onClick={async ()=>await appwriteNoteService.deleteNote(noteId)} > */}
 
                     {/* Delete Button */}
-                    <Button className="p-2" variant="ghost" onClick={deleteOnClickButton}>
+           
+                  <Button variant="ghost"  className="rounded-xl px-3 relative bottom-1.5"> <DeleteOutlineOutlined    onClick={() => {
+                        deleteNoteOperation()
+                        toast({
+                            title: 'Scheduled: Catch up ',
+                            description: 'Friday, February 10, 2023 at 5:57 PM',
+                            action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
+                        });
+                    }} sx={{ fontSize: 16 }} className=" text-slate-400" />
+              </Button>
+                    {/* <Button className="p-2" variant="ghost" onClick={deleteNoteOperation}>
                         <DeleteOutlineOutlined sx={{ fontSize: 16 }} className="text-slate-400 w-4" />
-                    </Button>
+                    </Button> */}
                 </div>
 
                 <p className="text-sm text-slate-400 break-words text-balance">{parse(content)}</p>

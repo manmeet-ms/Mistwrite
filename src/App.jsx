@@ -15,37 +15,17 @@ import { useSelector } from 'react-redux';
 import LoadingBar from 'react-top-loading-bar';
 import appwriteNoteService from './appwrite/config';
 import LoginFormUnit from './components/LoginFormUnit';
+import { Query } from 'appwrite';
 
 function App() {
+
     const ref = useRef(null);
     const authStatus = useSelector((state) => state.auth.status);
+    const userData = useSelector((state) => state.auth.userData);
     const [notes, setNotes] = useState([]);
-    const fetchNotes = useCallback(async () => {
-        try {
-            let queryPass = [];
-            const fetchedNotes = await appwriteNoteService.getEveryNote(queryPass);
-            if (fetchedNotes && fetchedNotes.documents) {
-                setNotes(fetchedNotes.documents);
-                
-            }
-        } catch (error) {
-            console.error('Error fetching notes:', error);
-        } finally {
-            setloading(false);
-        }
-    }, []);  
-
-useEffect(() => {
-  fetchNotes()
-
-//   return () => {
-//     second
-//   }
-// }, [notes]) //adding notes keeps on 'infinitely' rendering 
-}, [fetchNotes,setNotes]) 
+  
 
 
-    //  to overcome network delays when interactive with data from server
     const [loading, setloading] = useState(true);
     const dispatch = useDispatch(); // for retrieving  relevant data
 
@@ -69,69 +49,88 @@ useEffect(() => {
         //   second;
         // };
     }, []);
-    const userData = useSelector((state) => state.auth.userData);
+    const fetchNotes = async () => {
+        try { 
+            // let queryPass = [Query.equal("userId", userData.$id)];
+            const fetchedNotes = await appwriteNoteService.getEveryNote([Query.equal("userId", userData.$id)]);
+            if (fetchedNotes && fetchedNotes.documents) {
+                setNotes(fetchedNotes.documents); // add useeffecthre in func
+                
+            }
+        } catch (error) {
+            console.error('Error fetching notes:', error);
+        } finally {
+            setloading(false);
+        }
+    };  
+useEffect(() => {
+  fetchNotes()
+
+
+}, [fetchNotes])
+
     const generateTestData = async () => {
         let calc = new Date().getTime() + 12 * 60 * 60 * 1000;
         await appwriteNoteService.createNote({
-            title: 'Meeting Prep',
-            content: 'Discuss project updates and finalize the roadmap.',
+            title: `${userData.name} Meeting Prep`,
+            content: `${userData.$id} Discuss project updates and finalize the roadmap.`,
             userId: userData.$id,
         });
 
         await appwriteNoteService.createNote({
-            title: 'To-Do List',
+            title: `${userData.name} To-Do List`,
             content:
                 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis modi asperiores quod deserunt! Voluptas, expedita.<br><li>Buy groceries</li><li>Pick up laundry</li><li>Call the plumber</li><li>Buy groceries</li><li>Pick up laundry</li><li>Call the plumber</li> ',
             userId: userData.$id,
         });
 
         await appwriteNoteService.createNote({
-            title: 'Dinner Plans',
-            content: 'Book a table at the new <i>Italian</i> restaurant for <b>Saturday night</b>.',
+            title: `${userData.name} Dinner Plans`,
+            content: `${userData.$id} Book a table at the new <i>Italian</i> restaurant for <b>Saturday night</b>.`,
             userId: userData.$id,
         });
 
-        await appwriteNoteService.createNote({
-            title: 'Quick Notes',
-            content: 'Return library books. Send email to professor. Pay the bills.',
-            userId: userData.$id,
-        });
+        // await appwriteNoteService.createNote({
+        //     title:${userData.name} ` Quick Notes`,
+        //     content: `${userData.$id} Return library books. Send email to professor. Pay the bills.`,
+        //     userId: userData.$id,
+        // });
 
         await appwriteNoteService.createNote({
-            title: 'Study Checklist',
+            title: `${userData.name} Study Checklist`,
             content: "Complete the math assignment, revise chemistry notes, and prep for tomorrow's quiz. Don't forget to go over the calculus problems you missed last week. Focus on Chapter 6 and the practice test.",
             userId: userData.$id,
         });
 
+        // await appwriteNoteService.createNote({
+        //     title:${userData.name} ` Tomorrow’s Focus`,
+        //     content: `${userData.$id} Work on the business Work on the business proposal and finalize the marketing plan proposal and finalize the marketing plan.`,
+        //     userId: userData.$id,
+        // });
+
         await appwriteNoteService.createNote({
-            title: 'Tomorrow’s Focus',
-            content: 'Work on the business Work on the business proposal and finalize the marketing plan proposal and finalize the marketing plan.',
+            title: `${userData.name} Self-Reminder`,
+            content: `${userData.$id} Stay focused today. Small steps lead to big success eventually!`,
             userId: userData.$id,
         });
 
+        // await appwriteNoteService.createNote({
+        //     title:${userData.name} ` Daily Inspiration`,
+        //     content: `${userData.$id} <>The only limit to our realization of tomorrow is our doubts of today. Keep pushing forward, no matter how challenging things seem. Trust in your efforts, and the results will follow.</> `,
+        //     userId: userData.$id,
+        // });
+
         await appwriteNoteService.createNote({
-            title: 'Self-Reminder',
-            content: 'Stay focused today. Small steps lead to big success eventually!',
+            title: `${userData.name} Today’s Accomplishments`,
+            content: `${userData.$id} Milk, Eggs, Bread. I’d be interested to know what prompted you to take our conversation to DMs. How can I assist you further? Coffee.`,
             userId: userData.$id,
         });
 
-        await appwriteNoteService.createNote({
-            title: 'Daily Inspiration',
-            content: '<>The only limit to our realization of tomorrow is our doubts of today. Keep pushing forward, no matter how challenging things seem. Trust in your efforts, and the results will follow.</> ',
-            userId: userData.$id,
-        });
-
-        await appwriteNoteService.createNote({
-            title: 'Today’s Accomplishments',
-            content: 'Milk, Eggs, Bread. I’d be interested to know what prompted you to take our conversation to DMs. How can I assist you further? Coffee.',
-            userId: userData.$id,
-        });
-
-        await appwriteNoteService.createNote({
-            title: 'Weekend Plans',
-            content: 'Looking forward to a relaxing weekend. Planning to catch up on reading and maybe take a short hike on Sunday morning.',
-            userId: userData.$id,
-        });
+        // await appwriteNoteService.createNote({
+        //     title:${userData.name} ` Weekend Plans`,
+        //     content: `${userData.$id} Looking forward to a relaxing weekend. Planning to catch up on reading and maybe take a short hike on Sunday morning.`,
+        //     userId: userData.$id,
+        // });
     };
 
     return !loading ? (
@@ -142,6 +141,7 @@ useEffect(() => {
 
                 {authStatus ? (
                     <>
+                    <span className='text-xs text-muted-foreground' >Logged: {`${userData.name}: ${userData.$id}`}</span>
                         {/* <div className="masonary transition-all duration-500"> */}
                         <div className="transition-all duration-500">
                             <Masonry columns={{ xs: 2, sm: 3, md: 4, lg: 5 }} spacing={1}>
@@ -161,7 +161,7 @@ useEffect(() => {
                         <AddNote />
 
                         {/* <Button onClick={ ()=>{  generateTestData();ref.current.continuousStart()}}>Generate Test Data</Button> */}
-                        <Button onClick={generateTestData}>Generate Test Data</Button>
+                        <Button  className="my-6" onClick={generateTestData}>Generate Test Data</Button>
                     </>
                 ) : (
                     <LoginFormUnit />

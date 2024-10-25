@@ -47,9 +47,9 @@ const LoginFormUnit = () => {
           signup{" "}
         </Link>
 
-        {error ? (
+        {error && (
           <p className="text-red-500">{error}</p>
-        ) : null}
+        )}
 
         <form onSubmit={handleSubmit(login)}>
           <InputwRef

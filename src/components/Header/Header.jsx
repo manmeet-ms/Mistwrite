@@ -1,26 +1,21 @@
-import React from "react";
-import { Switch } from "@/components/ui/switch"
-import { Moon, Sun } from "lucide-react"
+import { useTheme } from "@/components/theme-provider";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { useTheme } from "@/components/theme-provider"
+} from "@/components/ui/dropdown-menu";
+import { Moon, Sun } from "lucide-react";
+import React from "react";
 
+import {
+  LocalFireDepartmentOutlined,
+  Menu
+} from "@mui/icons-material";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  LocalFireDepartment,
-  LocalFireDepartmentOutlined,
-  LocalFireDepartmentRounded,
-  LocalFireDepartmentSharp,
-  Menu,
-} from "@mui/icons-material";
 // import { LogoutButton } from "../index";
 import { Button } from "@/components/ui/button";
-import LogoutButton from "./LogoutButton";
 import {
   Sheet,
   SheetClose,
@@ -31,15 +26,15 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import authService from "../../appwrite/auth";
-import authSlice from "../../store/authSlice";
-import { FlameIcon } from "lucide-react";
+import LogoutButton from "./LogoutButton";
 
 const Header = () => {
   const { setTheme } = useTheme()
 
   // retrieving th status of authentication state
   const authStatus = useSelector((state) => state.auth.status);
+  const userData = useSelector((state) => state.auth.userData);
+
   const navigate = useNavigate();
   const navItems = [
     {
@@ -80,7 +75,7 @@ const Header = () => {
           "null"
         );
       })}
-      <header className="flex justify-between items-center pb-2">
+      <header className="flex justify-between items-center  pb-2">
      <div className="flex gap-x-2">
      <Sheet>
           <SheetTrigger asChild>
@@ -92,11 +87,7 @@ const Header = () => {
                 <Link to="/">
                   <div className="flex">
                     Burning Notes
-                    <img
-                      className="w-6 h-6"
-                      src="https://cdn3.emoji.gg/emojis/7251-blue-flames.gif"
-                      alt=""
-                    />
+                    <LocalFireDepartmentOutlined/>
                   </div>
                 </Link>
               </SheetTitle>
@@ -133,25 +124,19 @@ const Header = () => {
                     className="w-6 h-6"
                     src="https://cdn3.emoji.gg/emojis/7251-blue-flames.gif"
                     alt=""
-                  />
+                />
                 </div> */}
+
+<Link to="/">Burning Notes</Link>
+{/* 
         <Link to="/">
-          <div className="flex">
-            Burning Notes
-            <LocalFireDepartmentOutlined className="text-blue-400 ml-1" />
-          </div>
-        </Link> 
-
-
-        {/* <div className="flex">
-                  Burning Notes
-                  <img
-                    className="w-6 h-6"
-                    src="https://cdn3.emoji.gg/emojis/7251-blue-flames.gif"
-                    alt=""
-                  />
-                </div> */}
- 
+          {userData ?
+          <div className="flex">Burning Notes</div>
+          :
+          (<span className="flex flex-col">
+            <span className="text-sm" >  {userData.name}</span>
+          </span>)}
+        </Link>  */}
      </div>
         {/* <div className="text-slate-500">{`Logged in? ${authStatus}`}</div> */}
         {/* <div className="">{`Logged in? authstatus:${authStatus} ${(useSelector((state) => state.auth.status))}`}</div> */}
