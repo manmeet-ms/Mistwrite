@@ -9,7 +9,7 @@ import appwriteNoteService from '../appwrite/config';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { ThemeProvider } from '@/components/theme-provider';
-import { Add } from '@mui/icons-material';
+import { Add, AutoFixHighRounded, PhotoFilterRounded } from '@mui/icons-material';
 
 export default function AddNote({ post }) {
     const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
@@ -80,8 +80,11 @@ export default function AddNote({ post }) {
         return () => subscription.unsubscribe();
     }, [watch, slugTransform, setValue]);
 
+    
     return (
+        
         <ThemeProvider>
+                       
             <Dialog>
                 <DialogTrigger asChild>
                     {/* <Button className="fixed bottom-12 right-4 flex flex-col items-center font-medium text-blue-950 bg-blue-400 rounded-2xl"> */}
@@ -130,11 +133,11 @@ export default function AddNote({ post }) {
                     accept="image/png, image/jpg, image/jpeg, image/gif"
                     {...register("image", { required: !post })}
                     /> */}
-                            {post && (
+                            {/* {post && (
                                 <div className="w-full mb-4">
                                     <img src={appwriteNoteService.getFilePreview(post.featuredImage)} alt={post.title} className="rounded-lg" />
                                 </div>
-                            )}
+                            )} */}
                             {/* <Select
                     options={["active", "inactive"]}
                     label="Status"

@@ -15,16 +15,17 @@ import { useSelector } from 'react-redux';
 import LoadingBar from 'react-top-loading-bar';
 import appwriteNoteService from './appwrite/config';
 import LoginFormUnit from './components/LoginFormUnit';
+
 import { Query } from 'appwrite';
+import { AutoFixHighRounded, Cached, PhotoFilterRounded } from '@mui/icons-material';
+import conf from './conf/conf';
+import { Loader2, LoaderCircle } from 'lucide-react';
 
 function App() {
-
     const ref = useRef(null);
     const authStatus = useSelector((state) => state.auth.status);
     const userData = useSelector((state) => state.auth.userData);
     const [notes, setNotes] = useState([]);
-  
-
 
     const [loading, setloading] = useState(true);
     const dispatch = useDispatch(); // for retrieving  relevant data
@@ -45,29 +46,24 @@ function App() {
                 dispatch(logout()); // Logout if authentication fails
             })
             .finally(() => setloading(false));
-        // return () => {
-        //   second;
-        // };
     }, []);
     const fetchNotes = async () => {
-        try { 
+        try {
             // let queryPass = [Query.equal("userId", userData.$id)];
-            const fetchedNotes = await appwriteNoteService.getEveryNote([Query.equal("userId", userData.$id)]);
+            const fetchedNotes = await appwriteNoteService.getEveryNote([Query.equal('userId', userData.$id)]);
             if (fetchedNotes && fetchedNotes.documents) {
                 setNotes(fetchedNotes.documents); // add useeffecthre in func
-                
             }
         } catch (error) {
             console.error('Error fetching notes:', error);
         } finally {
             setloading(false);
         }
-    };  
-useEffect(() => {
-  fetchNotes()
-
-
-}, [fetchNotes])
+    };
+    useEffect(() => {
+        fetchNotes();
+    }, [setNotes && fetchNotes]);
+    // }, []);
 
     const generateTestData = async () => {
         let calc = new Date().getTime() + 12 * 60 * 60 * 1000;
@@ -137,11 +133,11 @@ useEffect(() => {
         <>
             <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
                 <Header />
-                <LoadingBar color="#4ade80" ref={ref} />
-
+ 
                 {authStatus ? (
                     <>
-                    <span className='text-xs text-muted-foreground' >Logged: {`${userData.name}: ${userData.$id}`}</span>
+                    <Cached onClick={fetchNotes}/>
+                        <span className="text-xs text-muted-foreground">Logged: {`${userData.name}: ${userData.$id}`}</span>
                         {/* <div className="masonary transition-all duration-500"> */}
                         <div className="transition-all duration-500">
                             <Masonry columns={{ xs: 2, sm: 3, md: 4, lg: 5 }} spacing={1}>
@@ -161,7 +157,8 @@ useEffect(() => {
                         <AddNote />
 
                         {/* <Button onClick={ ()=>{  generateTestData();ref.current.continuousStart()}}>Generate Test Data</Button> */}
-                        <Button  className="my-6" onClick={generateTestData}>Generate Test Data</Button>
+                        {/* <Button className="my-6 absolute bottom-20 right-4 " onClick={generateTestData}><AutoFixHighRounded/></Button>
+                        <Button className="my-6 absolute bottom-28 right-4 " onClick={generateTestData}><PhotoFilterRounded/></Button> */}
                     </>
                 ) : (
                     <LoginFormUnit />
@@ -177,6 +174,9 @@ useEffect(() => {
         </Link>
         
       </span>  */}
+                <Button className="my-2 fixed bottom-24 right-4 p-4 py-7 " onClick={generateTestData}>
+                    <AutoFixHighRounded />
+                </Button>
             </ThemeProvider>
         </>
     ) : (
