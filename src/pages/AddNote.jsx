@@ -1,72 +1,70 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
-
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import RTE from '../components/RTE';
 import appwriteNoteService from '../appwrite/config';
-import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { ThemeProvider } from '@/components/theme-provider';
-import { Add, AutoFixHighRounded, PhotoFilterRounded } from '@mui/icons-material';
+import { Add } from '@mui/icons-material';
+import { toast } from 'react-hot-toast';
 
-export default function AddNote({ post }) {
-    const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
+export default function AddNote({ onNoteCreate }) {
+    const [isOpen, setIsOpen] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    
+    const { register, handleSubmit, watch, setValue, reset, formState: { errors } } = useForm({
         defaultValues: {
-            title: post?.title || '',
-            slug: post?.$id || '',
-            content: post?.content || '',
-            status: post?.status || 'active',
+            title: '',
+            content: '',
+            status: 'active',
         },
     });
 
-    const navigate = useNavigate();
     const userData = useSelector((state) => state.auth.userData);
 
     const submitNoteData = async (data) => {
-        console.log(`clicked\n data as follows: ${data}`);
-
+        if (isSubmitting) return;
+        
+        setIsSubmitting(true);
         try {
-            if (post) {
-                // Updating existing note
-                const dbPost = await appwriteNoteService.updateNote(post.$id, {
-                    ...data,
-                    userId: userData.$id,
-                });
+            const dbPost = await appwriteNoteService.createNote({
+                title: data.title,
+                content: data.content,
+                status: data.status,
+                userId: userData.$id,
+            });
 
-                if (dbPost) {
-                    navigate(`/n/${dbPost.$id}`);
+            if (dbPost) {
+                // Notify parent component
+                if (onNoteCreate) {
+                    await onNoteCreate(dbPost);
                 }
-            } else {
-                // Creating new note
-                const dbPost = await appwriteNoteService.createNote({
-                    title: data.title,
-                    content: data.content,
-                    status: data.status,
-                    userId: userData.$id,
-                });
-
-                if (dbPost) {
-                    console.log('Note created successfully');
-                    navigate('/');
-                } else {
-                    console.log('Failed to create note');
-                }
+                
+                // Reset form
+                reset();
+                
+                // Close dialog
+                setIsOpen(false);
+                
+                toast.success('Note created successfully');
             }
         } catch (error) {
-            console.error('Error submitting note:', error);
+            console.error('Error creating note:', error);
+            toast.error('Failed to create note');
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
     const slugTransform = useCallback((value) => {
-        if (value && typeof value === 'string')
+        if (value && typeof value === 'string') {
             return value
                 .trim()
                 .toLowerCase()
                 .replace(/[^a-zA-Z\d\s]+/g, '-')
                 .replace(/\s/g, '-');
-
+        }
         return '';
     }, []);
 
@@ -80,80 +78,64 @@ export default function AddNote({ post }) {
         return () => subscription.unsubscribe();
     }, [watch, slugTransform, setValue]);
 
-    
     return (
-        
         <ThemeProvider>
-                       
-            <Dialog>
+            <Dialog open={isOpen} onOpenChange={setIsOpen}>
                 <DialogTrigger asChild>
-                    {/* <Button className="fixed bottom-12 right-4 flex flex-col items-center font-medium text-blue-950 bg-blue-400 rounded-2xl"> */}
-                    <span className='fixed bottom-8 right-4 flex p-4 justify-center items-center font-medium text-blue-950 bg-blue-400 rounded-2xl'  >
-                        <Add/>
+                    <span className="fixed bottom-8 right-4 flex p-4 justify-center items-center font-medium text-blue-950 bg-blue-400 rounded-2xl cursor-pointer">
+                        <Add />
                     </span>
-                    {/* </Button> */}
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[425px]">
                     <DialogHeader>
-                        <DialogTitle>Edit profile</DialogTitle>
-                        <DialogDescription>Make changes to your profile here. Click save when you're done.</DialogDescription>
+                        <DialogTitle>Create New Note</DialogTitle>
+                        <DialogDescription>
+                            Add a new note to your collection.
+                        </DialogDescription>
                     </DialogHeader>
-                    <form onSubmit={handleSubmit(submitNoteData)}>
-                        <Input label="Title :" placeholder="Title" {...register('title', { required: true })} />
-                        <Input label="Slug :" placeholder="Slug" {...register('slug', { required: true })} />
-                        <Input label="Content :" name="content" {...register('content', { required: true })} />
-                        {/*   
-                <Input
-                label="Title :"
-                placeholder="Title"
-                className="mb-4"
-                {...register("title", { required: true })}
-                />
-                
-                <Input
-                label="Slug :"
-                placeholder="Slug"
-                className="mb-4"
-                {...register("slug", { required: true })}
-                onInput={(e) => {
-                  setValue("slug", slugTransform(e.currentTarget.value), { shouldValidate: true });
-                  }}
-                  />
-                  <Input
-                  label="Content :" name="content" 
-                  {...register("content", { required: true })}
-                  /> */}
-                        {/* <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} /> */}
-
-                        <div className="w-1/3 px-2">
-                            {/* <Input
-                    label="Featured Image :"
-                    type="file"
-                    className="mb-4"
-                    accept="image/png, image/jpg, image/jpeg, image/gif"
-                    {...register("image", { required: !post })}
-                    /> */}
-                            {/* {post && (
-                                <div className="w-full mb-4">
-                                    <img src={appwriteNoteService.getFilePreview(post.featuredImage)} alt={post.title} className="rounded-lg" />
-                                </div>
-                            )} */}
-                            {/* <Select
-                    options={["active", "inactive"]}
-                    label="Status"
-                    className="mb-4"
-                    {...register("status", { required: true })}
-                    /> */}
+                    <form onSubmit={handleSubmit(submitNoteData)} className="space-y-4">
+                        <div>
+                            <Input
+                                placeholder="Title"
+                                {...register('title', { 
+                                    required: 'Title is required',
+                                    minLength: {
+                                        value: 3,
+                                        message: 'Title must be at least 3 characters'
+                                    }
+                                })}
+                            />
+                            {errors.title && (
+                                <span className="text-red-500 text-sm">{errors.title.message}</span>
+                            )}
                         </div>
-                        <Button type="submit" className="w-full">
-                            {post ? 'Update' : 'Submit'}
-                        </Button>
+                        
+                        <div>
+                            <Input
+                                placeholder="Content"
+                                {...register('content', { 
+                                    required: 'Content is required',
+                                    minLength: {
+                                        value: 10,
+                                        message: 'Content must be at least 10 characters'
+                                    }
+                                })}
+                            />
+                            {errors.content && (
+                                <span className="text-red-500 text-sm">{errors.content.message}</span>
+                            )}
+                        </div>
+
+                        <DialogFooter>
+                            <Button 
+                                type="submit" 
+                                className="w-full"
+                                disabled={isSubmitting}
+                            >
+                                {isSubmitting ? 'Creating...' : 'Create Note'}
+                            </Button>
+                        </DialogFooter>
                     </form>
-                    <DialogFooter>
-                        {/* <Button onClick={buttonCall} type="submit" className="w-full">
-                    {post ? "Update" : "Submit"}
-                    </Button> */}
-                    </DialogFooter>
                 </DialogContent>
             </Dialog>
         </ThemeProvider>

@@ -1,16 +1,3 @@
-# tasks
-- toast
-- light mnode color balance 
-- breadcrusb in heaader 
-- animations real feel like an app
-- dropdiwn menu fr a/c settings like google 
-<!-- - masonry (done) -->
-- properly set cors in appwrite platofrm '*` is not a good practice
-<!-- - intuitive loader -->
-- header welcome
-- responsive collapsible sidemenu (desktop) and hamburger on mobile seprate ui hide/show khel.
-- add inidication when fetching/updating notes {set}. 
-
 # problems:
 <!-- - refernce is not passing when creatin notes -->
 <!-- - remove perms from "any" in appwrite console -->
@@ -26,14 +13,26 @@
 - Pwa notifications obv
 - Shortcuts to directly create new note
  
+# tasks
+- light mnode color balance 
+- dropdiwn menu fr a/c settings like google 
+<!-- - masonry (done) -->
+- properly set cors in appwrite platofrm '*` is not a good practice
+<!-- - intuitive loader -->
+- header welcome
+- responsive collapsible sidemenu (desktop) and hamburger on mobile seprate ui hide/show khel.
+- add inidication when fetching/updating notes {set}. 
 
 # optimization/improvement:
 - remove loader as dependency (an implement you own style)
 - make it fast
+- native toast
+- animations real feel like an app
 - add trash feature (10 days deletion)
 - saved notes as well 
 - ligh/dark mode 'switch' literally switch
 - react top loading bars
+- breadcrusb in heaader 
 
 
 ## bottom nav 
