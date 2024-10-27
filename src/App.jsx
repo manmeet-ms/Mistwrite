@@ -13,7 +13,12 @@ import { Query } from 'appwrite';
 import { AutoFixHighRounded, Cached } from '@mui/icons-material';
 import appwriteNoteService from './appwrite/config';
 import LoginFormUnit from './components/LoginFormUnit';
-
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+  } from "@/components/ui/tooltip"
 function App() {
     const ref = useRef(null);
     const authStatus = useSelector((state) => state.auth.status);
@@ -43,11 +48,9 @@ function App() {
     // Memoize fetchNotes function
     const fetchNotes = useCallback(async () => {
         if (!userData?.$id) return; // Guard clause to prevent unnecessary API calls
-        
+
         try {
-            const fetchedNotes = await  appwriteNoteService.getEveryNote([
-                Query.equal('userId', userData.$id)
-            ]);
+            const fetchedNotes = await appwriteNoteService.getEveryNote([Query.equal('userId', userData.$id)]);
             if (fetchedNotes && fetchedNotes.documents) {
                 setNotes(fetchedNotes.documents);
             }
@@ -61,35 +64,41 @@ function App() {
         fetchNotes();
     }, [fetchNotes]); // Depend on memoized fetchNotes
 
-    const handleNoteDelete = useCallback(async (deletedNoteId) => {
-        try {
-            // Optimistically update UI
-            setNotes(prevNotes => prevNotes.filter(note => note.$id !== deletedNoteId));
-            
-            // Fetch fresh data from server
-            await fetchNotes();
-        } catch (error) {
-            console.error('Error handling note deletion:', error);
-            // If there's an error, refresh anyway to ensure UI is in sync
-            fetchNotes();
-        }
-    }, [fetchNotes]);
-    const handleNoteCreate = useCallback(async (newNote) => {
-        try {
-            // Optimistically add the new note to the UI
-            setNotes(prevNotes => [newNote, ...prevNotes]);
-            // Refresh to get the latest data
-            await fetchNotes();
-            toast.success('Note created successfully');
-        } catch (error) {
-            console.error('Error handling note creation:', error);
-            fetchNotes();
-        }
-    }, [fetchNotes]);
+    const handleNoteDelete = useCallback(
+        async (deletedNoteId) => {
+            try {
+                // Optimistically update UI
+                setNotes((prevNotes) => prevNotes.filter((note) => note.$id !== deletedNoteId));
+
+                // Fetch fresh data from server
+                await fetchNotes();
+            } catch (error) {
+                console.error('Error handling note deletion:', error);
+                // If there's an error, refresh anyway to ensure UI is in sync
+                fetchNotes();
+            }
+        },
+        [fetchNotes],
+    );
+    const handleNoteCreate = useCallback(
+        async (newNote) => {
+            try {
+                // Optimistically add the new note to the UI
+                setNotes((prevNotes) => [newNote, ...prevNotes]);
+                // Refresh to get the latest data
+                await fetchNotes();
+                toast.success('Note created successfully');
+            } catch (error) {
+                console.error('Error handling note creation:', error);
+                fetchNotes();
+            }
+        },
+        [fetchNotes],
+    );
 
     const generateTestData = async () => {
         if (!userData?.$id) return;
-        
+
         const testNotes = [
             {
                 title: `${userData.name} Meeting Prep`,
@@ -97,7 +106,8 @@ function App() {
             },
             {
                 title: `${userData.name} To-Do List`,
-                content: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis modi asperiores quod deserunt! Voluptas, expedita.<br><li>Buy groceries</li><li>Pick up laundry</li><li>Call the plumber</li><li>Buy groceries</li><li>Pick up laundry</li><li>Call the plumber</li> ',
+                content:
+                    'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis modi asperiores quod deserunt! Voluptas, expedita.<br><li>Buy groceries</li><li>Pick up laundry</li><li>Call the plumber</li><li>Buy groceries</li><li>Pick up laundry</li><li>Call the plumber</li> ',
             },
             {
                 title: `${userData.name} Study Checklist`,
@@ -110,7 +120,7 @@ function App() {
             {
                 title: `${userData.name} Today's Accomplishments`,
                 content: `${userData.$id} Milk, Eggs, Bread. I'd be interested to know what prompted you to take our conversation to DMs. How can I assist you further? Coffee.`,
-            }
+            },
         ];
 
         for (const note of testNotes) {
@@ -119,7 +129,7 @@ function App() {
                 userId: userData.$id,
             });
         }
-        
+
         // Refresh notes after generating test data
         fetchNotes();
     };
@@ -131,32 +141,38 @@ function App() {
             <Header />
             {authStatus ? (
                 <>
-                    <Button onClick={fetchNotes} className="my-2">
-                        <Cached />
-                    </Button>
-                    <span className="text-xs text-muted-foreground">
-                        Logged: {`${userData.name}: ${userData.$id}`}
+                    <div className='flex justify-between'>
+
+                    <span className="text-xs text-muted-foreground flex flex-col">
+                        <span className='text-xl text-primary ' >
+                            {/* {time = (Date.now())}  add greetings acc to time*/}
+                            Welcome
+                        </span>
+                        {`${userData.name}`}
                     </span>
+                    <TooltipProvider>
+                      <Tooltip> {/*set tooltip diren to below */}
+                        <TooltipTrigger>                    <Button variant="ghost" onClick={fetchNotes} className="my-2">
+                        <Cached />
+                    </Button></TooltipTrigger>
+                        <TooltipContent>
+                          <p>Refresh</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+
+
+                    </div>
+
                     <div className="transition-all duration-500">
                         <Masonry columns={{ xs: 2, sm: 3, md: 4, lg: 5 }} spacing={1}>
                             {notes.map((note) => (
-                                <NoteCard
-                                    key={note.$id}
-                                    noteId={String(note.$id)}
-                                    title={note.title}
-                                    content={note.content}
-                                    userId={note.userId}
-                                    createdAt={note.$createdAt}
-                                    onDelete={handleNoteDelete}
-                                />
+                                <NoteCard key={note.$id} noteId={String(note.$id)} title={note.title} content={note.content} userId={note.userId} createdAt={note.$createdAt} onDelete={handleNoteDelete} />
                             ))}
                         </Masonry>
                     </div>
-                    <AddNote onNoteCreate={handleNoteCreate}/>
-                    <Button 
-                        className="my-2 fixed bottom-24 right-4 p-4 py-7"
-                        onClick={generateTestData}
-                    >
+                    <AddNote onNoteCreate={handleNoteCreate} />
+                    <Button className="my-2 fixed bottom-24 right-4 p-4 py-7" onClick={generateTestData}>
                         <AutoFixHighRounded />
                     </Button>
                 </>

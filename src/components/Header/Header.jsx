@@ -1,13 +1,15 @@
 import { useTheme } from "@/components/theme-provider";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Moon, Sun } from "lucide-react";
+import React from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Moon, Sun } from "lucide-react";
-import React from "react";
-
+} from "@/components/ui/dropdown-menu"
 import {
   LocalFireDepartmentOutlined,
   Menu
@@ -128,20 +130,28 @@ const Header = () => {
                 </div> */}
 
 <Link to="/">Burning Notes</Link>
-{/* 
-        <Link to="/">
-          {userData ?
-          <div className="flex">Burning Notes</div>
-          :
-          (<span className="flex flex-col">
-            <span className="text-sm" >  {userData.name}</span>
-          </span>)}
-        </Link>  */}
+
      </div>
+     {/* check login status */}
         {/* <div className="text-slate-500">{`Logged in? ${authStatus}`}</div> */}
         {/* <div className="">{`Logged in? authstatus:${authStatus} ${(useSelector((state) => state.auth.status))}`}</div> */}
         {/* {authStatus && <LogoutButton />} */}
-
+        {/* {authStatus && (
+          <Button variant="ghost">
+            <Link to="/login">Login</Link>
+          </Button>
+        )} */}
+  <DropdownMenu>
+    <DropdownMenuTrigger>
+      <Avatar>
+        <AvatarImage src="https://github.com/shadcn.png" />
+        <AvatarFallback>Bn</AvatarFallback>
+      </Avatar>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent>
+      <DropdownMenuLabel>Settings</DropdownMenuLabel>
+      <DropdownMenuSeparator />
+      <DropdownMenuItem>
         {authStatus ? (
           <LogoutButton />
         ) : (null
@@ -149,32 +159,10 @@ const Header = () => {
           //   <Link to="/login">Login</Link>
           // </Button>
         )}
-        {/* {authStatus && (
-          <Button variant="ghost">
-            <Link to="/login">Login</Link>
-          </Button>
-        )} */}
-  
-         <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon">
-          <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-          <span className="sr-only">Toggle theme</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
-          Light
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
-          Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
-          System
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+</DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+
       </header>
     </>
   );

@@ -7,9 +7,9 @@
 <!-- - currentUSer can all allUsers notes 😝 -->
 <!-- - html parsing -->
 - smart render upon data change anywhere (current problem inifinite useEffect)
-- Call fetch notes() functions after delete function call
+-- - Call fetch notes() functions after delete function call
 - Add rich text formatting 
-- Better error handling ux
+-- - Better error handling ux
 - Pwa notifications obv
 - Shortcuts to directly create new note
  

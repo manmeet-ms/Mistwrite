@@ -77,8 +77,8 @@ const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
         <section className="pt-4 pr-2 pl-4 pb-2 my-2 mx-1 bg-slate-800/50 border border-slate-500/0 rounded-xl">
             <div className="space-y-2">
                 <div className="flex justify-between">
-                    <h4 className="text-slate-200 break-words truncate">{title}</h4>
-                    <Button variant="ghost" className="rounded-xl px-3 relative bottom-1.5" onClick={deleteNoteOperation}>
+                    <h4 className="text-slate-200 break-words">{title}</h4>
+                    <Button variant="icon" className="rounded-xl px-3 relative bottom-1.5 " onClick={deleteNoteOperation}>
                         <DeleteOutlineOutlined sx={{ fontSize: 16 }} className="text-slate-400" />
                     </Button>
                 </div>
@@ -86,11 +86,11 @@ const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
                 <p className="text-sm text-slate-400 break-words text-balance">{parse(content)}</p>
 
                 <div className="flex flex-col text-xs text-slate-600 break-all">
-                    <span>Created: {formatDate(noteCreated)} </span>
+                    {/* <span>Created: {formatDate(noteCreated)} </span>
                     <span>Burn: {formatDate(noteBurn)} </span>
-                    <span>Now: {moment().format('MMM DD, YYYY HH:mm')} </span>
-                    <span>Created: {moment(noteCreated).fromNow()} </span>
-                    <span>Note ID: {noteId} </span>
+                    <span>Now: {moment().format('MMM DD, YYYY HH:mm')} </span> */}
+                    <span>Created {moment(noteCreated).fromNow()} </span>
+                    {/* <span>Note ID: {noteId} </span> */}
                 </div>
 
                 {timeLeft && (
