@@ -10,15 +10,10 @@ import Loader from './components/Loader';
 import NoteCard from './components/NoteCard';
 import AddNote from './pages/AddNote';
 import { Query } from 'appwrite';
-import { AutoFixHighRounded, Cached } from '@mui/icons-material';
+import { AutoFixHighRounded, AutoFixHighSharp, Cached } from '@mui/icons-material';
 import appwriteNoteService from './appwrite/config';
 import LoginFormUnit from './components/LoginFormUnit';
-import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
-  } from "@/components/ui/tooltip"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 function App() {
     const ref = useRef(null);
     const authStatus = useSelector((state) => state.auth.status);
@@ -141,27 +136,47 @@ function App() {
             <Header />
             {authStatus ? (
                 <>
-                    <div className='flex justify-between'>
-
-                    <span className="text-xs text-muted-foreground flex flex-col">
-                        <span className='text-xl text-primary ' >
-                            {/* {time = (Date.now())}  add greetings acc to time*/}
-                            Welcome
+                    <div className="flex justify-between">
+                        <span className="text-xs text-muted-foreground flex flex-col">
+                            <span className="text-xl text-primary ">
+                                {/* {time = (Date.now())}  add greetings acc to time*/}
+                                Welcome
+                            </span>
+                            {`${userData.name}`}
                         </span>
-                        {`${userData.name}`}
-                    </span>
-                    <TooltipProvider>
-                      <Tooltip> {/*set tooltip diren to below */}
-                        <TooltipTrigger>                    <Button variant="ghost" onClick={fetchNotes} className="my-2">
-                        <Cached />
-                    </Button></TooltipTrigger>
-                        <TooltipContent>
-                          <p>Refresh</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-
-
+                      
+                      <div className="flex gap-2">
+                      <TooltipProvider>
+                            <Tooltip>
+                                {' '}
+                                {/*set tooltip diren to below */}
+                                <TooltipTrigger>
+                                    {' '}
+                                    <Button className="px-0" variant="icon" onClick={generateTestData}>
+                                        <AutoFixHighSharp  sx={{fontSize:20,}} />
+                                    </Button>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                    <p>Generate test data</p>
+                                </TooltipContent>
+                            </Tooltip>
+                        </TooltipProvider>
+                        <TooltipProvider>
+                            <Tooltip>
+                                {' '}
+                                {/*set tooltip diren to below */}
+                                <TooltipTrigger>
+                                    {' '}
+                                    <Button className="px-0 my-2" variant="icon" onClick={fetchNotes}>
+                                        <Cached  sx={{fontSize:20,}} />
+                                    </Button>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                    <p>Refresh</p>
+                                </TooltipContent>
+                            </Tooltip>
+                        </TooltipProvider>
+                      </div>
                     </div>
 
                     <div className="transition-all duration-500">
@@ -172,9 +187,6 @@ function App() {
                         </Masonry>
                     </div>
                     <AddNote onNoteCreate={handleNoteCreate} />
-                    <Button className="my-2 fixed bottom-24 right-4 p-4 py-7" onClick={generateTestData}>
-                        <AutoFixHighRounded />
-                    </Button>
                 </>
             ) : (
                 <LoginFormUnit />

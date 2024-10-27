@@ -46,7 +46,8 @@ const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
         const minutes = Math.floor((diffInMs % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diffInMs % (1000 * 60)) / 1000);
 
-        return `${hours}h ${minutes}m ${seconds}s`;
+        return `${hours}h ${minutes}m`;
+        // return `${hours}h ${minutes}m ${seconds}s`;
     }, []);
 
     // Calculate burn time when component mounts and set up interval

@@ -1,7 +1,5 @@
 import { useTheme } from "@/components/theme-provider";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Moon, Sun } from "lucide-react";
-import React from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,15 +7,15 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
 import {
   LocalFireDepartmentOutlined,
   Menu
 } from "@mui/icons-material";
+import React from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 // import { LogoutButton } from "../index";
-import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetClose,
@@ -29,6 +27,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import LogoutButton from "./LogoutButton";
+import { Home } from "lucide-react";
 
 const Header = () => {
   const { setTheme } = useTheme()
@@ -42,26 +41,31 @@ const Header = () => {
     {
       name: "Home",
       slug: "/",
+      icon:<Home/>,
       active: authStatus,
     },
     {
       name: "Login",
       slug: "/login",
+      icon:<Home/>,
       active: !authStatus,
     },
     {
       name: "Signup",
       slug: "/signup",
+      icon:<Home/>,
       active: !authStatus,
     },
     {
       name: "Notes",
       slug: "/notes",
+      icon:<Home/>,
       active: authStatus,
     },
     {
       name: "Create note",
       slug: "/add-note",
+      icon:<Home/>,
       active: authStatus,
     },
   ];
@@ -71,17 +75,19 @@ const Header = () => {
       {navItems.map((item) => {
         item.active ? (
           <li key={item.name}>
-            <button onClick={() => navigate(item.slug)}>{item.name}</button>
+            <button onClick={() => navigate(item.slug)}>{item.icon}{item.name}</button>
           </li>
         ) : (
           "null"
         );
       })}
-      <header className="flex justify-between items-center  pb-2">
-     <div className="flex gap-x-2">
+      <header className="flex justify-between items-center mb-4">
+
+     <div className="flex gap-x-2 bg-muted rounded-full px-3 py-2 -ml-1 mr-4 container">
      <Sheet>
           <SheetTrigger asChild>
-            <Menu />
+            <Menu  className="text-secondary-foreground/40 mt-0.5" sx={{fontSize:20
+            }} />
           </SheetTrigger>
           <SheetContent side="left">
             <SheetHeader>
@@ -128,8 +134,7 @@ const Header = () => {
                     alt=""
                 />
                 </div> */}
-
-<Link to="/">Burning Notes</Link>
+<span className="text-secondary-foreground/40">Search your notes</span>
 
      </div>
      {/* check login status */}
@@ -143,7 +148,7 @@ const Header = () => {
         )} */}
   <DropdownMenu>
     <DropdownMenuTrigger>
-      <Avatar>
+      <Avatar  className="w-8 h-8" >
         <AvatarImage src="https://github.com/shadcn.png" />
         <AvatarFallback>Bn</AvatarFallback>
       </Avatar>
