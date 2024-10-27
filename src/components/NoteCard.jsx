@@ -11,9 +11,7 @@ import { toast, ToastBar, Toaster } from 'react-hot-toast';
 
 const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
     const formatDate = useCallback((dateString) => {
-        return dateString ? 
-            `${moment(dateString).format('MMM DD, YYYY')} at ${moment(dateString).format('HH:mm')}` 
-            : 'Invalid Date';
+        return dateString ? `${moment(dateString).format('MMM DD, YYYY')} at ${moment(dateString).format('HH:mm')}` : 'Invalid Date';
     }, []);
 
     const deleteNoteOperation = async () => {
@@ -71,7 +69,7 @@ const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
     }, [createdAt, calculateTimeLeft]);
 
     const noteCreated = new Date(createdAt);
-    const [h, m, s, ms] = [1, 15, 60, 1000];
+    const [h, m, s, ms] = [24, 60, 60, 1000];
     const noteBurn = new Date(noteCreated.getTime() + h * m * s * ms);
     const timeLeft = calculateTimeLeft(noteCreated, noteBurn);
 
@@ -80,21 +78,12 @@ const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
             <div className="space-y-2">
                 <div className="flex justify-between">
                     <h4 className="text-slate-200 break-words truncate">{title}</h4>
-                    <Button 
-                        variant="ghost" 
-                        className="rounded-xl px-3 relative bottom-1.5"
-                        onClick={deleteNoteOperation}
-                    >
-                        <DeleteOutlineOutlined
-                            sx={{ fontSize: 16 }}
-                            className="text-slate-400"
-                        />
+                    <Button variant="ghost" className="rounded-xl px-3 relative bottom-1.5" onClick={deleteNoteOperation}>
+                        <DeleteOutlineOutlined sx={{ fontSize: 16 }} className="text-slate-400" />
                     </Button>
                 </div>
 
-                <p className="text-sm text-slate-400 break-words text-balance">
-                    {parse(content)}
-                </p>
+                <p className="text-sm text-slate-400 break-words text-balance">{parse(content)}</p>
 
                 <div className="flex flex-col text-xs text-slate-600 break-all">
                     <span>Created: {formatDate(noteCreated)} </span>
@@ -107,22 +96,15 @@ const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
                 {timeLeft && (
                     <div>
                         <span className="inline-flex gap-1 text-xs text-slate-600">
-                            <Badge 
-                                className="mt-2 mb-1 text-2xs font-bold text-amber-500 bg-amber-800/30 rounded-full py-1 pl-2"
-                                variant="secondary"
-                            >
-                                <LocalFireDepartmentOutlined 
-                                    className="mr-0.5" 
-                                    sx={{ fontSize: 14, strokeWidth: '2px' }} 
-                                />
+                            <Badge className="mt-2 mb-1 text-2xs font-bold text-amber-500 bg-amber-800/30 rounded-full py-1 pl-2" variant="secondary">
+                                <LocalFireDepartmentOutlined className="mr-0.5" sx={{ fontSize: 14, strokeWidth: '2px' }} />
                                 {timeLeft}
                             </Badge>
                         </span>
                     </div>
                 )}
             </div>
-            <Toaster/>
-
+            <Toaster />
         </section>
     );
 };
