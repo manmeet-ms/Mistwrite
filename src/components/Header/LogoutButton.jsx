@@ -22,7 +22,7 @@ const LogoutButton = () => {
         console.log("Error found - logoutBtncomponentHeader", e);
       });
   };
-  return <div onClick={logoutHandler} className="cursor-pointer"><Logout  className="mr-1 inline-flex items-center mt-0.5  " sx={{fontSize:16, strokeWidth:2,}} /> Logout </div>;
+  return <div onClick={logoutHandler} className="cursor-pointer flex items-center justify-center"><Logout  className="mr-1 inline-flex items-center mt-0.5  " sx={{fontSize:16, strokeWidth:2,}} /> Logout </div>;
   // return <Button variant="ghost" onClick={logoutHandler}>Logout<Logout className="ml-1" sx={{fontSize:14}} /> </Button>;
 };
 

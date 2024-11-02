@@ -145,7 +145,7 @@ function App() {
                             {`${userData.name}`}
                         </span>
                       
-                      <div className="flex gap-2">
+                      <div className="flex gap-4">
                       <TooltipProvider>
                             <Tooltip>
                                 {' '}
@@ -153,7 +153,7 @@ function App() {
                                 <TooltipTrigger>
                                     {' '}
                                     <Button className="px-0" variant="icon" onClick={generateTestData}>
-                                        <AutoFixHighSharp  sx={{fontSize:20,}} />
+                                        <AutoFixHighSharp  sx={{fontSize:24,}} />
                                     </Button>
                                 </TooltipTrigger>
                                 <TooltipContent>
@@ -168,7 +168,7 @@ function App() {
                                 <TooltipTrigger>
                                     {' '}
                                     <Button className="px-0 my-2" variant="icon" onClick={fetchNotes}>
-                                        <Cached  sx={{fontSize:20,}} />
+                                        <Cached  sx={{fontSize:24,}} />
                                     </Button>
                                 </TooltipTrigger>
                                 <TooltipContent>

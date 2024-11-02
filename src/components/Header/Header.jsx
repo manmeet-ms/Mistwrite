@@ -27,7 +27,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import LogoutButton from "./LogoutButton";
-import { Home } from "lucide-react";
+import { Home, Settings } from "lucide-react";
 
 const Header = () => {
   const { setTheme } = useTheme()
@@ -83,10 +83,10 @@ const Header = () => {
       })}
       <header className="flex justify-between items-center mb-4">
 
-     <div className="flex gap-x-2 bg-muted rounded-full px-3 py-2 -ml-1 mr-4 container">
+     <div className="flex gap-x-2 px-3 py-2 -ml-1 mr-4 container">
      <Sheet>
           <SheetTrigger asChild>
-            <Menu  className="text-secondary-foreground/40 mt-0.5" sx={{fontSize:20
+            <Menu  className="text-secondary-foreground mt-0.5" sx={{fontSize:20
             }} />
           </SheetTrigger>
           <SheetContent side="left">
@@ -134,7 +134,7 @@ const Header = () => {
                     alt=""
                 />
                 </div> */}
-<span className="text-secondary-foreground/40">Search your notes</span>
+<h1 className="text-secondary-foreground">Burning Notes</h1>
 
      </div>
      {/* check login status */}
@@ -146,27 +146,9 @@ const Header = () => {
             <Link to="/login">Login</Link>
           </Button>
         )} */}
-  <DropdownMenu>
-    <DropdownMenuTrigger>
-      <Avatar  className="w-8 h-8" >
-        <AvatarImage src="https://github.com/shadcn.png" />
-        <AvatarFallback>Bn</AvatarFallback>
-      </Avatar>
-    </DropdownMenuTrigger>
-    <DropdownMenuContent>
-      <DropdownMenuLabel>Settings</DropdownMenuLabel>
-      <DropdownMenuSeparator />
-      <DropdownMenuItem>
         {authStatus ? (
           <LogoutButton />
-        ) : (null
-          // <Button variant="ghost">
-          //   <Link to="/login">Login</Link>
-          // </Button>
-        )}
-</DropdownMenuItem>
-    </DropdownMenuContent>
-  </DropdownMenu>
+        ) : null}
 
       </header>
     </>
