@@ -10,10 +10,12 @@ import Loader from './components/Loader';
 import NoteCard from './components/NoteCard';
 import AddNote from './pages/AddNote';
 import { Query } from 'appwrite';
-import { AutoFixHighRounded, AutoFixHighSharp, Cached } from '@mui/icons-material';
+import { Add, AutoFixHighRounded, AutoFixHighSharp, Cached } from '@mui/icons-material';
 import appwriteNoteService from './appwrite/config';
 import LoginFormUnit from './components/LoginFormUnit';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import RTE from './components/RTE';
+import { Link } from 'react-router-dom';
 function App() {
     const ref = useRef(null);
     const authStatus = useSelector((state) => state.auth.status);
@@ -132,51 +134,51 @@ function App() {
     if (loading) return <Loader />;
 
     return (
-        <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+        <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
             <Header />
             {authStatus ? (
                 <>
-                    <div className="flex justify-between">
-                        <span className="text-xs text-muted-foreground flex flex-col">
-                            <span className="text-xl text-primary ">
+                    <div className="flex border-b mb-4 border-primary/20 border-dashed  justify-between">
+                        <span className=" text-xs flex flex-col">
+                            <span className="text-xl text-primary font-medium">
                                 {/* {time = (Date.now())}  add greetings acc to time*/}
                                 Welcome
                             </span>
-                            {`${userData.name}`}
+                            {userData.name}
                         </span>
-                      
-                      <div className="flex gap-4">
-                      <TooltipProvider>
-                            <Tooltip>
-                                {' '}
-                                {/*set tooltip diren to below */}
-                                <TooltipTrigger>
+
+                        <div className="flex gap-4">
+                            <TooltipProvider>
+                                <Tooltip>
                                     {' '}
-                                    <Button className="px-0" variant="icon" onClick={generateTestData}>
-                                        <AutoFixHighSharp  sx={{fontSize:24,}} />
-                                    </Button>
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                    <p>Generate test data</p>
-                                </TooltipContent>
-                            </Tooltip>
-                        </TooltipProvider>
-                        <TooltipProvider>
-                            <Tooltip>
-                                {' '}
-                                {/*set tooltip diren to below */}
-                                <TooltipTrigger>
+                                    {/*set tooltip diren to below */}
+                                    <TooltipTrigger>
+                                        {' '}
+                                        <Button className="px-0" variant="icon" onClick={generateTestData}>
+                                            <AutoFixHighSharp sx={{ fontSize: 24 }} />
+                                        </Button>
+                                    </TooltipTrigger>
+                                    <TooltipContent>
+                                        <p>Generate test data</p>
+                                    </TooltipContent>
+                                </Tooltip>
+                            </TooltipProvider>
+                            <TooltipProvider>
+                                <Tooltip>
                                     {' '}
-                                    <Button className="px-0 my-2" variant="icon" onClick={fetchNotes}>
-                                        <Cached  sx={{fontSize:24,}} />
-                                    </Button>
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                    <p>Refresh</p>
-                                </TooltipContent>
-                            </Tooltip>
-                        </TooltipProvider>
-                      </div>
+                                    {/*set tooltip diren to below */}
+                                    <TooltipTrigger>
+                                        {' '}
+                                        <Button className="px-0 my-2" variant="icon" onClick={fetchNotes}>
+                                            <Cached sx={{ fontSize: 24 }} />
+                                        </Button>
+                                    </TooltipTrigger>
+                                    <TooltipContent>
+                                        <p>Refresh</p>
+                                    </TooltipContent>
+                                </Tooltip>
+                            </TooltipProvider>
+                        </div>
                     </div>
 
                     <div className="transition-all duration-500">
@@ -186,7 +188,10 @@ function App() {
                             ))}
                         </Masonry>
                     </div>
-                    <AddNote onNoteCreate={handleNoteCreate} />
+                    {/* <AddNote onNoteCreate={handleNoteCreate} /> */}
+                    <Link  className='fixed bottom-8 right-4 flex p-4 justify-center items-center font-medium text-primary-foreground bg-primary rounded-2xl cursor-pointer' to="/add-note">
+                        <Add />
+                    </Link>
                 </>
             ) : (
                 <LoginFormUnit />

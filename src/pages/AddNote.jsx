@@ -1,19 +1,32 @@
 import React, { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
+
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import appwriteNoteService from '../appwrite/config';
-import { useSelector } from 'react-redux';
+// import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { ThemeProvider } from '@/components/theme-provider';
-import { Add } from '@mui/icons-material';
 import { toast } from 'react-hot-toast';
+import { useSelector } from 'react-redux';
+import appwriteNoteService from '../appwrite/config';
+import Header from '../components/Header/Header';
+import RTE from '../components/RTE';
+import { useNavigate } from 'react-router-dom';
 
 export default function AddNote({ onNoteCreate }) {
+    const navigate=useNavigate()
     const [isOpen, setIsOpen] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
-    
-    const { register, handleSubmit, watch, setValue, reset, formState: { errors } } = useForm({
+
+    const {
+        register,
+        control,
+        handleSubmit,
+        watch,
+        setValue,
+        reset,
+        getValues,
+        formState: { errors },
+    } = useForm({
         defaultValues: {
             title: '',
             content: '',
@@ -25,7 +38,7 @@ export default function AddNote({ onNoteCreate }) {
 
     const submitNoteData = async (data) => {
         if (isSubmitting) return;
-        
+
         setIsSubmitting(true);
         try {
             const dbPost = await appwriteNoteService.createNote({
@@ -40,13 +53,13 @@ export default function AddNote({ onNoteCreate }) {
                 if (onNoteCreate) {
                     await onNoteCreate(dbPost);
                 }
-                
+
                 // Reset form
                 reset();
-                
+
                 // Close dialog
                 setIsOpen(false);
-                
+
                 toast.success('Note created successfully');
             }
         } catch (error) {
@@ -54,6 +67,7 @@ export default function AddNote({ onNoteCreate }) {
             toast.error('Failed to create note');
         } finally {
             setIsSubmitting(false);
+            navigate("/")
         }
     };
 
@@ -80,64 +94,38 @@ export default function AddNote({ onNoteCreate }) {
 
     return (
         <ThemeProvider>
-            <Dialog open={isOpen} onOpenChange={setIsOpen}>
-                <DialogTrigger asChild>
-                    <span className="fixed bottom-8 right-4 flex p-4 justify-center items-center font-medium text-blue-950 bg-blue-400 rounded-2xl cursor-pointer">
-                        <Add />
-                    </span>
-                </DialogTrigger>
-                <DialogContent className="sm:max-w-[425px]">
-                    <DialogHeader>
-                        <DialogTitle>Create New Note</DialogTitle>
-                        <DialogDescription>
-                            Add a new note to your collection.
-                        </DialogDescription>
-                    </DialogHeader>
-                    <form onSubmit={handleSubmit(submitNoteData)} className="space-y-4">
-                        <div>
-                            <Input
-                                placeholder="Title"
-                                {...register('title', { 
-                                    required: 'Title is required',
-                                    minLength: {
-                                        value: 3,
-                                        message: 'Title must be at least 3 characters'
-                                    }
-                                })}
-                            />
-                            {errors.title && (
-                                <span className="text-red-500 text-sm">{errors.title.message}</span>
-                            )}
-                        </div>
-                        
-                        <div>
-                            <Input
-                                placeholder="Content"
-                                {...register('content', { 
-                                    required: 'Content is required',
-                                    minLength: {
-                                        value: 10,
-                                        message: 'Content must be at least 10 characters'
-                                    }
-                                })}
-                            />
-                            {errors.content && (
-                                <span className="text-red-500 text-sm">{errors.content.message}</span>
-                            )}
-                        </div>
+            <Header />
 
-                        <DialogFooter>
-                            <Button 
-                                type="submit" 
-                                className="w-full"
-                                disabled={isSubmitting}
-                            >
-                                {isSubmitting ? 'Creating...' : 'Create Note'}
-                            </Button>
-                        </DialogFooter>
-                    </form>
-                </DialogContent>
-            </Dialog>
+            <form onSubmit={handleSubmit(submitNoteData)} className="space-y-4">
+                <div>
+                    <Input
+                        placeholder="Title"
+                        className="border-none placeholder:text-lg"
+                        {...register('title', {
+                            required: 'Title is required',
+                            minLength: {
+                                value: 3,
+                                message: 'Title must be at least 3 characters',
+                            },
+                        })}
+                    />
+                    {errors.title && <span className="text-red-500 text-sm">{errors.title.message}</span>}
+                </div>
+
+                <div>
+                    <RTE name="content" control={control} defaultValue={getValues('content')} />
+
+                    {errors.content && <span className="text-red-500 text-sm">{errors.content.message}</span>}
+                </div>
+
+                {/* <DialogFooter> */}
+                <Button type="submit" className="w-full" disabled={isSubmitting}>
+                    {isSubmitting ? 'Creating...' : 'Create Note'}
+                </Button>
+                {/* </DialogFooter> */}
+            </form>
+            {/* </DialogContent> */}
+            {/* </Dialog> */}
         </ThemeProvider>
     );
 }

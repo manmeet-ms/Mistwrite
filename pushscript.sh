@@ -1,4 +1,5 @@
 git status --short
 git add -A
-git commit -m "default timer set to 24H  :: slight UI updates in NoteCard and header"
+git commit -m "editor added && minor ui updates"
 git push origin main
+

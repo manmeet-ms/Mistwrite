@@ -14,6 +14,7 @@ import EditNotes from './pages/EditPosts';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import './style.css';
+import RTE from './components/RTE.jsx';
 
 const router = createBrowserRouter([
   // {
@@ -51,9 +52,7 @@ const router = createBrowserRouter([
         {
             path: "/add-note",
             element: (
-                <AuthLayout authentication>
                     <AddNote />
-                </AuthLayout>
             ),
         },
         {
@@ -74,6 +73,7 @@ const router = createBrowserRouter([
             path: "/n/:slug",
             element: <NoteCard />,
         },
+        
     ],
 // },]
 )

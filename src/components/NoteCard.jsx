@@ -1,13 +1,12 @@
 'use client';
-
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Close, DeleteOutlineOutlined, LocalFireDepartmentOutlined } from '@mui/icons-material';
+import { DeleteOutlineOutlined, LocalFireDepartmentOutlined } from '@mui/icons-material';
 import parse from 'html-react-parser';
 import moment from 'moment';
-import React, { useEffect, useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
+import { toast, Toaster } from 'react-hot-toast';
 import appwriteNoteService from '../appwrite/config';
-import { toast, ToastBar, Toaster } from 'react-hot-toast';
 
 const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
     const formatDate = useCallback((dateString) => {
@@ -70,7 +69,7 @@ const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
     }, [createdAt, calculateTimeLeft]);
 
     const noteCreated = new Date(createdAt);
-    const [h, m, s, ms] = [24, 60, 60, 1000];
+    const [h, m, s, ms] = [24,60, 60, 1000];
     const noteBurn = new Date(noteCreated.getTime() + h * m * s * ms);
     const timeLeft = calculateTimeLeft(noteCreated, noteBurn);
 
@@ -83,7 +82,6 @@ const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
                         <DeleteOutlineOutlined sx={{ fontSize: 16 }} className="text-slate-400" />
                     </Button>
                 </div>
-
                 <p className="text-sm text-slate-400 break-words text-balance">{parse(content)}</p>
 
                 <div className="flex flex-col text-xs text-slate-600 break-all">
@@ -98,7 +96,8 @@ const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
                     <div>
                         <span className="inline-flex gap-1 text-xs text-slate-600">
                             <Badge className="mt-2 mb-1 text-2xs font-bold text-amber-500 bg-amber-800/30 rounded-full py-1 pl-2" variant="secondary">
-                                <LocalFireDepartmentOutlined className="mr-0.5" sx={{ fontSize: 14, strokeWidth: '2px' }} />
+                                <LocalFireDepartmentOutlined className="mr-0.5" sx={{ fontSize: 14,  strokeWidth: 20 }} />
+                                {/* <PackageMinus strokeWidth={3.25} size={14} className='mr-1' /> */}
                                 {timeLeft}
                             </Badge>
                         </span>
