@@ -101,23 +101,23 @@ function App() {
                 title: `${userData.name} Meeting Prep`,
                 content: `${userData.$id} Discuss project updates and finalize the roadmap.`,
             },
-            {
-                title: `${userData.name} To-Do List`,
-                content:
-                    'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis modi asperiores quod deserunt! Voluptas, expedita.<br><li>Buy groceries</li><li>Pick up laundry</li><li>Call the plumber</li><li>Buy groceries</li><li>Pick up laundry</li><li>Call the plumber</li> ',
-            },
-            {
-                title: `${userData.name} Study Checklist`,
-                content: "Complete the math assignment, revise chemistry notes, and prep for tomorrow's quiz. Don't forget to go over the calculus problems you missed last week. Focus on Chapter 6 and the practice test.",
-            },
-            {
-                title: `${userData.name} Self-Reminder`,
-                content: `${userData.$id} Stay focused today. Small steps lead to big success eventually!`,
-            },
-            {
-                title: `${userData.name} Today's Accomplishments`,
-                content: `${userData.$id} Milk, Eggs, Bread. I'd be interested to know what prompted you to take our conversation to DMs. How can I assist you further? Coffee.`,
-            },
+            // {
+            //     title: `${userData.name} To-Do List`,
+            //     content:
+            //         'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis modi asperiores quod deserunt! Voluptas, expedita.<br><li>Buy groceries</li><li>Pick up laundry</li><li>Call the plumber</li><li>Buy groceries</li><li>Pick up laundry</li><li>Call the plumber</li> ',
+            // },
+            // {
+            //     title: `${userData.name} Study Checklist`,
+            //     content: "Complete the math assignment, revise chemistry notes, and prep for tomorrow's quiz. Don't forget to go over the calculus problems you missed last week. Focus on Chapter 6 and the practice test.",
+            // },
+            // {
+            //     title: `${userData.name} Self-Reminder`,
+            //     content: `${userData.$id} Stay focused today. Small steps lead to big success eventually!`,
+            // },
+            // {
+            //     title: `${userData.name} Today's Accomplishments`,
+            //     content: `${userData.$id} Milk, Eggs, Bread. I'd be interested to know what prompted you to take our conversation to DMs. How can I assist you further? Coffee.`,
+            // },
         ];
 
         for (const note of testNotes) {
@@ -150,10 +150,10 @@ function App() {
                         <div className="flex gap-4">
                             <TooltipProvider>
                                 <Tooltip>
-                                    {' '}
+
                                     {/*set tooltip diren to below */}
                                     <TooltipTrigger>
-                                        {' '}
+
                                         <Button className="px-0" variant="icon" onClick={generateTestData}>
                                             <AutoFixHighSharp sx={{ fontSize: 24 }} />
                                         </Button>
@@ -165,10 +165,10 @@ function App() {
                             </TooltipProvider>
                             <TooltipProvider>
                                 <Tooltip>
-                                    {' '}
+
                                     {/*set tooltip diren to below */}
                                     <TooltipTrigger>
-                                        {' '}
+
                                         <Button className="px-0 my-2" variant="icon" onClick={fetchNotes}>
                                             <Cached sx={{ fontSize: 24 }} />
                                         </Button>

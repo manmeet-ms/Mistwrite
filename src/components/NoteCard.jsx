@@ -4,11 +4,12 @@ import { Button } from '@/components/ui/button';
 import { DeleteOutlineOutlined, LocalFireDepartmentOutlined } from '@mui/icons-material';
 import parse from 'html-react-parser';
 import moment from 'moment';
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { toast, Toaster } from 'react-hot-toast';
 import appwriteNoteService from '../appwrite/config';
 
 const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
+    const [tleftString, settleftString] = useState('NaN')
     const formatDate = useCallback((dateString) => {
         return dateString ? `${moment(dateString).format('MMM DD, YYYY')} at ${moment(dateString).format('HH:mm')}` : 'Invalid Date';
     }, []);
@@ -45,20 +46,21 @@ const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
         const minutes = Math.floor((diffInMs % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diffInMs % (1000 * 60)) / 1000);
 
-        return `${hours}h ${minutes}m`;
-        // return `${hours}h ${minutes}m ${seconds}s`;
+        // return `${hours}h ${minutes}m`;
+        return `${hours}h ${minutes}m ${seconds}s`;
     }, []);
 
     // Calculate burn time when component mounts and set up interval
     useEffect(() => {
         const noteCreated = new Date(createdAt);
         // Set burn time to 1 hour, 15 minutes after creation
-        const [h, m, s, ms] = [1, 15, 60, 1000];
+        const [h, m, s, ms] = [1, 1, 30, 1000];
         const noteBurn = new Date(noteCreated.getTime() + h * m * s * ms);
 
         // Check burn time every second
         const interval = setInterval(() => {
             const timeLeft = calculateTimeLeft(noteCreated, noteBurn);
+            settleftString(timeLeft)
             if (!timeLeft) {
                 clearInterval(interval);
             }
@@ -69,7 +71,7 @@ const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
     }, [createdAt, calculateTimeLeft]);
 
     const noteCreated = new Date(createdAt);
-    const [h, m, s, ms] = [24,60, 60, 1000];
+    const [h, m, s, ms] = [1,1,30, 1000];
     const noteBurn = new Date(noteCreated.getTime() + h * m * s * ms);
     const timeLeft = calculateTimeLeft(noteCreated, noteBurn);
 
@@ -98,7 +100,7 @@ const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
                             <Badge className="mt-2 mb-1 text-2xs font-bold text-amber-700 bg-amber-400/30 dark:text-amber-500 dark:bg-amber-800/30 rounded-full py-1 pl-2" variant="secondary">
                                 <LocalFireDepartmentOutlined className="mr-0.5" sx={{ fontSize: 14,  strokeWidth: 20 }} />
                                 {/* <PackageMinus strokeWidth={3.25} size={14} className='mr-1' /> */}
-                                {timeLeft}
+                                {tleftString}
                             </Badge>
                         </span>
                     </div>
