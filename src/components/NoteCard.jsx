@@ -46,15 +46,15 @@ const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
         const minutes = Math.floor((diffInMs % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diffInMs % (1000 * 60)) / 1000);
 
-        // return `${hours}h ${minutes}m`;
-        return `${hours}h ${minutes}m ${seconds}s`;
+        return `${hours}h ${minutes}m`;
+        // return `${hours}h ${minutes}m ${seconds}s`;
     }, []);
 
     // Calculate burn time when component mounts and set up interval
     useEffect(() => {
         const noteCreated = new Date(createdAt);
         // Set burn time to 1 hour, 15 minutes after creation
-        const [h, m, s, ms] = [1, 1, 30, 1000];
+        const [h, m, s, ms] = [24,60,60, 1000];
         const noteBurn = new Date(noteCreated.getTime() + h * m * s * ms);
 
         // Check burn time every second
@@ -71,7 +71,7 @@ const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
     }, [createdAt, calculateTimeLeft]);
 
     const noteCreated = new Date(createdAt);
-    const [h, m, s, ms] = [1,1,30, 1000];
+    const [h, m, s, ms] = [24,60,60, 1000];
     const noteBurn = new Date(noteCreated.getTime() + h * m * s * ms);
     const timeLeft = calculateTimeLeft(noteCreated, noteBurn);
 
