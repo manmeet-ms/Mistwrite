@@ -74,6 +74,7 @@ const Header = () => {
 
   return (
     <>
+      <header className="  flex justify-between items-center mb-4">
       {navItems.map((item) => {
         item.active ? (
           <li key={item.name}>
@@ -83,7 +84,6 @@ const Header = () => {
           "null"
         );
       })}
-      <header className="flex justify-between items-center mb-4">
 
      <div className="flex gap-x-2  container">
      <Sheet>

@@ -3,30 +3,25 @@
 @tailwind utilities;
 @layer base {
   :root {
-    --background: 41 100% 95.12%; 
-    --foreground: 222.2 84.00% 4.90%; 
-    --card: 43.9 74.45% 88.86%; 
-    --card-foreground: 222.2 84.00% 4.90%; 
-    --primary: 40.98 34.43% 29.03%; 
-    --primary-foreground: 210 40% 98%; 
-    --secondary: 210 40% 96.1%; 
-    --secondary-foreground: 222.2 47.4% 11.20%; 
-    --muted: 210 40% 96.1%; 
-    --muted-foreground: 215.4 16.3% 46.9%; 
-    --accent: 46.83 37.42% 79.21%; 
-    --accent-foreground: 222.2 47.4% 11.20%; 
-    --popover: 0 0% 100%; 
-    --popover-foreground: 222.2 84.00% 4.90%; 
-    --destructive: 0 84.2% 60.2%; 
-    --destructive-foreground: 210 40% 98%; 
-    --border: 214.3 31.8% 91.4%; 
-    --input: 214.3 31.8% 91.4%; 
-    --ring: 222.2 84.00% 4.90%; 
-    --chart-1: 12 76.00% 61.00%; 
-    --chart-2: 173 58.00% 39%; 
-    --chart-3: 197 37.00% 24.00%; 
-    --chart-4: 43 74.00% 66.00%; 
-    --chart-5: 27 87.00% 67.00%;
+    --background: 85 80% 95%;
+    --foreground: 85 5% 10%;
+    --card: 85 50% 90%;
+    --card-foreground: 85 5% 15%;
+    --popover: 85 80% 95%;
+    --popover-foreground: 85 95% 10%;
+    --primary: 85 85% 35%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 85 30% 70%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 70.83333333333334 30% 85%;
+    --muted-foreground: 85 5% 35%;
+    --accent: 70.83333333333334 30% 80%;
+    --accent-foreground: 85 5% 15%;
+    --destructive: 0 80% 30%;
+    --destructive-foreground: 85 5% 90%;
+    --border: 85 30% 50%;
+    --input: 85 30% 20%;
+    --ring: 85 85% 35%;
     --radius: 0.5rem;
   }
   
@@ -66,7 +61,7 @@
 
     body {
         @apply bg-background text-foreground;
-        padding: 0.75rem;
+        /* padding: 0.75rem; */
     }
 }
 
@@ -139,7 +134,13 @@
     @apply bg-background text-foreground;
   }
 } */
-
-a{
-  border-bottom: solid 2px hsl(var(dark--accent)) !important;
+body{
+  padding: 12px  !important;
+}
+/* a{
+  text-decoration: none !important;
+  border-bottom: solid 2px hsl(var(--accent)) !important;
+} */
+input, button{
+  border-radius: 40rem !important;
 }

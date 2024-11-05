@@ -15,10 +15,10 @@ export default React.forwardRef(function InputwRef({ label, type = "text", class
   const id = useId();
 return (
   <>
-    <div className="w-full flex flex-col gap-2 ">
+    <div className="w-full flex flex-col gap-2  ">
       {label && <Label htmlFor={id}>{label}</Label>}
       <Input
-        className={`${className}`}
+        className={`  ${className}`}
         type={type}
         placeholder={props.placeholder}
         ref={ref}
