@@ -34,7 +34,7 @@
 - ligh/dark mode 'switch' literally switch
 - react top loading bars
 - breadcrusb in heaader 
-
+- differnt headers (#khoob_s_oo_rati)
 
 ## bottom nav 
 login / signup
