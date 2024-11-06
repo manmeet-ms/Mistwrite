@@ -16,6 +16,7 @@ import LoginFormUnit from './components/LoginFormUnit';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import RTE from './components/RTE';
 import { Link } from 'react-router-dom';
+import BottomToolbar from './components/BottomToolbar';
 function App() {
     const ref = useRef(null);
     const authStatus = useSelector((state) => state.auth.status);
@@ -192,10 +193,12 @@ function App() {
                     <Link  className='fixed bottom-8 right-4 flex p-4 justify-center items-center font-medium text-primary-foreground bg-primary rounded-2xl cursor-pointer' to="/add-note">
                         <Add />
                     </Link>
+                    <BottomToolbar/>
                 </>
             ) : (
                 <LoginFormUnit />
             )}
+
         </ThemeProvider>
     );
 }

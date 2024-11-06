@@ -1,6 +1,5 @@
-
 import { Button } from '@/components/ui/button';
-import { Globe,  UserRound } from 'lucide-react';
+import { Globe, UserRound } from 'lucide-react';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
@@ -13,6 +12,8 @@ import { Label } from '@/components/ui/label';
 import authService from '../appwrite/auth';
 import InputwRef from '../components/InputwRef';
 import { login as storeAuthLogin } from '../store/authSlice';
+import BackgroundVector from './BackgroundVector';
+import LinkUnit from './LinkUnit';
 
 const LoginFormUnit = () => {
     const navigate = useNavigate();
@@ -40,89 +41,86 @@ const LoginFormUnit = () => {
     };
     return (
         <>
-            <div className="backgroundVectorElement">
-                <section className="py-12">
-                    <div className="container">
-                        <div className="flex flex-col gap-4">
-                            {/* <img
+            <BackgroundVector />
+            <section className="py-12 ">
+                <div className="container">
+                    <div className="flex flex-col gap-2">
+                        {/* <img
               src="https://www.shadcnblocks.com/images/block/logos/shadcn-ui.svg"
               alt="logo"
               className="h-8"
             /> */}
-                            <Card className="mx-auto w-full max-w-md">
-                                <CardHeader className="items-center">
-                                    <UserRound className="size-10 rounded-full bg-accent p-2.5 text-muted-foreground" />
-                                    <CardTitle className="text-xl">Log into your account</CardTitle>
-                                    <CardDescription>Enter your information to login</CardDescription>
-                                </CardHeader>
-                                <CardContent>
-                                        {/* <Button variant="secondary" className="w-full">
+                        <Card className="mx-auto w-full max-w-md">
+                            <CardHeader className="items-center">
+                                <UserRound className="size-10 rounded-full bg-accent p-2.5 text-muted-foreground" />
+                                <CardTitle className="text-xl">Log into your account</CardTitle>
+                                <CardDescription>Enter your information to login</CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                {/* <Button variant="secondary" className="w-full">
                     <Google sx={{fontSize:18
                     }} className="mr-2 size-4" />
                     Continue with Google
                   </Button> */}
-                                        {/* <div className="flex items-center gap-4">
+                                {/* <div className="flex items-center gap-4">
                     <span className="h-px w-full bg-input"></span>
                     <span className="text-xs text-muted-foreground">OR</span>
                     <span className="h-px w-full bg-input"></span>
                   </div> */}
-                                            <form onSubmit={handleSubmit(login)}>
-                                                <div className=" pt-12 grid gap-4">
-                                                <InputwRef
-                                                    className="mt-1"
-                                                    label="Email"
-                                                    autoComplete="email"
-                                                    name="Email"
-                                                    placeholder="email@example.com"
-                                                    type="email"
-                                                    ref={register}
-                                                    {...register('email', {
-                                                        required: true,
-                                                        validate: {
-                                                            pattern: (value) => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value) || 'Email must be a valid address',
-                                                        },
-                                                    })}
-                                                />
-                                                <div className="">
-                                                <div className="flex justify-between mb-2">
-                                                    <Label htmlFor="password">Password</Label>
-                                                    {/* <a href="#" className="text-sm underline">
+                                <form onSubmit={handleSubmit(login)}>
+                                    <div className=" pt-12 grid gap-3">
+                                        <InputwRef
+                                            className="mt-1"
+                                            label="Email"
+                                            autoComplete="email"
+                                            name="Email"
+                                            placeholder="email@example.com"
+                                            type="email"
+                                            ref={register}
+                                            {...register('email', {
+                                                required: true,
+                                                validate: {
+                                                    pattern: (value) => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value) || 'Email must be a valid address',
+                                                },
+                                            })}
+                                        />
+                                        <div>
+                                            <div className="flex justify-between mb-2">
+                                                <Label htmlFor="password">Password</Label>
+                                                {/* <a href="#" className="text-sm underline">
                                                         Forgot password
                                                     </a> */}
-                                                </div>
-                                                <InputwRef
-                                                    autoComplete="password"
-                                                    className="mt-1"
-                                                    name="password"
-                                                    placeholder="Enter your password"
-                                                    type="password"
-                                                    ref={register}
-                                                    {...register('password', {
-                                                        required: true,
-                                                    })}
-                                                />
-                                                </div>
-                                                <Button className="w-full" type="submit">
-                                                    Login
-                                                </Button>
-                                                </div>
-                                            </form>
-                                </CardContent>
-                            </Card>
-                            <div className="mx-auto flex gap-1 text-sm">
-                                <p>Don&apos;t have an account yet?</p>
-                                <Link className="text-primary hover:text-secondary-foreground font-medium hover:bg-accent px-2 py-1 relative bottom-1 rounded transition-all duration-500 ease-in-out " to="/signup">
-                                    Register
-                                </Link>
-                            </div>
+                                            </div>
+                                            <InputwRef
+                                                autoComplete="password"
+                                                className="mt-1"
+                                                name="password"
+                                                placeholder="Enter your password"
+                                                type="password"
+                                                ref={register}
+                                                {...register('password', {
+                                                    required: true,
+                                                })}
+                                            />
+                                        </div>
+                                        <Button className="w-full" type="submit">
+                                            Login
+                                        </Button>
+                                    </div>
+                                </form>
+                            </CardContent>
+                        </Card>
+                        <div className="mx-auto flex gap-1 text-sm">
+                            <p>Don&apos;t have an account yet?</p>
+
+                            <LinkUnit text="Register" to="/signup" />
                         </div>
                     </div>
-                </section>
-            </div>
+                </div>
+            </section>
 
-
-{/* INSPIRATIoN */}
-{/* <section className="py-32">
+            {/* INSPIRATIoN */}
+            {/* <section className="py-32">
       <div className="container">
         <div className="flex flex-col gap-4">
           <img
@@ -180,7 +178,6 @@ const LoginFormUnit = () => {
       </div>
     </section> */}
             <section>
-
                 {error && <p className="text-red-500">{error}</p>}
                 {/* <form onSubmit={handleSubmit(login)}>
             <InputwRef

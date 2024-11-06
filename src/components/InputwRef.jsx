@@ -18,7 +18,7 @@ return (
     <div className="w-full flex flex-col gap-2  ">
       {label && <Label htmlFor={id}>{label}</Label>}
       <Input
-        className={`  ${className}`}
+        className={` outline outline-1 outline-input/40 dark:outline-muted-foreground/40 border-none ${className}`}
         type={type}
         placeholder={props.placeholder}
         ref={ref}

@@ -22,10 +22,10 @@ const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
 
         try {
             await appwriteNoteService.deleteNote(noteId);
-            toast.success(`Deleted ${title}`);
             // Notify parent component to update the notes list
             if (onDelete) {
                 onDelete(noteId);
+                toast.success(`Deleted ${title}`);
             }
         } catch (error) {
             console.error('Error deleting note:', error);
@@ -76,17 +76,17 @@ const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
     const timeLeft = calculateTimeLeft(noteCreated, noteBurn);
 
     return (
-        <section className="pt-4 pr-2 pl-4 pb-2 bg-primary/10 border border-primary/5 rounded-xl">
+        <section className="pt-4 pr-2 pl-4 pb-2 bg-primary/0 border  border-secondary-foreground/30 rounded-xl">
             <div className="space-y-2">
                 <div className="flex justify-between">
-                    <h4 className="text-primary break-words">{title}</h4>
+                    <h4 className="text-secondary-foreground-foreground break-words">{title}</h4>
                     <Button variant="icon" className="rounded-xl px-3 relative bottom-1.5 " onClick={deleteNoteOperation}>
-                        <DeleteOutlineOutlined sx={{ fontSize: 16 }} className="text-primary" />
+                        <DeleteOutlineOutlined sx={{ fontSize: 16 }} className="text-secondary-foreground" />
                     </Button>
                 </div>
-                <p className="text-sm text-secondary-foreground dark:text-secondary-foreground/80 break-words text-balance">{parse(content)}</p>
+                <p className="text-sm text-muted-foreground dark:text-secondary-foreground/80 break-words text-balance">{parse(content)}</p>
 
-                <div className="flex flex-col text-xs text-primary/50 break-all">
+                <div className="flex flex-col text-xs text-accent break-all">
                     {/* <span>Created: {formatDate(noteCreated)} </span>
                     <span>Burn: {formatDate(noteBurn)} </span>
                     <span>Now: {moment().format('MMM DD, YYYY HH:mm')} </span> */}
@@ -96,7 +96,7 @@ const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
 
                 {timeLeft && (
                     <div>
-                        <span className="inline-flex gap-1 text-xs text-slate-600">
+                        <span className="inline-flex gap-1 text-xs">
                             <Badge className="mt-2 mb-1 text-2xs font-bold text-amber-700 bg-amber-400/30 dark:text-amber-500 dark:bg-amber-800/30 rounded-full py-1 pl-2" variant="secondary">
                                 <LocalFireDepartmentOutlined className="mr-0.5" sx={{ fontSize: 14,  strokeWidth: 20 }} />
                                 {/* <PackageMinus strokeWidth={3.25} size={14} className='mr-1' /> */}
