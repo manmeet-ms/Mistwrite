@@ -86,7 +86,7 @@ const Header = () => {
       })}
 
      <div className="flex gap-x-2  container">
-     <Sheet>
+     {/* <Sheet>
           <SheetTrigger asChild>
             <Menu  className="text-secondary-foreground mt-0.5" sx={{fontSize:20
             }} />
@@ -126,7 +126,7 @@ const Header = () => {
               <SheetClose asChild>{authStatus && <LogoutButton />}</SheetClose>
             </SheetFooter>
           </SheetContent>
-        </Sheet>
+        </Sheet> */}
 
         {/* <div className="flex">
                   Burning Notes
@@ -136,7 +136,11 @@ const Header = () => {
                     alt=""
                 />
                 </div> */}
-<h1 className="text-secondary-foreground">Burning Notes</h1>
+  <Link to="/">
+<h1 className="text-secondary-foreground">
+  Burning Notes
+</h1>
+  </Link>
 
      </div>
      {/* check login status */}
@@ -148,9 +152,11 @@ const Header = () => {
             <Link to="/login">Login</Link>
           </Button>
         )} */}
-        {authStatus ? (
+
+        {/* show if necessary logout button */}
+        {/* {authStatus ? (
           <LogoutButton />
-        ) : null}
+        ) : null} */}
  <DropdownMenu>
       <DropdownMenuTrigger asChild>
 

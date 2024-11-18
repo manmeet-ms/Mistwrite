@@ -23,7 +23,7 @@
 - header welcome
 - responsive collapsible sidemenu (desktop) and hamburger on mobile seprate ui hide/show khel.
 - add inidication when fetching/updating notes {set}. 
-
+- sidebar proper render problem setting
 # optimization/improvement:
 - remove loader as dependency (an implement you own style)
 - make it fast

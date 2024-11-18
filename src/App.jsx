@@ -1,22 +1,19 @@
 import { ThemeProvider } from '@/components/theme-provider';
 import { Button } from '@/components/ui/button';
+import { Add, AutoFixHighSharp, Cached } from '@mui/icons-material';
+import Masonry from '@mui/lab/Masonry';
+import { Query } from 'appwrite';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import authService from './appwrite/auth';
-import { login, logout } from './store/authSlice';
-import Masonry from '@mui/lab/Masonry';
+import appwriteNoteService from './appwrite/config';
+import BottomToolbar from './components/BottomToolbar';
 import Header from './components/Header/Header';
 import Loader from './components/Loader';
-import NoteCard from './components/NoteCard';
-import AddNote from './pages/AddNote';
-import { Query } from 'appwrite';
-import { Add, AutoFixHighRounded, AutoFixHighSharp, Cached } from '@mui/icons-material';
-import appwriteNoteService from './appwrite/config';
 import LoginFormUnit from './components/LoginFormUnit';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import RTE from './components/RTE';
-import { Link } from 'react-router-dom';
-import BottomToolbar from './components/BottomToolbar';
+import NoteCard from './components/NoteCard';
+import { login, logout } from './store/authSlice';
 function App() {
     const ref = useRef(null);
     const authStatus = useSelector((state) => state.auth.status);
@@ -45,7 +42,7 @@ function App() {
 
     // Memoize fetchNotes function
     const fetchNotes = useCallback(async () => {
-        if (!userData?.$id) return; // Guard clause to prevent unnecessary API calls
+        if (!userData?.$id) return; // prevent unnecessary API calls
 
         try {
             const fetchedNotes = await appwriteNoteService.getEveryNote([Query.equal('userId', userData.$id)]);
@@ -99,26 +96,23 @@ function App() {
 
         const testNotes = [
             {
-                title: `${userData.name} Meeting Prep`,
-                content: `${userData.$id} Discuss project updates and finalize the roadmap.`,
+                title: `Meeting Prep`,
+                content: `${userData.$id} Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.END END END`,
             },
-            // {
-            //     title: `${userData.name} To-Do List`,
-            //     content:
-            //         'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis modi asperiores quod deserunt! Voluptas, expedita.<br><li>Buy groceries</li><li>Pick up laundry</li><li>Call the plumber</li><li>Buy groceries</li><li>Pick up laundry</li><li>Call the plumber</li> ',
-            // },
-            // {
-            //     title: `${userData.name} Study Checklist`,
-            //     content: "Complete the math assignment, revise chemistry notes, and prep for tomorrow's quiz. Don't forget to go over the calculus problems you missed last week. Focus on Chapter 6 and the practice test.",
-            // },
-            // {
-            //     title: `${userData.name} Self-Reminder`,
-            //     content: `${userData.$id} Stay focused today. Small steps lead to big success eventually!`,
-            // },
-            // {
-            //     title: `${userData.name} Today's Accomplishments`,
-            //     content: `${userData.$id} Milk, Eggs, Bread. I'd be interested to know what prompted you to take our conversation to DMs. How can I assist you further? Coffee.`,
-            // },
+            {
+                title: `To-Do List`,
+                content:
+                    'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis modi asperiores quod deserunt! Voluptas, expedita.<br><li>Buy groceries</li><li>Pick up laundry</li><li>Call the plumber</li><li>Buy groceries</li><li>Pick up laundry</li><li>Call the plumber</li> ',
+            },
+            {
+                title: `Study Checklist`,
+                content: "Complete the math assignment, revise chemistry notes, and prep for tomorrow's quiz. Don't forget to go over the calculus problems you missed last week. Focus on Chapter 6 and the practice test.",
+            },
+            {
+                title: `Self-Reminder`,
+                content: `${userData.$id} Stay focused today. Small steps lead to big success eventually!`,
+            },
+
         ];
 
         for (const note of testNotes) {
@@ -139,7 +133,7 @@ function App() {
             <Header />
             {authStatus ? (
                 <>
-                    <div className="flex border-b mb-4 border-primary/20 border-dashed  justify-between">
+                    <div className="flex mb-4 border-primary/20  border-dashed  justify-between">
                         <span className=" text-xs flex flex-col">
                             <span className="text-xl text-primary font-medium">
                                 {/* {time = (Date.now())}  add greetings acc to time*/}
@@ -149,10 +143,15 @@ function App() {
                         </span>
 
                         <div className="flex gap-4">
-                            <TooltipProvider>
+                        <Button className="px-0 my-2" variant="icon" onClick={fetchNotes}>
+                                            <Cached sx={{ fontSize: 24 }} />
+                                        </Button>
+                        {/* <Button className="px-0 my-2" variant="icon" onClick={generateTestData}>
+                                            <AutoFixHighSharp sx={{ fontSize: 24 }} />
+                                        </Button> */}
+                          {/*   <TooltipProvider>
                                 <Tooltip>
 
-                                    {/*set tooltip diren to below */}
                                     <TooltipTrigger>
 
                                         <Button className="px-0" variant="icon" onClick={generateTestData}>
@@ -165,10 +164,10 @@ function App() {
                                 </Tooltip>
                             </TooltipProvider>
                             <TooltipProvider>
-                                <Tooltip>
+                                <Tooltip> */}
 
                                     {/*set tooltip diren to below */}
-                                    <TooltipTrigger>
+                                    {/* <TooltipTrigger>
 
                                         <Button className="px-0 my-2" variant="icon" onClick={fetchNotes}>
                                             <Cached sx={{ fontSize: 24 }} />
@@ -178,7 +177,7 @@ function App() {
                                         <p>Refresh</p>
                                     </TooltipContent>
                                 </Tooltip>
-                            </TooltipProvider>
+                            </TooltipProvider> */}
                         </div>
                     </div>
 
@@ -190,9 +189,9 @@ function App() {
                         </Masonry>
                     </div>
                     {/* <AddNote onNoteCreate={handleNoteCreate} /> */}
-                    <Link  className='fixed bottom-8 right-4 flex p-4 justify-center items-center font-medium text-primary-foreground bg-primary rounded-2xl cursor-pointer' to="/add-note">
+                    {/* <Link  className='fixed bottom-8 right-4 flex p-4 justify-center items-center font-medium text-primary-foreground bg-primary rounded-2xl cursor-pointer' to="/add-note">
                         <Add />
-                    </Link>
+                    </Link> */}
                     <BottomToolbar/>
                 </>
             ) : (

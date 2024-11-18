@@ -1,15 +1,16 @@
 'use client';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { DeleteOutlineOutlined, LocalFireDepartmentOutlined } from '@mui/icons-material';
+import { DeleteOutlineOutlined, LocalFireDepartment, LocalFireDepartmentOutlined, LocalFireDepartmentTwoTone } from '@mui/icons-material';
 import parse from 'html-react-parser';
 import moment from 'moment';
 import React, { useCallback, useEffect, useState } from 'react';
 import { toast, Toaster } from 'react-hot-toast';
 import appwriteNoteService from '../appwrite/config';
+import { PackageMinus } from 'lucide-react';
 
 const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
-    const [tleftString, settleftString] = useState('NaN')
+    const [tleftString, settleftString] = useState('NaN');
     const formatDate = useCallback((dateString) => {
         return dateString ? `${moment(dateString).format('MMM DD, YYYY')} at ${moment(dateString).format('HH:mm')}` : 'Invalid Date';
     }, []);
@@ -54,13 +55,13 @@ const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
     useEffect(() => {
         const noteCreated = new Date(createdAt);
         // Set burn time to 1 hour, 15 minutes after creation
-        const [h, m, s, ms] = [24,60,60, 1000];
+        const [h, m, s, ms] = [24, 60, 60, 1000];
         const noteBurn = new Date(noteCreated.getTime() + h * m * s * ms);
 
         // Check burn time every second
         const interval = setInterval(() => {
             const timeLeft = calculateTimeLeft(noteCreated, noteBurn);
-            settleftString(timeLeft)
+            settleftString(timeLeft);
             if (!timeLeft) {
                 clearInterval(interval);
             }
@@ -71,22 +72,33 @@ const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
     }, [createdAt, calculateTimeLeft]);
 
     const noteCreated = new Date(createdAt);
-    const [h, m, s, ms] = [24,60,60, 1000];
+    const [h, m, s, ms] = [24, 60, 60, 1000];
     const noteBurn = new Date(noteCreated.getTime() + h * m * s * ms);
     const timeLeft = calculateTimeLeft(noteCreated, noteBurn);
 
     return (
-        <section className="pt-4 pr-2 pl-4 pb-2 bg-primary/0 border  border-secondary-foreground/30 rounded-xl">
+        <section className=" pt-4 pr-2 pl-4 pb-2 h-fit max-h-[400px] overflow-auto  bg-primary/0 hover:bg-primary/5 border  border-secondary-foreground/20 rounded-xl transition-all duration-500 ease-in-out ">
             <div className="space-y-2">
                 <div className="flex justify-between">
-                    <h4 className="text-secondary-foreground-foreground break-words">{title}</h4>
-                    <Button variant="icon" className="rounded-xl px-3 relative bottom-1.5 " onClick={deleteNoteOperation}>
+                    <h4 className="w-20  md:w-24 lg:w-36 text-secondary-foreground-foreground break-words">{title}</h4>
+                    {/* <Button variant="icon" className="rounded-xl px-3 relative bottom-1.5 " onClick={deleteNoteOperation}>
                         <DeleteOutlineOutlined sx={{ fontSize: 16 }} className="text-secondary-foreground" />
-                    </Button>
+                    </Button> */}
+                    {timeLeft && (
+                        <div className="  ">
+                            {/* <div className='w-full relative left-4'> */}
+                            <span className="">
+                                <Badge className="badgeText text-2xs text-amber-700 bg-amber-400/30 dark:text-amber-500 dark:bg-amber-800/30 rounded-full py-1 pl-2" variant="secondary">
+                                    <LocalFireDepartmentOutlined  className="mr-0.5 " sx={{ fontSize: 14, strokeWidth: 24 }} />
+                                    {tleftString}
+                                </Badge>
+                            </span>
+                        </div>
+                    )}
                 </div>
                 <p className="text-sm text-muted-foreground dark:text-secondary-foreground/80 break-words text-balance">{parse(content)}</p>
 
-                <div className="flex flex-col text-xs text-accent break-all">
+                <div className="flex flex-col text-xs text-primary/40 break-all">
                     {/* <span>Created: {formatDate(noteCreated)} </span>
                     <span>Burn: {formatDate(noteBurn)} </span>
                     <span>Now: {moment().format('MMM DD, YYYY HH:mm')} </span> */}
@@ -94,17 +106,16 @@ const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
                     {/* <span>Note ID: {noteId} </span> */}
                 </div>
 
-                {timeLeft && (
+                {/* {timeLeft && (
                     <div>
                         <span className="inline-flex gap-1 text-xs">
-                            <Badge className="mt-2 mb-1 text-2xs font-bold text-amber-700 bg-amber-400/30 dark:text-amber-500 dark:bg-amber-800/30 rounded-full py-1 pl-2" variant="secondary">
+                            <Badge className="mt-2 mb-1 text-2xs text-xs font-bold text-amber-700 bg-amber-400/30 dark:text-amber-500 dark:bg-amber-800/30 rounded-full py-1 pl-2" variant="secondary">
                                 <LocalFireDepartmentOutlined className="mr-0.5" sx={{ fontSize: 14,  strokeWidth: 20 }} />
-                                {/* <PackageMinus strokeWidth={3.25} size={14} className='mr-1' /> */}
                                 {tleftString}
                             </Badge>
                         </span>
                     </div>
-                )}
+                )} */}
             </div>
             <Toaster />
         </section>

@@ -68,6 +68,15 @@ export class AuthService {
       // throw error;
     }
   }
+  async flushSessions() {
+    try {
+      // return await this.account.deleteSessions(); // This was first condition
+      await this.account.deleteSessions();
+    } catch (error) {
+      console.log("Appwrite Service error auth.js :: at logout :: ", error);
+      // throw error;
+    }
+  }
 }
 //  as one have to create an object of AuthService, so we are directly exporting this as an object itself
 const authService = new AuthService(); // exported ready-made object of  'class AuthService'

@@ -11,7 +11,7 @@ import { Label } from '@/components/ui/label';
 
 import authService from '../appwrite/auth';
 import InputwRef from '../components/InputwRef';
-import { login as storeAuthLogin } from '../store/authSlice';
+import { logout, login as storeAuthLogin } from '../store/authSlice';
 import BackgroundVector from './BackgroundVector';
 import LinkUnit from './LinkUnit';
 
@@ -20,7 +20,18 @@ const LoginFormUnit = () => {
     const dispatch = useDispatch();
     const { register, handleSubmit } = useForm();
     const [error, setError] = useState('');
-
+const logoutHandler=()=>{
+  authService
+      .logout()
+      .then(() => {
+        dispatch(logout());
+        // navigate("/signup")
+        navigate("/login")
+      })
+      .catch((e) => {
+        console.log("Error found - logoutBtncomponentHeader", e);
+      });
+}
     const login = async (data) => {
         setError(''); // Clear error when logging in
         try {
@@ -209,6 +220,15 @@ const LoginFormUnit = () => {
             <Button type="submit">Login</Button>
           </form> */}
             </section>
+
+            <div className="flex gap-1 justify-center text-xs text-secondary-foreground/40 ">
+              Trouble logging in? Delete your previously logged session by clicking 
+
+              <span className=' underline  text-secondary-foreground/60 font-medium hover:bg-accent  rounded transition-all duration-500 ease-in-out' onClick={logoutHandler}>here</span>
+                        </div>
+            <p className='flex ' >
+              </p>
+              
         </>
     );
 };
