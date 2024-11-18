@@ -14,6 +14,7 @@ import Loader from './components/Loader';
 import LoginFormUnit from './components/LoginFormUnit';
 import NoteCard from './components/NoteCard';
 import { login, logout } from './store/authSlice';
+import moment from 'moment';
 function App() {
     const ref = useRef(null);
     const authStatus = useSelector((state) => state.auth.status);
@@ -125,6 +126,17 @@ function App() {
         // Refresh notes after generating test data
         fetchNotes();
     };
+    const date = new Date();
+    const hours = date.getHours();
+    let Greet;
+     
+    if(hours < 12){
+            Greet = "Good Morning";
+    }else if(hours >= 12 && hours <= 17){
+            Greet = "Good Afternoon";
+    }else if(hours >= 17 && hours <= 24){
+            Greet = "Good Evening";
+    }
 
     if (loading) return <Loader />;
 
@@ -133,22 +145,19 @@ function App() {
             <Header />
             {authStatus ? (
                 <>
-                    <div className="flex mb-4 border-primary/20  border-dashed  justify-between">
-                        <span className=" text-xs flex flex-col">
-                            <span className="text-xl text-primary font-medium">
-                                {/* {time = (Date.now())}  add greetings acc to time*/}
-                                Welcome
-                            </span>
-                            {userData.name}
+                    <div className="flex mb-4 border-b border-primary/20  border-dashed items-center justify-between">
+                        <span className=" text-xs flex flex-col gap-0.5">
+                            {Greet}, {userData.name}
+                            <span className="text-primary font-semibold">{moment().format('LLL')} </span>
                         </span>
 
                         <div className="flex gap-4">
                         <Button className="px-0 my-2" variant="icon" onClick={fetchNotes}>
                                             <Cached sx={{ fontSize: 24 }} />
                                         </Button>
-                        {/* <Button className="px-0 my-2" variant="icon" onClick={generateTestData}>
+                        <Button className="px-0 my-2" variant="icon" onClick={generateTestData}>
                                             <AutoFixHighSharp sx={{ fontSize: 24 }} />
-                                        </Button> */}
+                                        </Button>
                           {/*   <TooltipProvider>
                                 <Tooltip>
 

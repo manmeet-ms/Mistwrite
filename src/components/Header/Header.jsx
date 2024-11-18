@@ -11,6 +11,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import {
+  FireplaceOutlined,
+  FireplaceSharp,
   LocalFireDepartmentOutlined,
   Menu
 } from "@mui/icons-material";
@@ -137,8 +139,10 @@ const Header = () => {
                 />
                 </div> */}
   <Link to="/">
-<h1 className="text-secondary-foreground">
-  Burning Notes
+<h1 className="flex items-center text-xl font-bold text-secondary-foreground">
+  <span className=" mr-2 -mt-0.5"><FireplaceSharp sx={{fontSize:24}}  /></span>
+  Burning Notes 
+  {/* <span className=" ml-2 -mt-0.5"><FireplaceOutlined sx={{fontSize:22}}  /></span> */}
 </h1>
   </Link>
 
@@ -159,7 +163,7 @@ const Header = () => {
         ) : null} */}
  <DropdownMenu>
       <DropdownMenuTrigger asChild>
-
+ 
         <Button className='px-3' variant="ghost" size="icon">
           <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
           <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />

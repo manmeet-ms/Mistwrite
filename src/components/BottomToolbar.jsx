@@ -1,22 +1,51 @@
-import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger,SheetClose } from '@/components/ui/sheet';
-import { AccountCircleOutlined, AccountTreeOutlined, AccountTreeRounded, AccountTreeSharp, CodeOutlined, EmailOutlined, EmailSharp, EmojiFoodBeverageOutlined, EmojiFoodBeverageSharp, Facebook, FacebookOutlined, FacebookSharp, GitHub, HomeOutlined, InfoOutlined, Instagram, LayersOutlined, MessageOutlined, PersonAddAltOutlined, PostAddTwoTone, Send, SettingsOutlined, StorefrontOutlined, StorefrontSharp, VolunteerActivismOutlined, VolunteerActivismSharp } from '@mui/icons-material';
-import { Github, Home, Menu, PanelRightClose } from 'lucide-react';
-import React from 'react';
+import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger, SheetClose } from '@/components/ui/sheet';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import {
+    AccountCircleOutlined,
+    AccountTreeOutlined,
+    AccountTreeRounded,
+    AccountTreeSharp,
+    CodeOutlined,
+    EmailOutlined,
+    EmailSharp,
+    EmojiFoodBeverageOutlined,
+    EmojiFoodBeverageSharp,
+    Facebook,
+    FacebookOutlined,
+    FacebookSharp,
+    FavoriteOutlined,
+    GitHub,
+    HomeOutlined,
+    InfoOutlined,
+    Instagram,
+    LayersOutlined,
+    MessageOutlined,
+    PersonAddAltOutlined,
+    PostAddTwoTone,
+    RateReviewOutlined,
+    Send,
+    SettingsOutlined,
+    StorefrontOutlined,
+    StorefrontSharp,
+    VolunteerActivismOutlined,
+    VolunteerActivismSharp,
+} from '@mui/icons-material';
+import { ChevronsUpDown, Github, Home, Menu, PanelRightClose, Pencil } from 'lucide-react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import LogoutButton from './Header/LogoutButton';
+import authService from '../appwrite/auth';
 
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { useEffect } from 'react';
+import moment from 'moment';
+import { FormControl } from '@mui/material';
 const BottomToolbar = () => {
     const authStatus = useSelector((state) => state.auth.status);
     const commonBottomNavIconStyle = 'bg-primary/0 hover:bg-primary/20  px-4 py-1 rounded-full transition-all duration-500 ease-in-out';
     const commonBottomNavItemNameStyle = ' font-medium';
-    const sideNavIconStyle="w-5 h-5"
+    const sideNavIconStyle = 'w-5 h-5 mr-2 ';
     const SheetFooterIconStyle = ' px-2 py-1 rounded-full';
     const sideNavItems = [
         {
@@ -25,6 +54,7 @@ const BottomToolbar = () => {
             icon: <HomeOutlined className={sideNavIconStyle} />,
             active: authStatus,
         },
+        
         {
             name: 'Login',
             slug: '/login',
@@ -63,89 +93,134 @@ const BottomToolbar = () => {
                 </svg>
             ),
             active: authStatus,
+        },{
+            name: 'Feedback',
+            slug: '#',
+            icon: <RateReviewOutlined className={sideNavIconStyle} />,
+            active: authStatus,
         },
     ];
-    const footerIcons = [
+    const userData = useSelector((state) => state.auth.userData);
+    const [avatarURL, setAvatarURL] = useState(null);
+    const getProfile = () => {
+        const response = authService.getAvatar().then((url) => {
+            console.log('url fetched', url);
+            setAvatarURL(url);
+        });
+        console.log(response);
+    };
+    useEffect(() => {
+        getProfile();
+        authService
+            .getCurrentUser()
+            .then((userData) => {
+                // console.log(userData.name);
+                // console.log(userData.email);
+                // console.log(moment(userData.accessedAt).fromNow()); // Last login
+            })
+            .catch((error) => {
+                console.error('Error fetching user data:', error);
+                // dispatch(logout());
+            })
+            .finally(() => console.log('userData fetch successfull'));
+    }, []); // Only run once on mount
+
+    const sheetFooterIcons = [
         {
             tooltip: 'View Source',
-            icon: <CodeOutlined sx={{fontSize:36}} className={`bg-primary/0 hover:bg-green-500/10 text-secondary-foreground hover:text-green-500 ${SheetFooterIconStyle}`} />,
+            icon: <CodeOutlined sx={{ fontSize: 36 }} className={`bg-primary/0 hover:bg-green-500/10 text-secondary-foreground hover:text-green-500 ${SheetFooterIconStyle}`} />,
         },
+
         {
             tooltip: 'I post my work here',
-            icon: <Instagram sx={{fontSize:36}} className={`bg-primary/0 hover:bg-pink-500/10 text-secondary-foreground hover:text-pink-500 ${SheetFooterIconStyle}`} />,
+            icon: <Instagram sx={{ fontSize: 36 }} className={`bg-primary/0 hover:bg-pink-500/10 text-secondary-foreground hover:text-pink-500 ${SheetFooterIconStyle}`} />,
         },
 
         {
             tooltip: 'Sticker Store',
-            icon: <StorefrontOutlined sx={{fontSize:36}} className={`bg-primary/0 hover:bg-sky-500/10 text-secondary-foreground hover:text-sky-500 ${SheetFooterIconStyle}`} />,
+            icon: <StorefrontOutlined sx={{ fontSize: 36 }} className={`bg-primary/0 hover:bg-sky-500/10 text-secondary-foreground hover:text-sky-500 ${SheetFooterIconStyle}`} />,
         },
         {
             tooltip: 'Support',
-            icon: <VolunteerActivismOutlined sx={{fontSize:36}} className={`bg-primary/0 hover:bg-red-500/10 text-secondary-foreground hover:text-red-500 ${SheetFooterIconStyle}`} />,
+            icon: <VolunteerActivismOutlined sx={{ fontSize: 36 }} className={`bg-primary/0 hover:bg-red-500/10 text-secondary-foreground hover:text-red-500 ${SheetFooterIconStyle}`} />,
         },
     ];
     const bottomNavItems = [
         {
             name: 'Menu',
             // slug: '#',
-            icon: ( <Sheet>
-                <SheetTrigger  asChild >
+            icon: (
+                <Sheet>
+                    <SheetTrigger asChild>
                         <PanelRightClose />
-                    {/* <div className="flex flex-col text-sm text-accent-foreground font-semibold justify-center items-center ">
+                        {/* <div className="flex flex-col text-sm text-accent-foreground font-semibold justify-center items-center ">
                         <span className={commonBottomNavItemNameStyle}>Menu</span>
                     </div> */}
-                </SheetTrigger>
-                <SheetContent side="left" className="flex flex-col justify-between">
-                    <div className="">
-                    <SheetHeader>
-                        <SheetTitle>
-                            <Link to="/">
-                                <div className="flex">Burning Notes</div>
-                            </Link>
-                        </SheetTitle>
+                    </SheetTrigger>
+                    <SheetContent side="left" className="flex flex-col justify-between ">
+                        <div>
+                            <SheetHeader>
+                                <SheetTitle>
+                                    <Link to="/">
+                                        <div className="flex">Burning Notes</div>
+                                    </Link>
+                                </SheetTitle>
 
-                        <SheetDescription className="text-left">Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, deleniti!</SheetDescription>
-                    </SheetHeader>
-                    <div className="flex flex-col">
-                        {sideNavItems.map((item) =>
-                            item.active ? (
-                                <Link
-                                    key={item.name}
-                                    to={item.slug}
-                                    className={`py-4 pl-4  gap-2 inline-flex items-center justify-start whitespace-nowrap rounded-full  font-medium transition-colors  disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-primary focus:bg-accent focus:text-primary
+                                <SheetDescription className="text-left">Made with {<FavoriteOutlined sx={{fontSize:14}}/> } by Manmeet Singh</SheetDescription>
+                            </SheetHeader>
+                            {/* side nav links */}
+                            <div className="flex flex-col mt-4 -ml-4">
+                                {sideNavItems.map((item) =>
+                                    item.active ? (
+                                        <Link
+                                            key={item.name}
+                                            to={item.slug}
+                                            className={`py-3 pl-4 gap-1 inline-flex items-center justify-start rounded-full  font-medium transition-colors   hover:bg-accent hover:text-primary focus:bg-accent focus:text-primary
                   }`}>
-                                    {item.icon}
-                                    {item.name}
-                                </Link>
-                            ) : null,
-                        )}
-                    </div>
+                                            {item.icon}
+                                            {item.name}
+                                        </Link>
+                                    ) : null,
+                                )}
+                            </div>
+                        </div>
+                        <SheetFooter>
+                            <div className="flex flex-col gap-4">
+                                <div className="flex justify-evenly">
+                                    {sheetFooterIcons.map((items) => (
+                                        <TooltipProvider>
+                                            <Tooltip>
+                                                <TooltipTrigger>{items.icon}</TooltipTrigger>
+                                                <TooltipContent>
+                                                    <p>{items.tooltip}</p>
+                                                </TooltipContent>
+                                            </Tooltip>
+                                        </TooltipProvider>
+                                    ))}
+                                </div>
 
-                    </div>
-                    <SheetFooter>
-                <div className="flex flex-col gap-4">
-                {authStatus && <LogoutButton className="bg-accent py-4 rounded-full" />}
-
-<div className="flex justify-evenly">
-    {footerIcons.map((items)=>(
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger>{items.icon}</TooltipTrigger>
-            <TooltipContent>
-              <p>{items.tooltip}</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-    ))}
-   
-</div>
-                </div>
-                         <SheetClose asChild>
-                        </SheetClose>
-                        
-                    </SheetFooter>
-                </SheetContent>
-            </Sheet> ),
+                                <div className="flex gap-4 items-center">
+                                    <Avatar className="h-8 w-8 rounded-lg">
+                                        <AvatarImage className="rounded-full" src={avatarURL} alt={userData.name} />
+                                        <AvatarFallback className="rounded-full">CN</AvatarFallback>
+                                    </Avatar>
+                                    <div className="grid flex-1 text-left text-sm leading-tight">
+                                        <span className="truncate font-semibold">{userData.name}</span>
+                                        <span className="truncate text-xs">{userData.email}</span>
+                                        <span className="truncate text-xs font-medium">
+                                            {' '}
+                                            Last login <span>{moment(userData.accessedAt).fromNow()} </span>
+                                        </span>
+                                    </div>
+                                </div>
+                                {authStatus && <LogoutButton className="bg-accent text-sm font-medium py-2 rounded-full" />}
+                                {/* <ChevronsUpDown className="ml-auto size-4" /> */}
+                            </div>
+                            <SheetClose asChild></SheetClose>
+                        </SheetFooter>
+                    </SheetContent>
+                </Sheet>
+            ),
         },
 
         {
@@ -159,9 +234,9 @@ const BottomToolbar = () => {
             icon: <PostAddTwoTone />,
         },
         {
-            name: 'Settings',
-            slug: '/settings',
-            icon: <SettingsOutlined />,
+            name: 'About',
+            slug: '/about',
+            icon: <InfoOutlined />,
         },
     ];
 
@@ -169,45 +244,6 @@ const BottomToolbar = () => {
         <>
             <footer className="fixed px-4 bottom-0 py-2 container bg-accent text-accent-foreground">
                 <div className="flex justify-between items-center">
-                    {/* <Sheet>
-                        <SheetTrigger>
-                            <div className="flex flex-col text-sm text-accent-foreground font-semibold justify-center items-center ">
-                                <Menu className={`px-4 py-1 rounded-full w-14 h-[30px] bg-primary/20`}  />
-                                <span className={commonBottomNavItemNameStyle}>Menu</span>
-                            </div>
-                        </SheetTrigger>
-                        <SheetContent side="left">
-                            <SheetHeader>
-                                <SheetTitle>
-                                    <Link to="/">
-                                        <div className="flex">Burning Notes</div>
-                                    </Link>
-                                </SheetTitle>
-
-                                <SheetDescription className="text-left">Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, deleniti!</SheetDescription>
-                            </SheetHeader>
-                            <div className="flex flex-col">
-                                {sideNavItems.map((item) =>
-                                    item.active ? (
-                                        <Link
-                                            key={item.name}
-                                            to={item.slug}
-                                            className={`py-4 px-4 mt-1 inline-flex items-center justify-start whitespace-nowrap rounded-full text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground
-                          }`}>
-                                            {item.name}
-                                        </Link>
-                                    ) : null,
-                                )}
-                            </div>
-                            <SheetFooter>
-                                <GitHub />
-                                <InfoOutlined />
-                                 <SheetClose asChild>
-                                {authStatus && <LogoutButton />}</SheetClose>
-                                
-                            </SheetFooter>
-                        </SheetContent>
-                    </Sheet> */}
                     {bottomNavItems.map((item) => (
                         <Link className="flex flex-col text-sm text-accent-foreground font-semibold justify-center items-center" to={item.slug}>
                             <span className={commonBottomNavIconStyle}>{item.icon}</span>
