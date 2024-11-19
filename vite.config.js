@@ -17,8 +17,8 @@ export default defineConfig({
             },
 
             manifest: {
-                name: 'Burning Notes',
-                short_name: 'burningnotes',
+                name: 'Mistwrite',
+                short_name: 'Mistwrite',
                 description: 'A minimalist digital notebook for jotting down quick thoughts and organizing your mind.',
                 theme_color: '#111827',
                 display: 'standalone', // from resources
@@ -37,35 +37,15 @@ export default defineConfig({
                         src: '/icons/burningnotes-icon-512.png',
                         sizes: '512x512',
                         type: 'image/png',
-                      },
-                    ],
+                    },
+                ],
                 shortcuts: [
                     {
                         name: 'Create Note',
                         url: '/add-note',
                         description: 'Create new note quickly',
-                        icons: [
-                          {
-                            src: '/icons/burningnotes-icon-512.png',
-                                sizes: '144x144',
-                                type: 'image/png',
-                                purpose: 'any',
-                            },
-                        ],
-                      },
-                      {
-                        name: 'Settings',
-                        url: '/',
-                        description: 'Tinker with profile',
-                        icons: [
-                          {
-                            src: '/icons/burningnotes-icon-512.png',
-                            sizes: '144x144',
-                                type: 'image/png',
-                                purpose: 'any',
-                            },
-                        ],
                     },
+
                 ],
             },
 

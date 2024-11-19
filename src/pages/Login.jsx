@@ -40,8 +40,9 @@ const Login = () => {
     <>
 <ThemeProvider>
       <Header />
-      
+      <section className=" px-2 ">
   <LoginFormUnit/>
+      </section>
 
   </ThemeProvider>
     </>

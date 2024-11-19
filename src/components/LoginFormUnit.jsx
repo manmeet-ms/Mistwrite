@@ -53,7 +53,7 @@ const logoutHandler=()=>{
     return (
         <>
             <BackgroundVector />
-            <section className="py-12 ">
+            <section className="py-12  px-2 ">
                 <div className="container">
                     <div className="flex flex-col gap-2">
                         {/* <img

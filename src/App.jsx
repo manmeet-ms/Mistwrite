@@ -47,8 +47,10 @@ function App() {
 
         try {
             const fetchedNotes = await appwriteNoteService.getEveryNote([Query.equal('userId', userData.$id)]);
+            console.log("loggin this", fetchedNotes.documents[0].$createdAt);
+            
             if (fetchedNotes && fetchedNotes.documents) {
-                setNotes(fetchedNotes.documents);
+                setNotes((fetchedNotes.documents).reverse());
             }
         } catch (error) {
             console.error('Error fetching notes:', error);
@@ -143,9 +145,11 @@ function App() {
     return (
         <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
             <Header />
+            
             {authStatus ? (
-                <>
-                    <div className="flex mb-4 border-b border-primary/20  border-dashed items-center justify-between">
+               <>
+                <section className='px-2'>
+                    <div className=" px-2 flex mb-4 border-b border-primary/20  border-dashed items-center justify-between">
                         <span className=" text-xs flex flex-col gap-0.5">
                             {Greet}, {userData.name}
                             <span className="text-primary font-semibold">{moment().format('LLL')} </span>
@@ -201,8 +205,10 @@ function App() {
                     {/* <Link  className='fixed bottom-8 right-4 flex p-4 justify-center items-center font-medium text-primary-foreground bg-primary rounded-2xl cursor-pointer' to="/add-note">
                         <Add />
                     </Link> */}
+                </section>
+                     {/* // placeholder fro bottom toolbar so that user can acces the notes at the very bottom */}
                     <BottomToolbar/>
-                </>
+                    </>
             ) : (
                 <LoginFormUnit />
             )}

@@ -29,8 +29,8 @@ import moment from 'moment';
 import { useEffect } from 'react';
 const BottomToolbar = () => {
     const authStatus = useSelector((state) => state.auth.status);
-    const commonBottomNavIconStyle = 'bg-primary/0 hover:bg-primary/20  px-4 py-1 rounded-full transition-all duration-500 ease-in-out';
-    const commonBottomNavItemNameStyle = ' font-medium';
+    const commonBottomNavIconStyle = 'bg-primary/0 hover:bg-primary/30  px-4 py-1 rounded-full transition-all duration-500 ease-in-out';
+    const commonBottomNavItemNameStyle = ' font-[600] ';
     const sideNavIconStyle = 'w-5 h-5 mr-2 ';
     const SheetFooterIconStyle = ' px-2 py-1 rounded-full';
     const commonSideNavLinkStyle = 'py-3 pl-4 gap-1 -ml-4 container  inline-flex items-center justify-start rounded-full  font-medium transition-colors   hover:bg-accent hover:text-primary focus:bg-accent focus:text-primary';
@@ -162,7 +162,7 @@ const BottomToolbar = () => {
                             <SheetHeader>
                                 <SheetTitle>
                                     <Link to="/">
-                                        <div className="flex">Burning Notes</div>
+                                        <h2 className="flex -mt-3">Burning Notes</h2>
                                     </Link>
                                 </SheetTitle>
 
@@ -252,10 +252,11 @@ const BottomToolbar = () => {
 
     return (
         <>
-            <footer className="fixed px-4 bottom-0 py-2 container bg-accent text-accent-foreground">
-                <div className="flex justify-between items-center">
+        <div className="h-16"></div>
+            <footer className="fixed bottom-0 px-4 py-2 container bg-accent border-t border-accent rounded-tl-xl rounded-tr-xl">
+                <div className="flex justify-between text-xs text-secondary-foreground font-semibold  items-center">
                     {bottomNavItems.map((item) => (
-                        <Link className="flex flex-col text-sm text-accent-foreground font-semibold justify-center items-center" to={item.slug}>
+                        <Link className="flex flex-col hover:text-primary justify-center items-center" to={item.slug}>
                             <span className={commonBottomNavIconStyle}>{item.icon}</span>
                             <span className={commonBottomNavItemNameStyle}>{item.name}</span>
                         </Link>

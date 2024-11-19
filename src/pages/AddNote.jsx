@@ -1,3 +1,5 @@
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
+
 import React, { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -10,7 +12,8 @@ import { useSelector } from 'react-redux';
 import appwriteNoteService from '../appwrite/config';
 import Header from '../components/Header/Header';
 import RTE from '../components/RTE';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import BottomToolbar from '../components/BottomToolbar';
 
 export default function AddNote({ onNoteCreate }) {
     const navigate=useNavigate()
@@ -95,12 +98,27 @@ export default function AddNote({ onNoteCreate }) {
     return (
         <ThemeProvider>
             <Header />
+<section className=" px-2 ">
+<Breadcrumb className='py-4'>
+                <BreadcrumbList>
+                    <BreadcrumbItem>
+                        <BreadcrumbLink>
+                            <Link to="/">Home</Link>
+                        </BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator />
 
+                    <BreadcrumbItem>
+                        <BreadcrumbPage>Create new note</BreadcrumbPage>
+                    </BreadcrumbItem>
+                </BreadcrumbList>
+            </Breadcrumb>
+                    
             <form onSubmit={handleSubmit(submitNoteData)} className="space-y-4">
                 <div>
                     <Input
                         placeholder="Title"
-                        className="border-none placeholder:text-lg"
+                        // className="border-none placeholder:text-lg"
                         {...register('title', {
                             required: 'Title is required',
                             minLength: {
@@ -125,7 +143,8 @@ export default function AddNote({ onNoteCreate }) {
                 {/* </DialogFooter> */}
             </form>
             {/* </DialogContent> */}
-            {/* </Dialog> */}
+            {/* </Dialog> */}</section>
+            <BottomToolbar/>
         </ThemeProvider>
     );
 }

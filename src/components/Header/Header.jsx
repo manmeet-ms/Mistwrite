@@ -1,83 +1,58 @@
-import { useTheme } from "@/components/theme-provider";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { useTheme } from '@/components/theme-provider';
+import { Button } from '@/components/ui/button';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 
-import {
-  FireplaceOutlined,
-  FireplaceSharp,
-  LocalFireDepartmentOutlined,
-  Menu
-} from "@mui/icons-material";
-import React from "react";
-import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Brightness1, Brightness7, DarkMode, FireplaceSharp, LightMode } from '@mui/icons-material';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 // import { LogoutButton } from "../index";
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-import LogoutButton from "./LogoutButton";
-import { Home, Moon, Settings, Sun } from "lucide-react";
 
 const Header = () => {
-  const { setTheme } = useTheme()
+    const { setTheme } = useTheme();
 
-  // retrieving th status of authentication state
-  const authStatus = useSelector((state) => state.auth.status);
-  const userData = useSelector((state) => state.auth.userData);
+    // retrieving th status of authentication state
+    const authStatus = useSelector((state) => state.auth.status);
+    const userData = useSelector((state) => state.auth.userData);
 
-  const navigate = useNavigate();
-  const navItems = [
-    {
-      name: "Home",
-      slug: "/",
-      icon:<Home/>,
-      active: authStatus,
-    },
-    {
-      name: "Login",
-      slug: "/login",
-      icon:<Home/>,
-      active: !authStatus,
-    },
-    {
-      name: "Signup",
-      slug: "/signup",
-      icon:<Home/>,
-      active: !authStatus,
-    },
-    {
-      name: "Notes",
-      slug: "/notes",
-      icon:<Home/>,
-      active: authStatus,
-    },
-    {
-      name: "Create note",
-      slug: "/add-note",
-      icon:<Home/>,
-      active: authStatus,
-    },
-  ];
+    const navigate = useNavigate();
+    // const navItems = [
+    //   {
+    //     name: "Home",
+    //     slug: "/",
+    //     icon:<Home/>,
+    //     active: authStatus,
+    //   },
+    //   {
+    //     name: "Login",
+    //     slug: "/login",
+    //     icon:<Home/>,
+    //     active: !authStatus,
+    //   },
+    //   {
+    //     name: "Signup",
+    //     slug: "/signup",
+    //     icon:<Home/>,
+    //     active: !authStatus,
+    //   },
+    //   {
+    //     name: "Notes",
+    //     slug: "/notes",
+    //     icon:<Home/>,
+    //     active: authStatus,
+    //   },
+    //   {
+    //     name: "Create note",
+    //     slug: "/add-note",
+    //     icon:<Home/>,
+    //     active: authStatus,
+    //   },
+    // ];
 
-  return (
-    <>
-      <header className="  flex justify-between items-center mb-4">
-      {navItems.map((item) => {
+    return (
+        <>
+            <header className=" pl-4 pr-0 pt-2 flex justify-between items-center mb-4">
+                {/* {navItems.map((item) => {
         item.active ? (
           <li key={item.name}>
             <button onClick={() => navigate(item.slug)}>{item.icon}{item.name}</button>
@@ -85,10 +60,10 @@ const Header = () => {
         ) : (
           "null"
         );
-      })}
+      })} */}
 
-     <div className="flex gap-x-2  container">
-     {/* <Sheet>
+                <div className="flex gap-2  container">
+                    {/* <Sheet>
           <SheetTrigger asChild>
             <Menu  className="text-secondary-foreground mt-0.5" sx={{fontSize:20
             }} />
@@ -98,7 +73,7 @@ const Header = () => {
               <SheetTitle>
                 <Link to="/">
                   <div className="flex">
-                    Burning Notes
+                    Mistwrite
                     <LocalFireDepartmentOutlined/>
                   </div>
                 </Link>
@@ -130,43 +105,61 @@ const Header = () => {
           </SheetContent>
         </Sheet> */}
 
-        {/* <div className="flex">
-                  Burning Notes
+                    {/* <div className="flex">
+                  Mistwrite
                   <img
                     className="w-6 h-6"
                     src="https://cdn3.emoji.gg/emojis/7251-blue-flames.gif"
                     alt=""
                 />
                 </div> */}
-  <Link to="/">
-<h1 className="flex items-center text-xl font-bold text-secondary-foreground">
-  <span className=" mr-2 -mt-0.5"><FireplaceSharp sx={{fontSize:24}}  /></span>
-  Burning Notes 
-  {/* <span className=" ml-2 -mt-0.5"><FireplaceOutlined sx={{fontSize:22}}  /></span> */}
-</h1>
-  </Link>
-
-     </div>
-     {/* check login status */}
-        {/* <div className="text-slate-500">{`Logged in? ${authStatus}`}</div> */}
-        {/* <div className="">{`Logged in? authstatus:${authStatus} ${(useSelector((state) => state.auth.status))}`}</div> */}
-        {/* {authStatus && <LogoutButton />} */}
-        {/* {authStatus && (
+                    <Link to="/">
+                        <h1 className="flex items-center text-xl font-bold text-secondary-foreground">
+                            <span className=" mr-2 -mt-0.5">
+                                <FireplaceSharp sx={{ fontSize: 24 }} />
+                            </span>
+                            Mistwrite
+                            {/* <span className=" ml-2 -mt-0.5"><FireplaceOutlined sx={{fontSize:22}}  /></span> */}
+                        </h1>
+                    </Link>
+                </div>
+                {/* check login status */}
+                {/* <div className="text-slate-500">{`Logged in? ${authStatus}`}</div> */}
+                {/* <div className="">{`Logged in? authstatus:${authStatus} ${(useSelector((state) => state.auth.status))}`}</div> */}
+                {/* {authStatus && <LogoutButton />} */}
+                {/* {authStatus && (
           <Button variant="ghost">
             <Link to="/login">Login</Link>
           </Button>
         )} */}
 
-        {/* show if necessary logout button */}
-        {/* {authStatus ? (
+                {/* show if necessary logout button */}
+                {/* {authStatus ? (
           <LogoutButton />
         ) : null} */}
- <DropdownMenu>
+                {/* <Button onClick={() => setTheme("light")} > <LightMode className=" rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" /></Button>
+          <Button onClick={() => setTheme("dark")} > <DarkMode className="  rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" /></Button>
+       */}
+                <div className="flex flex-col">
+                    <Button variant="icon" onClick={() => setTheme('light')}
+                     className=" scale-0 dark:scale-100 transition-all">
+                        <DarkMode/>
+                        {/* <span className='font-medium ml-2'>Dark</span> */}
+                    </Button>
+                    <Button variant="icon" onClick={() => setTheme('dark')}
+                     className=" absolute scale-100 dark:scale-0 transition-all">
+                        <Brightness7 />
+                        {/* <span className='font-medium ml-2'>Light</span> */}
+                    </Button>
+                </div>
+                {/* <DropdownMenu>
       <DropdownMenuTrigger asChild>
  
         <Button className='px-3' variant="ghost" size="icon">
-          <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+          <LightMode className=" rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+          <DarkMode className="absolute  rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+           <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+          <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" /> 
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
@@ -181,10 +174,10 @@ const Header = () => {
           System
         </DropdownMenuItem>
       </DropdownMenuContent>
-    </DropdownMenu>
-      </header>
-    </>
-  );
+    </DropdownMenu> */}
+            </header>
+        </>
+    );
 };
 
 export default Header;

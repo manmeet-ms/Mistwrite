@@ -77,7 +77,8 @@ const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
     const timeLeft = calculateTimeLeft(noteCreated, noteBurn);
 
     return (
-        <section className=" pt-4 pr-2 pl-4 pb-2 h-fit max-h-[400px] overflow-auto  bg-primary/0 hover:bg-primary/5 border  border-secondary-foreground/20 rounded-xl transition-all duration-500 ease-in-out ">
+        <section className=" pt-4 pr-2 pl-4 pb-2 h-fit max-h-[400px] overflow-auto  bg-card text-card-foreground border-2 border-card-foreground/10 rounded-xl transition-all duration-500 ease-in-out ">
+        {/* <section className=" pt-4 pr-2 pl-4 pb-2 h-fit max-h-[400px] overflow-auto  bg-accent/0 hover:bg-accent/50 border  border-secondary-foreground/20 rounded-xl transition-all duration-500 ease-in-out "> */}
             <div className="space-y-2">
                 <div className="flex justify-between">
                     <h4 className="w-20  md:w-24 lg:w-36 text-secondary-foreground-foreground break-words">{title}</h4>
@@ -88,7 +89,8 @@ const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
                         <div className="  ">
                             {/* <div className='w-full relative left-4'> */}
                             <span className="">
-                                <Badge className="badgeText text-2xs text-amber-700 bg-amber-400/30 dark:text-amber-500 dark:bg-amber-800/30 rounded-full py-1 pl-2" variant="secondary">
+                                <Badge className="font-[700] text-2xs text-primary bg-primary/15 hover:bg-primary/20 rounded-full py-1 pl-2" variant="secondary">
+                                {/* <Badge className="badgeText text-2xs text-amber-700 bg-amber-400/30 dark:text-amber-500 dark:bg-amber-800/30 rounded-full py-1 pl-2" variant="secondary"> */}
                                     <LocalFireDepartmentOutlined  className="mr-0.5 " sx={{ fontSize: 14, strokeWidth: 24 }} />
                                     {tleftString}
                                 </Badge>
@@ -98,7 +100,7 @@ const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
                 </div>
                 <p className="text-sm text-muted-foreground dark:text-secondary-foreground/80 break-words text-balance">{parse(content)}</p>
 
-                <div className="flex flex-col text-xs text-primary/40 break-all">
+                <div className="flex flex-col text-xs text-card-foreground/30 break-all">
                     {/* <span>Created: {formatDate(noteCreated)} </span>
                     <span>Burn: {formatDate(noteBurn)} </span>
                     <span>Now: {moment().format('MMM DD, YYYY HH:mm')} </span> */}

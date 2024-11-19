@@ -16,11 +16,12 @@ export default function RTE({ name, control, label, defaultValue = 'Content' }) 
                         apiKey="xaklimerojf3nka5mboafdrmzj0d1rqxa8f7rc047ukqjzp7"
                         init={{
                             initialValue: defaultValue,
-                            height: 500,
-                            menubar: true,
+                            height: 400,
+//                             skin: (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'oxide-dark' : 'oxide'),
+//   content_css: (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default'),
+                            menubar: false,
                             // skin: 'oxide',
                             plugins: [
-                                'image',
                                 'advlist',
                                 'autolink',
                                 'lists',
@@ -35,8 +36,8 @@ export default function RTE({ name, control, label, defaultValue = 'Content' }) 
                                 // 'help',
                                 'wordcount',
                             ],
-                            toolbar: 'undo redo | bold italic link underline | bullist numlist outdent indent  removeformat',
-                            content_style: '',
+                            toolbar: 'undo redo |  bold italic underline link | table bullist numlist ',
+
                         }}
                         onEditorChange={onChange}
                     />

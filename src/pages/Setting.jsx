@@ -20,6 +20,8 @@ const Setting = () => {
     return (
         <>
             <Header />
+      <section className="px-2">
+
             <Breadcrumb>
                 <BreadcrumbList>
                     <BreadcrumbItem>
@@ -116,6 +118,8 @@ const Setting = () => {
                     {/* {authStatus && <LogoutButton />} */}
                 </div>
             </section>
+            </section>
+            
             <BottomToolbar />
         </>
     );
