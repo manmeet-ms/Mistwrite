@@ -47,9 +47,9 @@ const router = createBrowserRouter([
     {
         path: '/add-note',
         element: (
-            // <AuthLayout authentication>
+            <AuthLayout authentication>
                 <AddNote />
-            // </AuthLayout>
+            </AuthLayout>
         ),
  
     },

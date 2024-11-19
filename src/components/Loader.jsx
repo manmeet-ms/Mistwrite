@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Skeleton } from "@/components/ui/skeleton"
 import { Masonry } from '@mui/lab';
 import Header from './Header/Header';
+import BottomToolbar from './BottomToolbar';
  
 const Loader = () => {
   return (
@@ -24,6 +25,7 @@ const Loader = () => {
     {/* <div className='container h-[100vh] flex flex-col space-y-4 justify-center items-center ' >
     <Loaders.ScaleLoader color="#1e293b" />
     </div> */}
+    <BottomToolbar/>
       </ThemeProvider>
   )
 }

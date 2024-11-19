@@ -1,11 +1,11 @@
 import { ThemeProvider } from '@/components/theme-provider';
 import { Button } from '@/components/ui/button';
-import { Add, AutoFixHighSharp, Cached } from '@mui/icons-material';
+import { AutoFixHighSharp, Cached } from '@mui/icons-material';
 import Masonry from '@mui/lab/Masonry';
 import { Query } from 'appwrite';
+import moment from 'moment';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import authService from './appwrite/auth';
 import appwriteNoteService from './appwrite/config';
 import BottomToolbar from './components/BottomToolbar';
@@ -14,7 +14,7 @@ import Loader from './components/Loader';
 import LoginFormUnit from './components/LoginFormUnit';
 import NoteCard from './components/NoteCard';
 import { login, logout } from './store/authSlice';
-import moment from 'moment';
+import BackgroundVector from './components/BackgroundVector';
 function App() {
     const ref = useRef(null);
     const authStatus = useSelector((state) => state.auth.status);
@@ -50,7 +50,7 @@ function App() {
             console.log("loggin this", fetchedNotes.documents[0].$createdAt);
             
             if (fetchedNotes && fetchedNotes.documents) {
-                setNotes((fetchedNotes.documents).reverse());
+                setNotes((fetchedNotes.documents).reverse()); // to sorrt the notes in (latest created) order
             }
         } catch (error) {
             console.error('Error fetching notes:', error);
@@ -99,20 +99,20 @@ function App() {
 
         const testNotes = [
             {
-                title: `Meeting Prep`,
+                title: `1. Meeting Prep`,
                 content: `${userData.$id} Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.Discuss project updates and finalize the roadmap.END END END`,
             },
             {
-                title: `To-Do List`,
+                title: `2. To-Do List`,
                 content:
                     'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis modi asperiores quod deserunt! Voluptas, expedita.<br><li>Buy groceries</li><li>Pick up laundry</li><li>Call the plumber</li><li>Buy groceries</li><li>Pick up laundry</li><li>Call the plumber</li> ',
             },
             {
-                title: `Study Checklist`,
+                title: `3. Study Checklist`,
                 content: "Complete the math assignment, revise chemistry notes, and prep for tomorrow's quiz. Don't forget to go over the calculus problems you missed last week. Focus on Chapter 6 and the practice test.",
             },
             {
-                title: `Self-Reminder`,
+                title: `4. Self-Reminder`,
                 content: `${userData.$id} Stay focused today. Small steps lead to big success eventually!`,
             },
 
@@ -144,12 +144,14 @@ function App() {
 
     return (
         <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-            <Header />
+
+    <Header />
+    
             
             {authStatus ? (
-               <>
+                <>
                 <section className='px-2'>
-                    <div className=" px-2 flex mb-4 border-b border-primary/20  border-dashed items-center justify-between">
+                    <div className=" px-2 flex mb-4 border-b border-primary/20 border-dashed items-center justify-between">
                         <span className=" text-xs flex flex-col gap-0.5">
                             {Greet}, {userData.name}
                             <span className="text-primary font-semibold">{moment().format('LLL')} </span>
@@ -208,6 +210,7 @@ function App() {
                 </section>
                      {/* // placeholder fro bottom toolbar so that user can acces the notes at the very bottom */}
                     <BottomToolbar/>
+
                     </>
             ) : (
                 <LoginFormUnit />

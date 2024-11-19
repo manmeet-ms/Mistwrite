@@ -1,5 +1,44 @@
+
+
+* {
+    font-family: var(--paraFont);
+
+    
+    letter-spacing: 0.1px;
+    font-weight: 400;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    /* text-transform: capitalize; */
+    font-family: var(--headingFont);
+    font-weight: 700;
+    /* letter-spacing: -0.5px; */
+}
+
+
 .badgeText{
 font-family: var(--paraFont);
     font-weight: 800;
 }
 
+
+input,
+button {
+    border-radius: 40rem !important;
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+    border-radius: 999px;
+    /* background-color: ; */
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    /* background-color: ; */
+}

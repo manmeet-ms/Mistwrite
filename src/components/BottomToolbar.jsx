@@ -1,3 +1,20 @@
+// import React from 'react'
+
+// const BottomToolbar = () => {
+//   return (
+//     <div>BottomToolbar</div>
+//   )
+// }
+
+// export default BottomToolbar
+
+import { useTheme } from '@/components/theme-provider';
+import { Button } from '@/components/ui/button';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+
+import { Brightness1, Brightness7, DarkMode, FireplaceSharp, LightMode } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
+
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Separator } from '@/components/ui/separator';
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
@@ -16,9 +33,13 @@ import {
     PostAddTwoTone,
     RateReview,
     Store,
-    VolunteerActivism
+    VolunteerActivism,
+    Settings,
+    InfoRounded,
+    CreateNewFolder,
+    Layers
 } from '@mui/icons-material';
-import { PanelRightClose } from 'lucide-react';
+import { Info, PanelRightClose } from 'lucide-react';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -29,6 +50,10 @@ import moment from 'moment';
 import { useEffect } from 'react';
 const BottomToolbar = () => {
     const authStatus = useSelector((state) => state.auth.status);
+
+
+    const navigate = useNavigate();
+
     const commonBottomNavIconStyle = 'bg-primary/0 hover:bg-primary/30  px-4 py-1 rounded-full transition-all duration-500 ease-in-out';
     const commonBottomNavItemNameStyle = ' font-[600] ';
     const sideNavIconStyle = 'w-5 h-5 mr-2 ';
@@ -122,6 +147,7 @@ const BottomToolbar = () => {
         },
     ];
     const userData = useSelector((state) => state.auth.userData);
+
     const [avatarURL, setAvatarURL] = useState(null);
     const getProfile = () => {
         const response = authService.getAvatar().then((url) => {
@@ -146,107 +172,26 @@ const BottomToolbar = () => {
             .finally(() => console.log('userData fetch successfull'));
     }, []); // Only run once on mount
     const bottomNavItems = [
-        {
-            name: 'Menu',
-            // slug: '#',
-            icon: (
-                <Sheet>
-                    <SheetTrigger asChild>
-                        <PanelRightClose />
-                        {/* <div className="flex flex-col text-sm text-accent-foreground font-semibold justify-center items-center ">
-                        <span className={commonBottomNavItemNameStyle}>Menu</span>
-                    </div> */}
-                    </SheetTrigger>
-                    <SheetContent side="left" className="flex flex-col justify-between overflow-scroll">
-                        <div>
-                            <SheetHeader>
-                                <SheetTitle>
-                                    <Link to="/">
-                                        <h2 className="flex -mt-3">Burning Notes</h2>
-                                    </Link>
-                                </SheetTitle>
-
-                                <SheetDescription className="text-left text-xs">Made with {<FavoriteOutlined sx={{ fontSize: 14 }} />} by Manmeet Singh</SheetDescription>
-                            </SheetHeader>
-                            {/* side nav links */}
-                            <div className="flex flex-col  mt-4 ">
-  
-  {sideNavItems[0].active ? (<Link to={sideNavItems[0].slug} className={commonSideNavLinkStyle}> {sideNavItems[0].icon} {sideNavItems[0].name}</Link> ) : null}
-  {sideNavItems[1].active ? (<Link to={sideNavItems[1].slug} className={commonSideNavLinkStyle}> {sideNavItems[1].icon} {sideNavItems[1].name}</Link> ) : null}
-  {sideNavItems[2].active ? (<Link to={sideNavItems[2].slug} className={commonSideNavLinkStyle}> {sideNavItems[2].icon} {sideNavItems[2].name}</Link> ) : null}
-  
-  
-  {sideNavItems[3].active ? (<Link to={sideNavItems[3].slug} className={commonSideNavLinkStyle}> {sideNavItems[3].icon} {sideNavItems[3].name}</Link> ) : null}
-    <Separator className="my-2 " />
-    <span className="px-4 py-2 mb-2 -ml-4 uppercase font-semibold tracking-widest text-xs text-secondary-foreground/50">
-      Network</span>  </div>
-  {sideNavItems[9].active ? (<Link to={sideNavItems[9].slug} className={commonSideNavLinkStyle}> {sideNavItems[9].icon} {sideNavItems[9].name}</Link> ) : null}
-  {sideNavItems[5].active ? (<Link to={sideNavItems[5].slug} className={commonSideNavLinkStyle}> {sideNavItems[5].icon} {sideNavItems[5].name}</Link> ) : null}<div>
-  {sideNavItems[4].active ? (<Link to={sideNavItems[4].slug} className={commonSideNavLinkStyle}> {sideNavItems[4].icon} {sideNavItems[4].name}</Link> ) : null}
-  {sideNavItems[8].active ? (<Link to={sideNavItems[8].slug} className={commonSideNavLinkStyle}> {sideNavItems[8].icon} {sideNavItems[8].name}</Link> ) : null}
-  <div>
-    <Separator className="my-2 " />
-    <span className="px-4 py-2 mb-2 -ml-4 uppercase font-semibold tracking-widest text-xs text-secondary-foreground/50">
-      Other</span>  </div>
-  {sideNavItems[11].active ? (<Link to={sideNavItems[11].slug} className={commonSideNavLinkStyle}> {sideNavItems[11].icon} {sideNavItems[11].name}</Link> ) : null}
-  {sideNavItems[6].active ? (    <Link to={sideNavItems[6].slug} className={commonSideNavLinkStyle}>      {sideNavItems[6].icon} {sideNavItems[6].name}    </Link>  ) : null}
-  {sideNavItems[10].active ? (<Link to={sideNavItems[10].slug} className={commonSideNavLinkStyle}> {sideNavItems[10].icon} {sideNavItems[10].name}</Link> ) : null}
-  {sideNavItems[7].active ? (<Link to={sideNavItems[7].slug} className={commonSideNavLinkStyle}> {sideNavItems[7].icon} {sideNavItems[7].name}</Link> ) : null}
-  {/* {sideNavItems.map((item) =>
-                                    item.active ? (
-                                        <Link
-                                            key={item.name}
-                                            to={item.slug}
-                                            className={`py-3 pl-4 gap-1 inline-flex items-center justify-start rounded-full  font-medium transition-colors   hover:bg-accent hover:text-primary focus:bg-accent focus:text-primary
-                  }`}>
-                                            {item.icon}
-                                            {item.name}
-                                        </Link>
-                                    ) : null,
-                                )} */}
-</div>
-
-                        </div>
-                        <SheetFooter>
-                            <div className="flex flex-col gap-4">
-                                <Separator />
-                                <div className="flex gap-4 items-center">
-                                    <Avatar className="h-8 w-8 rounded-lg">
-                                        <AvatarImage className="rounded-full" src={avatarURL} alt={userData.name} />
-                                        <AvatarFallback className="rounded-full">CN</AvatarFallback>
-                                    </Avatar>
-                                    <div className="grid flex-1 text-left text-sm leading-tight">
-                                        <span className="truncate font-semibold">{userData.name}</span>
-                                        <span className="truncate text-xs">{userData.email}</span>
-                                        <span className="truncate text-xs font-medium">
-                                            Last login <span>{moment(userData.accessedAt).fromNow()} </span>
-                                        </span>
-                                    </div>
-                                </div>
-                                {authStatus && <LogoutButton className="bg-accent text-sm font-medium py-2 rounded-full" />}
-                                {/* <ChevronsUpDown className="ml-auto size-4" /> */}
-                            </div>
-                            <SheetClose asChild></SheetClose>
-                        </SheetFooter>
-                    </SheetContent>
-                </Sheet>
-            ),
-        },
-
+       
         {
             name: 'Notes',
             slug: '/',
-            icon: <LayersOutlined />,
+            icon: <Layers />,
         },
         {
             name: 'Create',
             slug: '/add-note',
-            icon: <PostAddTwoTone />,
+            icon: <CreateNewFolder />,
         },
         {
             name: 'About',
             slug: '/about',
-            icon: <InfoOutlined />,
+            icon: <InfoRounded />,
+        },
+        {
+            name: 'Setting',
+            slug: '/about',
+            icon: <Settings />,
         },
     ];
 

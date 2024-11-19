@@ -103,27 +103,6 @@
   
 
 
-
-* {
-    font-family: var(--paraFont);
-
-    
-    letter-spacing: 0.1px;
-    font-weight: 400;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    /* text-transform: capitalize; */
-    font-family: var(--headingFont);
-    font-weight: 700;
-}
-
-
 /* @layer base {
     :root {
         --background: 0 0% 100%;
@@ -196,18 +175,3 @@ h6 {
   text-decoration: none !important;
   border-bottom: solid 2px hsl(var(--accent)) !important;
 } */
-input,
-button {
-    border-radius: 40rem !important;
-}
-
-::-webkit-scrollbar {
-    width: 4px;
-    border-radius: 999px;
-    /* background-color: ; */
-}
-
-::-webkit-scrollbar-thumb {
-    border-radius: 999px;
-    /* background-color: ; */
-}
