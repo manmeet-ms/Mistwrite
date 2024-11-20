@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from 'react';
 import { useTheme } from '@/components/theme-provider';
+import React, { useEffect, useState } from 'react';
 
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
+import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { AccountCircle, AccountTree, Brightness7, DarkMode, Email, FavoriteOutlined, GitHub, Home, Instagram, LinkedIn, PersonAddAlt, RateReview, Store, VolunteerActivism, WbSunny, WbSunnyOutlined } from '@mui/icons-material';
 import moment from 'moment/moment';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Separator } from '@/components/ui/separator';
-import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { Brightness7, CloudCircle, DarkMode, FireplaceSharp, MenuOpen, SettingsSuggest, SettingsSystemDaydream } from '@mui/icons-material';
-import { AccountCircle, AccountTree, Email, FavoriteOutlined, GitHub, Home, Instagram, LinkedIn, PersonAddAlt, RateReview, Store, VolunteerActivism } from '@mui/icons-material';
-import { Menu, PanelRightClose } from 'lucide-react';
 import authService from '../../appwrite/auth';
-import { Menu1, Menu2, Menu3, Menu4, Menu5, Menu6 } from '../Menucomponent';
+import { LatestUpdatesAsPopover } from '../UpdatesComponents';
 import LogoutButton from './LogoutButton';
+import globalStyle from '../../conf/globalStyle';
 
 const Header = () => {
     const { setTheme } = useTheme();
@@ -27,19 +26,19 @@ const Header = () => {
     const [userSessionLoginAgo, setUserSessionLoginAgo] = useState(null);
     const getProfile = () => {
         const response = authService.getAvatar().then((url) => {
-            console.log('url fetched', url);
+            // console.log('url fetched', url);
             setUserAvatarURL(url);
         });
-        console.log(response);
+        // console.log(response);
     };
     useEffect(() => {
         getProfile();
         authService
             .getCurrentUser()
             .then((userData) => {
-                console.log(userData.name);
-                console.log(userData.email);
-                console.log(moment(userData.accessedAt).fromNow()); // Last login
+                // console.log(userData.name);
+                // console.log(userData.email);
+                // console.log(moment(userData.accessedAt).fromNow()); // Last login
                 setUserFullName(userData.name);
                 setUserEmail(userData.email);
                 setUserSessionLoginAgo(moment(userData.accessedAt).fromNow()); // Last login
@@ -58,7 +57,6 @@ const Header = () => {
             icon: <Home className={sideNavIconStyle} />,
             active: authStatus,
         },
-
         {
             name: 'Login',
             slug: '/login',
@@ -71,23 +69,23 @@ const Header = () => {
             icon: <PersonAddAlt className={sideNavIconStyle} />,
             active: !authStatus,
         },
+        {
+            name: 'Contact',
+            slug: '/contact',
+            icon: <Email className={sideNavIconStyle} />,
+            active: authStatus,
+        },
 
         {
             name: 'Projects',
-            slug: '#',
+            slug: 'https://linktrix.vercel.app',
             icon: <AccountTree className={sideNavIconStyle} />,
             active: authStatus,
         },
 
         {
-            name: 'Contact',
-            slug: '/notes',
-            icon: <Email className={sideNavIconStyle} />,
-            active: authStatus,
-        },
-        {
             name: 'Fiverr Profile',
-            slug: '/add-note',
+            slug: 'https://www.fiverr.com/wavewalker777',
             icon: (
                 <svg className={sideNavIconStyle} viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -100,13 +98,13 @@ const Header = () => {
         },
         {
             name: 'Feedback',
-            slug: '#',
+            slug: '#', //google/typeform fedbacck form mailchimp
             icon: <RateReview className={sideNavIconStyle} />,
             active: authStatus,
         },
         {
             name: 'View Source',
-            slug: '#',
+            slug: 'https://github.com/manmeet-ms/Mistwrite',
             icon: <GitHub className={sideNavIconStyle} />,
             active: authStatus,
         },
@@ -126,13 +124,13 @@ const Header = () => {
 
         {
             name: 'Sticker Store',
-            slug: '#',
+            slug: '#', //redbuble
             icon: <Store className={sideNavIconStyle} />,
             active: authStatus,
         },
         {
             name: 'Support',
-            slug: '#',
+            slug: '#', //bmc
             icon: <VolunteerActivism className={sideNavIconStyle} />,
             active: authStatus,
         },
@@ -172,43 +170,24 @@ const Header = () => {
     //     active: authStatus,
     //   },
     // ];
-    const svg = [
-        <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4 6H20M4 12H14M4 18H9" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>,
-        <Menu1 />,
-        <Menu2 />,
-        <Menu3 />,
-        <Menu4 />,
-        <Menu5 />,
-        <Menu6 />,
-    ];
+
     return (
         <>
-            <header className="sticky top-0 bg-background/10 backdrop-blur-lg pl-4 pr-0 py-2 flex justify-between items-center mb-4">
-                {/* {navItems.map((item) => {
-        item.active ? (
-          <li key={item.name}>
-            <button onClick={() => navigate(item.slug)}>{item.icon}{item.name}</button>
-          </li>
-        ) : (
-          "null"
-        );
-      })} */}
-
+            <header className={`${globalStyle.pageBodyPaddingX} sticky top-0 bg-background/10 backdrop-blur-lg py-2 z-10 flex mb-4`}>
                 <div className="flex gap-2 items-center container ">
-                    <div className="rounded-full w-48 h-32 absolute blur-3xl  bg-primary/40 -top-16 -left-16 z-99 "></div>
+                    <div className="rounded-full w-56 h-36 absolute blur-3xl  bg-primary/40 -top-16 -left-16 -z-10 "></div>
                     <Sheet>
                         <SheetTrigger asChild>
                             {/* <MenuOpen/> */}
-                            <svg className="w-6 h-6 text-foreground" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            {/* <NotesOutlined sx={{stroke:20 ,strokeWidth:20, fontSize:24}}/> */}
+                            <svg className="w-6 h-6 text-foreground cursor-pointer" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <g>
-                                    <path d="M5 17H13M5 12H19M11 7H19" stroke="currentColor" strokeWidth={2.5} stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M5 17H13M5 12H19M11 7H19" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" />
                                 </g>
                             </svg>
 
-                            {/* <svg className='w-6 h-6' viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#000000" stroke-width="1.25">
-        <g stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M4 7C4 6.44771 4.44772 6 5 6H24C24.5523 6 25 6.44771 25 7C25 7.55229 24.5523 8 24 8H5C4.44772 8 4 7.55229 4 7Z" fill="#000000"></path><path d="M4 13.9998C4 13.4475 4.44772 12.9997 5 12.9997L16 13C16.5523 13 17 13.4477 17 14C17 14.5523 16.5523 15 16 15L5 14.9998C4.44772 14.9998 4 14.552 4 13.9998Z" fill="#000000"></path><path d="M5 19.9998C4.44772 19.9998 4 20.4475 4 20.9998C4 21.552 4.44772 21.9997 5 21.9997H22C22.5523 21.9997 23 21.552 23 20.9998C23 20.4475 22.5523 19.9998 22 19.9998H5Z" fill="#000000"></path></g></svg> */}
+                            {/* <svg className='w-6 h-6' viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#000000" strokeWidth="1.25">
+        <g strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M4 7C4 6.44771 4.44772 6 5 6H24C24.5523 6 25 6.44771 25 7C25 7.55229 24.5523 8 24 8H5C4.44772 8 4 7.55229 4 7Z" fill="#000000"></path><path d="M4 13.9998C4 13.4475 4.44772 12.9997 5 12.9997L16 13C16.5523 13 17 13.4477 17 14C17 14.5523 16.5523 15 16 15L5 14.9998C4.44772 14.9998 4 14.552 4 13.9998Z" fill="#000000"></path><path d="M5 19.9998C4.44772 19.9998 4 20.4475 4 20.9998C4 21.552 4.44772 21.9997 5 21.9997H22C22.5523 21.9997 23 21.552 23 20.9998C23 20.4475 22.5523 19.9998 22 19.9998H5Z" fill="#000000"></path></g></svg> */}
 
                             {/* <div className="flex flex-col text-sm text-accent-foreground font-semibold justify-center items-center ">
                         <span className={commonBottomNavItemNameStyle}>Menu</span>
@@ -344,84 +323,27 @@ const Header = () => {
                             </SheetFooter>
                         </SheetContent>
                     </Sheet>
-                    {/* <Sheet>
-          <SheetTrigger asChild>
-            <Menu  className="text-secondary-foreground mt-0.5" sx={{fontSize:20
-            }} />
-          </SheetTrigger>
-          <SheetContent side="left">
-            <SheetHeader>
-              <SheetTitle>
-                <Link to="/">
-                  <div className="flex">
-                    Mistwrite
-                    <LocalFireDepartmentOutlined/>
-                  </div>
-                </Link>
-              </SheetTitle>
 
-              <SheetDescription className="text-left">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. In,
-                deleniti!
-              </SheetDescription>
-            </SheetHeader>
-            <div className="flex flex-col">
-              {navItems.map((item) =>
-                item.active ? (
-                  <Link
-                    key={item.name}
-                    to={item.slug}
-                    className={`py-2 px-4 mt-1 inline-flex items-center justify-start whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground ${
-                      item.active ? "active" : ""
-                    }`}
-                  >
-                    {item.name}
-                  </Link>
-                ) : null
-              )}
-            </div>
-            <SheetFooter>
-              <SheetClose asChild>{authStatus && <LogoutButton />}</SheetClose>
-            </SheetFooter>
-          </SheetContent>
-        </Sheet> */}
-
-                    {/* <div className="flex">
-                  Mistwrite
-                  <img
-                    className="w-6 h-6"
-                    src="https://cdn3.emoji.gg/emojis/7251-blue-flames.gif"
-                    alt=""
-                />
-                </div> */}
                     <Link to="/">
-                        <h1 className="flex items-center text-xl font-bold text-secondary-foreground">
-                            Mistwrite
+                        <h1 className="flex items-center text-xl  text-primary">
+                            Mist<span className=" text-secondary-foreground italic  line-through decoration-primary-foreground ">write</span>
                             {/* <FireplaceSharp className="ml-1 mr-2 -mt-0.5" sx={{ fontSize: 24 }} /> */}
                             {/* <span className=" ml-2 -mt-0.5"><FireplaceOutlined sx={{fontSize:22}}  /></span> */}
                         </h1>
                     </Link>
                 </div>
-                {/* check login status */}
-                {/* <div className="text-slate-500">{`Logged in? ${authStatus}`}</div> */}
-                {/* <div className="">{`Logged in? authstatus:${authStatus} ${(useSelector((state) => state.auth.status))}`}</div> */}
-                {/* {authStatus && <LogoutButton />} */}
-                {/* {authStatus && (
-          <Button variant="ghost">
-            <Link to="/login">Login</Link>
-          </Button>
-        )} */}
 
-                {/* show if necessary logout button */}
-                {/* {authStatus ? (
-          <LogoutButton />
-        ) : null} */}
-                {/* <Button onClick={() => setTheme("light")} > <LightMode className=" rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" /></Button>
-          <Button onClick={() => setTheme("dark")} > <DarkMode className="  rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" /></Button>
-       */}
-                <div className="flex flex-col">
-                    <Button variant="icon" onClick={() => setTheme('light')} className="absolute opacity-0 dark:opacity-100  scale-0 dark:scale-100 "><DarkMode /></Button>
-                    <Button variant="icon" onClick={() => setTheme('dark')} className="  scale-100 dark:scale-0 "><Brightness7 /></Button>
+                <div className="flex">
+                    <LatestUpdatesAsPopover />
+                    <div className="flex flex-col">
+                        <Button variant="icon" onClick={() => setTheme('light')} className="absolute opacity-0 dark:opacity-100  scale-0 dark:scale-100 ">
+                            <DarkMode />
+                        </Button>
+                        {/* <Button variant="icon" onClick={() => setTheme('dark')} className="  scale-100 dark:scale-0 "><WbSunnyOutlined /></Button> */}
+                        <Button variant="icon" onClick={() => setTheme('dark')} className="  scale-100 dark:scale-0 ">
+                            <WbSunnyOutlined />
+                        </Button>
+                    </div>
                 </div>
                 {/* <DropdownMenu>
       <DropdownMenuTrigger asChild>

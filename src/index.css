@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Space+Mono:regular,italic,700,700italic);
 @import url(https://fonts.googleapis.com/css?family=DM+Sans:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
 @import url(https://fonts.googleapis.com/css?family=Urbanist:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
 @import url(https://fonts.googleapis.com/css?family=Manrope:200,300,regular,500,600,700,800);
@@ -21,15 +22,16 @@
 --headingFont:"Manrope"; */
 @layer base {
     :root {
-        --paraFont:"DM Sans";
-        --paraFont:"Spline Sans";
-        --paraFont:"Roboto";
-        --paraFont:"Plus Jakarta Sans";
-        --paraFont:"Inter";
-        
-        --headingFont:"Urbanist";
-        --headingFont:"Plus Jakarta Sans";
-        --headingFont:"Manrope";
+      --paraFont:"Spline Sans";
+      --paraFont:"Plus Jakarta Sans";
+      --paraFont:"Roboto";
+      --paraFont:"DM Sans";
+      --paraFont:"Inter";
+      --headingFont:"Urbanist";
+      --headingFont:"Plus Jakarta Sans";
+      --headingFont:"Manrope";
+      --monoFont:"Space Mono";
+
       --background: 0 0% 100%;
       --foreground: 222.2 84% 4.9%;
       --card: 0 0% 100%;
@@ -171,7 +173,6 @@
 }
 
 
-/* a{
-  text-decoration: none !important;
-  border-bottom: solid 2px hsl(var(--accent)) !important;
-} */
+.monoType{
+  font-family: var(--monoFont);
+}

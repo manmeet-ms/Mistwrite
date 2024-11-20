@@ -14,6 +14,11 @@ import EditNotes from './pages/EditPosts';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Setting from './pages/Setting';
+import { LatestUpdatesAsPage } from './components/UpdatesComponents.jsx';
+import CHangelog from './pages/Changelog.jsx';
+import Changelog from './pages/Changelog.jsx';
+import About from './pages/About.jsx';
+import Contact from './pages/Contact.jsx';
 
 const router = createBrowserRouter([
     {
@@ -51,7 +56,6 @@ const router = createBrowserRouter([
                 <AddNote />
             </AuthLayout>
         ),
- 
     },
     // {
     //     path: '/loader',
@@ -61,8 +65,32 @@ const router = createBrowserRouter([
         path: '/about',
         element: (
             <AuthLayout authentication>
+                <About />
+            </AuthLayout>
+        ),
+    },
+    {
+        path: '/settings',
+        element: (
+            <AuthLayout authentication>
                 <Setting />
-                </AuthLayout>
+            </AuthLayout>
+        ),
+    },
+    {
+        path: '/contact',
+        element: (
+            <AuthLayout authentication>
+            <Contact />
+            </AuthLayout>
+        ),
+    },
+    {
+        path: '/changelog',
+        element: (
+            <AuthLayout authentication>
+                <Changelog />
+            </AuthLayout>
         ),
     },
     {

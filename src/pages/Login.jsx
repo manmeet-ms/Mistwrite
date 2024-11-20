@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import Header from "../components/Header/Header";
 import LoginFormUnit from "../components/LoginFormUnit";
 import { ThemeProvider } from '@/components/theme-provider';
+import globalStyle from "../conf/globalStyle";
 
 const Login = () => {
   // const navigate = useNavigate();
@@ -40,7 +41,7 @@ const Login = () => {
     <>
 <ThemeProvider>
       <Header />
-      <section className=" px-2 ">
+      <section className={globalStyle.pageBodyPaddingX}>
   <LoginFormUnit/>
       </section>
 

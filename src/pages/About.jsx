@@ -8,7 +8,7 @@ import Header from '../components/Header/Header';
 import LogoutButton from '../components/Header/LogoutButton';
 import globalStyle from '../conf/globalStyle';
 
-const Setting = () => {
+const About = () => {
     const authStatus = useSelector((state) => state.auth.status);
     const settingPageItemsStyle = 'w-4 h-4';
     const settingPageItems = [
@@ -33,7 +33,7 @@ const Setting = () => {
                     <BreadcrumbSeparator />
 
                     <BreadcrumbItem>
-                        <BreadcrumbPage>Settings</BreadcrumbPage>
+                        <BreadcrumbPage>Information</BreadcrumbPage>
                     </BreadcrumbItem>
                 </BreadcrumbList>
             </Breadcrumb>
@@ -126,4 +126,4 @@ const Setting = () => {
     );
 };
 
-export default Setting;
+export default About;

@@ -13,6 +13,7 @@ import Header from '../components/Header/Header';
 import { ThemeProvider } from '@/components/theme-provider';
 import BackgroundVector from '../components/BackgroundVector';
 import LinkUnit from '../components/LinkUnit';
+import globalStyle from '../conf/globalStyle';
 
 const Signup = () => {
     const navigate = useNavigate();
@@ -45,7 +46,7 @@ const Signup = () => {
                 <BackgroundVector />
 
                 <Header />
-                <section className="py-12  ">
+                <section className={`${globalStyle.pageBodyPaddingX} py-12`}>
                     <div className="container">
                         <div className="flex flex-col gap-4">
                             {/* <img

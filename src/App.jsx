@@ -13,8 +13,8 @@ import Header from './components/Header/Header';
 import Loader from './components/Loader';
 import LoginFormUnit from './components/LoginFormUnit';
 import NoteCard from './components/NoteCard';
+import globalStyle from './conf/globalStyle';
 import { login, logout } from './store/authSlice';
-import BackgroundVector from './components/BackgroundVector';
 function App() {
     const ref = useRef(null);
     const authStatus = useSelector((state) => state.auth.status);
@@ -150,8 +150,9 @@ function App() {
             
             {authStatus ? (
                 <>
-                <section className='px-2'>
-                    <div className=" px-2 flex mb-4 border-b border-primary/20 border-dashed items-center justify-between">
+                {/* <LatestUpdatesAsPage/> */}
+                <section className={`${globalStyle.pageBodyPaddingX}`}>
+                    <div className="  flex mb-4 border-b border-primary/20 border-dashed items-center justify-between">
                         <span className=" text-xs flex flex-col gap-0.5">
                             {Greet}, {userData.name}
                             <span className="text-primary font-semibold">{moment().format('LLL')} </span>

@@ -14,6 +14,7 @@ import Header from '../components/Header/Header';
 import RTE from '../components/RTE';
 import { Link, useNavigate } from 'react-router-dom';
 import BottomToolbar from '../components/BottomToolbar';
+import globalStyle from '../conf/globalStyle';
 
 export default function AddNote({ onNoteCreate }) {
     const navigate=useNavigate()
@@ -98,8 +99,8 @@ export default function AddNote({ onNoteCreate }) {
     return (
         <ThemeProvider>
             <Header />
-<section className=" px-2 ">
-<Breadcrumb className='py-4'>
+<section className={globalStyle.pageBodyPaddingX}>
+<Breadcrumb className='pb-4'>
                 <BreadcrumbList>
                     <BreadcrumbItem>
                         <BreadcrumbLink>
