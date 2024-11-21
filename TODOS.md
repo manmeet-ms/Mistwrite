@@ -15,6 +15,7 @@
 - Shortcuts to directly create new note
  
 # tasks
+move bottom nav bar to side in desktop
 - promotional landing pge shadcn blocks transport here 
 - make bottom toolbar appear in let on dekstop 
 <!-- - light mnode color balance  -->
@@ -29,6 +30,8 @@
 <!-- - add inidication when fetching/updating notes {set}.  -->
 <!-- - sidebar proper render problem setting -->
 # optimization/improvement:
+- hover fix navbar, darkmode grounp
+ways to change css variables with javascrip
 - mailchimp integrations in contact page
 <!-- - remove loader as dependency (an implement you own style) -->
 - make it fast
@@ -40,7 +43,7 @@
 - react top loading bars
 <!-- - breadcrusb in heaader  -->
 <!-- - differnt headers (#khoob-s-oo-rati) (well everything is fine) -->
-
+-  NavigationMenu, suportbmc and github sponsor https://github.com/sponsors/manmeet-ms
 ## bottom nav 
 <!-- login / signup
 / signup / generate test data?- 

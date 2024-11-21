@@ -168,7 +168,7 @@ const BottomToolbar = () => {
 //                             <SheetHeader>
 //                                 <SheetTitle>
 //                                     <Link to="/">
-//                                         <div className="flex">Burning Notes</div>
+//                                         <div className="flex">Mistwrite</div>
 //                                     </Link>
 //                                 </SheetTitle>
 
@@ -438,7 +438,7 @@ const BottomToolbar = () => {
                             <SheetHeader>
                                 <SheetTitle>
                                     <Link to="/">
-                                        <div className="flex">Burning Notes</div>
+                                        <div className="flex">Mistwrite</div>
                                     </Link>
                                 </SheetTitle>
 

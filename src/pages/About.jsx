@@ -20,9 +20,9 @@ const About = () => {
 
     return (
         <>
-            <Header />
+            <Header pagename={"Information"}/>
       <section className={globalStyle.pageBodyPaddingX}>
-
+{/* 
             <Breadcrumb>
                 <BreadcrumbList>
                     <BreadcrumbItem>
@@ -36,8 +36,8 @@ const About = () => {
                         <BreadcrumbPage>Information</BreadcrumbPage>
                     </BreadcrumbItem>
                 </BreadcrumbList>
-            </Breadcrumb>
-            <section className="container py-6">
+            </Breadcrumb> */}
+            <section className="container py-2">
                 <div>
                     <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">Information</h1>
                     <p className="leading-7 [&:not(:first-child)]:mt-6">

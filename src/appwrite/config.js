@@ -90,7 +90,7 @@ async readNote(slug) {
         conf.appwriteCollectionId,
         queries // get all notes of currently logged in user
       );
-      console.log("getEveryNoteResult() config.js: ",getEveryNoteResult);
+      // console.log("getEveryNoteResult() config.js: ",getEveryNoteResult);
       
       return getEveryNoteResult;
     } catch (errorFound) {

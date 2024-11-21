@@ -3,7 +3,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import moment from 'moment/moment';
 import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { BatchPredictionOutlined, Event, EventOutlined, KeyboardDoubleArrowRight, LogoDevOutlined, TipsAndUpdatesOutlined, Today, Update } from '@mui/icons-material';
+import { BatchPredictionOutlined, Event, EventOutlined, KeyboardDoubleArrowRight, LogoDevOutlined, NotificationsOutlined, TipsAndUpdatesOutlined, Today, Update } from '@mui/icons-material';
 import Header from './Header/Header';
 import BottomToolbar from './BottomToolbar';
 import { Link } from 'react-router-dom';
@@ -30,27 +30,28 @@ const updateBullets = [
     },
 ];
 
-const LatestUpdatesAsPopover = () => {
+const LatestUpdatesAsPopover = ({xlassName}) => {
 return(
     <>
-    <Popover>
-        <PopoverTrigger>
+    <Popover  >
+        {/* <PopoverTrigger className="hover:bg-muted rounded-full p-2 border border-accent-foreground/0 hover:border-accent-foreground/10"> */}
+        <PopoverTrigger >
             <div className="relative">
                 {/* <TipsAndUpdatesOutlined /> */}
-                <LogoDevOutlined />
-                <div className="w-3 h-3 absolute top-0 -right-0.5 rounded-full bg-foreground border-[3.5px] border-white dark:border-black"></div>
+                <NotificationsOutlined/>
+                {/* <div className="w-3 h-3 absolute top-0 -right-0.5 rounded-full bg-foreground/50 border-[3.5px] border-white dark:border-black"></div> */}
             </div>
         </PopoverTrigger>
         <PopoverContent className="relative bg-background/80 backdrop-blur-md  max-h-[50vh] right-4 overflow-auto">
                     <section className="flex flex-col  ">
-                    {updateBullets.map((points)=>(
+                    {updateBullets.map((key, points)=>(
                           <Link to="/changelog"> <div className={`flex justify-start items-start  border-${points.border ? points.border : 'b'} border-border py-2 space-x-4`}>
                           <div className="flex flex-col items-center justify-center">
                               <Today sx={{ fontSize: 28 }} className=" p-1  items-center justify-center bg-accent text-muted-foreground px-2 rounded-full" />
-                              <span className="text-2xs font-medium text-muted-foreground">{moment( points.datePushed).format('DD/MM')}</span>
+                              <span className="text-2xs font-medium text-muted-foreground pt-1">{moment( points.datePushed).format('DD/MM')}</span>
                           </div>
                           <div className="space-y-0.5">
-                              <h4 className="text-xs font-semibold">{points.title}</h4>
+                              <h4 className="text-sm font-semibold">{points.title}</h4>
                               <p className="text-xs text-muted-foreground">{points.description}</p>
                               {/* <div className="flex items-center pb-2">
                           <EventOutlined sx={{ fontSize: 16 }} className="mr-1 h-4 w-4 opacity-70" /> <span className="text-xs text-muted-foreground">{points.datePushed}</span>
@@ -76,7 +77,7 @@ const LatestUpdatesAsPage = () => {
   <div className="container py-6 mx-auto">
     <div className=" divide-y-2 divide-muted">
 
-{updateBullets.map((points)=>(
+{updateBullets.map((key, points)=>(
   <div className="py-8 flex flex-wrap md:flex-nowrap">
   <div className="md:w-64 md:mb-0 mb-2 flex-shrink-0 flex flex-col">
     <span className="text-sm text-muted-foreground monoType ">v{points.version?points.version:null}</span>
@@ -99,7 +100,7 @@ const LatestUpdatesAsPage = () => {
   </div>
 </section>
             {/* <section className="flex flex-col px-4 ">
-                {updateBullets.map((points) => (
+                {updateBullets.map((key, points) => (
                     <div className="flex justify-start items-start border-b border-border py-2 space-x-4">
                         <div className="flex flex-col items-center justify-center">
                             <Today sx={{ fontSize: 28 }} className=" p-1  items-center justify-center bg-accent px-2 rounded-full" />

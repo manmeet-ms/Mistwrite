@@ -2,11 +2,7 @@ import os
 
 # Hardcoded directories
 directories = [
-     "E:/Development/BurningNotesPWA/src/components",
-     "E:/Development/BurningNotesPWA/src/components/Footer",
-    "E:/Development/BurningNotesPWA/src/components/Header",
-    "E:/Development/BurningNotesPWA/src/components/NoteOperations",
-    "E:/Development/BurningNotesPWA/src/pages"
+     "E:/Development/BurningNotesPWA/"
   
 ]
 
@@ -16,8 +12,8 @@ exclude_dirs = [
 ]
 
 def replace_word_in_files(directory):
-    word_to_replace = "-gray-"
-    replacement_word = "-slate-"
+    word_to_replace = "BurningNotes"
+    replacement_word = "Mistwrite"
     
     for root, dirs, files in os.walk(directory):
         # Exclude directories

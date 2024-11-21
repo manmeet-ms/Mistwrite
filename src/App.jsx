@@ -47,7 +47,7 @@ function App() {
 
         try {
             const fetchedNotes = await appwriteNoteService.getEveryNote([Query.equal('userId', userData.$id)]);
-            console.log("loggin this", fetchedNotes.documents[0].$createdAt);
+            // console.log("loggin this", fetchedNotes.documents[0].$createdAt);
             
             if (fetchedNotes && fetchedNotes.documents) {
                 setNotes((fetchedNotes.documents).reverse()); // to sorrt the notes in (latest created) order
@@ -151,6 +151,7 @@ function App() {
             {authStatus ? (
                 <>
                 {/* <LatestUpdatesAsPage/> */}
+                <main className=''>
                 <section className={`${globalStyle.pageBodyPaddingX}`}>
                     <div className="  flex mb-4 border-b border-primary/20 border-dashed items-center justify-between">
                         <span className=" text-xs flex flex-col gap-0.5">
@@ -165,35 +166,7 @@ function App() {
                         <Button className="px-0 my-2" variant="icon" onClick={generateTestData}>
                                             <AutoFixHighSharp sx={{ fontSize: 24 }} />
                                         </Button>
-                          {/*   <TooltipProvider>
-                                <Tooltip>
-
-                                    <TooltipTrigger>
-
-                                        <Button className="px-0" variant="icon" onClick={generateTestData}>
-                                            <AutoFixHighSharp sx={{ fontSize: 24 }} />
-                                        </Button>
-                                    </TooltipTrigger>
-                                    <TooltipContent>
-                                        <p>Generate test data</p>
-                                    </TooltipContent>
-                                </Tooltip>
-                            </TooltipProvider>
-                            <TooltipProvider>
-                                <Tooltip> */}
-
-                                    {/*set tooltip diren to below */}
-                                    {/* <TooltipTrigger>
-
-                                        <Button className="px-0 my-2" variant="icon" onClick={fetchNotes}>
-                                            <Cached sx={{ fontSize: 24 }} />
-                                        </Button>
-                                    </TooltipTrigger>
-                                    <TooltipContent>
-                                        <p>Refresh</p>
-                                    </TooltipContent>
-                                </Tooltip>
-                            </TooltipProvider> */}
+                
                         </div>
                     </div>
 
@@ -205,13 +178,10 @@ function App() {
                         </Masonry>
                     </div>
                     {/* <AddNote onNoteCreate={handleNoteCreate} /> */}
-                    {/* <Link  className='fixed bottom-8 right-4 flex p-4 justify-center items-center font-medium text-primary-foreground bg-primary rounded-2xl cursor-pointer' to="/add-note">
-                        <Add />
-                    </Link> */}
+                
                 </section>
-                     {/* // placeholder fro bottom toolbar so that user can acces the notes at the very bottom */}
                     <BottomToolbar/>
-
+                    </main>
                     </>
             ) : (
                 <LoginFormUnit />

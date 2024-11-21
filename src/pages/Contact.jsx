@@ -1,8 +1,15 @@
 import React from 'react'
+import Header from '../components/Header/Header'
+import BottomToolbar from '../components/BottomToolbar'
 
 const Contact = () => {
   return (
-    <div>Contact</div>
+    
+  <>
+  <Header pagename="Get in touch"/>
+    <BottomToolbar/>
+  
+  </>
   )
 }
 

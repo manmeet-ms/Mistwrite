@@ -24,17 +24,43 @@ export default defineConfig({
                 display: 'standalone', // from resources
                 icons: [
                     {
-                        src: '/icons/burningnotes-icon-144.png',
+                        src: '/icons/mistwrite-icon-48.png',
+                        sizes: '48x48',
+                        type: 'image/png',
+                    },
+                    
+                    {
+                        src: '/icons/mistwrite-icon-72.png',
+                        sizes: '72x72',
+                        type: 'image/png',
+                    },
+
+                    {
+                        src: '/icons/mistwrite-icon-96.png',
+                        sizes: '96x96',
+                        type: 'image/png',
+                    },
+
+                    {
+                        src: '/icons/mistwrite-icon-128.png',
+                        sizes: '128x128',
+                        type: 'image/png',
+                    },
+
+                    {
+                        src: '/icons/mistwrite-icon-144.png',
                         sizes: '144x144',
                         type: 'image/png',
                     },
+
                     {
-                        src: '/icons/burningnotes-icon-192.png',
+                        src: '/icons/mistwrite-icon-192.png',
                         sizes: '192x192',
                         type: 'image/png',
                     },
+
                     {
-                        src: '/icons/burningnotes-icon-512.png',
+                        src: '/icons/mistwrite-icon-512.png',
                         sizes: '512x512',
                         type: 'image/png',
                     },
@@ -45,7 +71,6 @@ export default defineConfig({
                         url: '/add-note',
                         description: 'Create new note quickly',
                     },
-
                 ],
             },
 

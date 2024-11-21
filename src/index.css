@@ -16,6 +16,7 @@
 --paraFont:"Inter";
 --paraFont:"Roboto";
 --paraFont:"Plus Jakarta Sans";
+--monoFont:"Space Mono";
 
 --headingFont:"Urbanist";
 --headingFont:"Plus Jakarta Sans";
@@ -38,7 +39,8 @@
       --card-foreground: 222.2 84% 4.9%;
       --popover: 0 0% 100%;
       --popover-foreground: 222.2 84% 4.9%;
-      --primary: 221.2 83.2% 53.3%;
+      --primary: 200.41 98.01% 39.41%;
+      /* --primary: 142 76% 36%; */
       --primary-foreground: 210 40% 98%;
       --secondary: 210 40% 96.1%;
       --secondary-foreground: 222.2 47.4% 11.2%;
@@ -68,13 +70,16 @@
     }
   
     .dark {
-      --background: 222.2 84% 4.9%;
+      --background: 222 47% 11%;
+      /* --background: 222.2 84% 4.9%; */
       --foreground: 210 40% 98%;
       --card: 222.2 84% 4.9%;
       --card-foreground: 210 40% 98%;
       --popover: 222.2 84% 4.9%;
       --popover-foreground: 210 40% 98%;
-      --primary: 217.2 91.2% 59.8%;
+      /* --primary: 217.2 91.2% 59.8%; */
+      --primary: 198.63 88.66% 48.43%;
+      /* --primary: 142 71% 45%; */
       --primary-foreground: 222.2 47.4% 11.2%;
       --secondary: 217.2 32.6% 17.5%;
       --secondary-foreground: 210 40% 98%;
@@ -175,4 +180,8 @@
 
 .monoType{
   font-family: var(--monoFont);
+  
+}
+.rgbtohsl{
+color: hsl(222 47% 11%);;
 }

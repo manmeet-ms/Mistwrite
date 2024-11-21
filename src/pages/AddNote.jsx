@@ -98,23 +98,9 @@ export default function AddNote({ onNoteCreate }) {
 
     return (
         <ThemeProvider>
-            <Header />
+            <Header pagename="Create new note" />
 <section className={globalStyle.pageBodyPaddingX}>
-<Breadcrumb className='pb-4'>
-                <BreadcrumbList>
-                    <BreadcrumbItem>
-                        <BreadcrumbLink>
-                            <Link to="/">Home</Link>
-                        </BreadcrumbLink>
-                    </BreadcrumbItem>
-                    <BreadcrumbSeparator />
-
-                    <BreadcrumbItem>
-                        <BreadcrumbPage>Create new note</BreadcrumbPage>
-                    </BreadcrumbItem>
-                </BreadcrumbList>
-            </Breadcrumb>
-                    
+                
             <form onSubmit={handleSubmit(submitNoteData)} className="space-y-4">
                 <div>
                     <Input

@@ -1,24 +1,35 @@
-let arr = ['one', 'two', 'three', 'four', 'five'];
-let valueofArr;
-console.log(arr.length);
-console.log(arr.reverse());
+const authStatus = true;
+const sideNavItems = [
+    { name: 'Home', active: authStatus },
+    { name: 'Login', active: !authStatus },
+    { name: 'Signup', active: !authStatus },
+    { name: 'Contact', active: authStatus },
+    { name: 'Projects', active: authStatus },
+    { name: 'Fiverr Profile', active: authStatus },
+    { name: 'Feedback', active: authStatus },
+    { name: 'View Source', active: authStatus },
+    { name: 'Instagram', active: authStatus },
+    { name: 'LinkedIn', active: authStatus },
+    { name: 'Sticker Store', active: authStatus },
+    { name: 'Support', active: authStatus },
+];
 
-let revArr = [];
-console.log(arr);
-console.log(revArr);
-let revarridx=0
-for (let i = arr.length; i <= 0; i--) {
-    console.log(i);
-    valueofArr = arr[i];
-    revArr.push(valueofArr);
-    
-    revarridx=revarridx+1;
-    console.log(revarridx);
-    
+
+
+const selectedArrayIndices = [0, 1, 2, 3, 4, 11];
+const selectedArrayItemstoRender = [];
+console.log(sideNavItems.length);
+for (let index = 0; index < selectedArrayIndices.length; index++) {
+    try {
+        console.log(`LoopIdx: ${index} :: selectedArrayIndices ${selectedArrayIndices[index]}`);
+        selectedArrayItemstoRender[index] = sideNavItems[selectedArrayIndices[index]];
+    } catch (error) {
+        console.log('error encountered', error);
+    }
 }
-// arr.map((idx) => {
-//     console.log("printing from index", arr[idx]);
-//     // return val
-// });
-console.log(arr);
-console.log(revArr);
+
+console.log('selectedArrayItemstoRender', selectedArrayItemstoRender);
+
+selectedArrayItemstoRender.map((items) => 
+    console.log('selected objects: ', items.name));
+
