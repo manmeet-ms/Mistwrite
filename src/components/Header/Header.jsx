@@ -298,7 +298,7 @@ const Header = ({ pagename }) => {
 
                                     <h1 className="flex  tracking-tight items-center text-xl  text-foreground">
                                         Mistwrite
-                                        <span className="monoType text-xs ml-2 bg-muted border border-primary-foreground px-3 py-1 rounded-full">v0.2.0</span>
+                                        <span className="monoType text-xs ml-2 bg-muted border border-primary-foreground px-3 py-1 rounded-full">v1.0.0</span>
                                     </h1>
                                 </span>
                             </Link>
