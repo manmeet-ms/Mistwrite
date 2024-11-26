@@ -15,6 +15,7 @@
 - Shortcuts to directly create new note
  
 # tasks
+pickup and make fatafat landing page
 move bottom nav bar to side in desktop
 - promotional landing pge shadcn blocks transport here 
 - make bottom toolbar appear in let on dekstop 

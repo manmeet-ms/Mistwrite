@@ -61,7 +61,7 @@ const logoutHandler=()=>{
               alt="logo"
               className="h-8"
             /> */}
-                        <Card className="mx-auto w-full max-w-md">
+                        <Card className="mx-auto w-full max-w-md bg-card text-card-foreground">
                             <CardHeader className="items-center">
                                 <UserRound className="size-10 rounded-full bg-accent p-2.5 text-muted-foreground" />
                                 <CardTitle className="text-xl">Log into your account</CardTitle>

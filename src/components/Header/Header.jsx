@@ -302,14 +302,14 @@ const Header = ({ pagename }) => {
                                     </h1>
                                 </span>
                             </Link>
-
-                            <Link to="#" className="ml-3 text-xs leading-5 font-medium text-primary bg-primary/10 rounded-full py-1 px-3 hidden xl:flex items-center hover:bg-sky-400/20">
-                                <strong className="font-semibold">Annoucement: Introducing Catalyst</strong>
+{/* Announcement */}
+                            <Link to="#" className="ml-3 text-xs leading-5 font-medium text-primary bg-primary/10 rounded-full py-1 px-3 hidden xl:flex items-center  hover:bg-sky-400/20">
+                                <strong className="font-semibold">Introducing Mistwrite</strong>
                                 <svg width={2} height={2} fill="currentColor" aria-hidden="true" className="ml-2 text-primary dark:text-primary/70">
                                     <circle cx={1} cy={1} r={1} />
                                 </svg>
-                                <span className="ml-2">A modern application UI kit for React</span>
-                                <svg width={3} height={6} className="ml-3 overflow-visible text-primary dark:text-primary" aria-hidden="true">
+                                <span className="ml-2">Providing fatest ever UX in temporary note creation</span>
+                                <svg width={3} height={6} className="ml-3 mt-0.5 overflow-visible text-primary dark:text-primary" aria-hidden="true">
                                     <path d="M0 0L3 3L0 6" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
                             </Link>
