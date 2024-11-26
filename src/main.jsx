@@ -19,6 +19,7 @@ import CHangelog from './pages/Changelog.jsx';
 import Changelog from './pages/Changelog.jsx';
 import About from './pages/About.jsx';
 import Contact from './pages/Contact.jsx';
+import LandingPage from './pages/LandingPage/LandingPage.jsx';
 
 const router = createBrowserRouter([
     {
@@ -96,6 +97,14 @@ const router = createBrowserRouter([
     {
         path: '/n/:slug',
         element: <NoteCard />,
+    },
+    {
+        path: '/home',
+        element: (
+            <AuthLayout authentication={false}>
+            <LandingPage />
+        </AuthLayout>
+            ),
     },
 ]);
 
