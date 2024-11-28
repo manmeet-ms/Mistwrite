@@ -1,5 +1,5 @@
 git status --short
 git add -A
-git commit -m "backup push"
+git commit -m "added swipe to delete"
 git push origin main
 

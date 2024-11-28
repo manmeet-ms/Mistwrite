@@ -15,6 +15,7 @@ import { LatestUpdatesAsPopover } from '../UpdatesComponents';
 import LogoutButton from './LogoutButton';
 
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
+import { Menu } from 'lucide-react';
 
 const Header = ({ pagename }) => {
     const { setTheme } = useTheme();
@@ -142,7 +143,8 @@ const Header = ({ pagename }) => {
         <span className="sr-only">Navigation</span>
         <Sheet>
             <SheetTrigger asChild>
-                <WidgetsOutlined/>
+                <Menu/>
+                {/* <WidgetsOutlined/> */}
             </SheetTrigger>
             <SheetContent side="left" className="flex flex-col justify-between overflow-scroll">
                 <div>

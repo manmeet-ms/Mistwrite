@@ -89,9 +89,9 @@ const router = createBrowserRouter([
     {
         path: '/changelog',
         element: (
-            <AuthLayout authentication>
-                <Changelog />
-            </AuthLayout>
+            <Changelog />
+            // <AuthLayout authentication={false}>
+            // </AuthLayout>
         ),
     },
     {

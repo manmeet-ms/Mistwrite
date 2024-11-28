@@ -1,19 +1,27 @@
 'use client';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { DeleteOutlineOutlined, LocalFireDepartment, LocalFireDepartmentOutlined, LocalFireDepartmentTwoTone } from '@mui/icons-material';
+import { LocalFireDepartmentOutlined } from '@mui/icons-material';
 import parse from 'html-react-parser';
 import moment from 'moment';
 import React, { useCallback, useEffect, useState } from 'react';
-import { toast, Toaster } from 'react-hot-toast';
+import { motion, useAnimate } from 'framer-motion';
 import appwriteNoteService from '../appwrite/config';
-import { PackageMinus } from 'lucide-react';
 
-const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
+
+const NoteCard = ({ 
+    title, 
+    noteId, 
+    content, 
+    createdAt, 
+    onDelete 
+}) => {
     const [tleftString, settleftString] = useState('NaN');
-    const formatDate = useCallback((dateString) => {
-        return dateString ? `${moment(dateString).format('MMM DD, YYYY')} at ${moment(dateString).format('HH:mm')}` : 'Invalid Date';
-    }, []);
+    const [scope, animate] = useAnimate();
+
+    // const formatDate = useCallback((dateString) => {
+    //     return dateString ? `${moment(dateString).format('MMM DD, YYYY')} at ${moment(dateString).format('HH:mm')}` : 'Invalid Date';
+    // }, []);
 
     const deleteNoteOperation = async () => {
         if (!noteId) {
@@ -23,14 +31,38 @@ const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
 
         try {
             await appwriteNoteService.deleteNote(noteId);
-            // Notify parent component to update the notes list
             if (onDelete) {
                 onDelete(noteId);
-                toast.success(`Deleted ${title}`);
             }
         } catch (error) {
-            console.error('Error deleting note:', error);
-            toast.error('Failed to delete note');
+            alert('Error deleting note:', error);
+            // console.error('Error deleting note:', error);
+        }
+    };
+
+    const handleDragEnd = async (_, info) => {
+        const offset = info.offset.x;
+        const velocity = info.velocity.x;
+        
+        if (offset < -100 || offset > 100 || velocity < -500) {
+            // Swipe to delete
+            await animate(scope.current, { 
+                x: offset, 
+                opacity: 0 
+            }, { 
+                duration: 0.2 
+            });
+            
+            // Wait for animation to complete before deleting
+            setTimeout(deleteNoteOperation, 200);
+        } else {
+            // Snap back if not swiped far enough
+            await animate(scope.current, { 
+                x: 0, 
+                opacity: 1 
+            }, { 
+                duration: 0.5 
+            });
         }
     };
 
@@ -45,16 +77,14 @@ const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
 
         const hours = Math.floor((diffInMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((diffInMs % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diffInMs % (1000 * 60)) / 1000);
 
         return `${hours}h ${minutes}m`;
-        // return `${hours}h ${minutes}m ${seconds}s`;
     }, []);
 
     // Calculate burn time when component mounts and set up interval
     useEffect(() => {
         const noteCreated = new Date(createdAt);
-        // Set burn time to 1 hour, 15 minutes after creation
+        // Set burn time to 24 hours after creation
         const [h, m, s, ms] = [24, 60, 60, 1000];
         const noteBurn = new Date(noteCreated.getTime() + h * m * s * ms);
 
@@ -77,20 +107,21 @@ const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
     const timeLeft = calculateTimeLeft(noteCreated, noteBurn);
 
     return (
-        <section className="pt-4 pr-2 pl-4 pb-2 h-fit max-h-[400px] overflow-auto  text-card-foreground border-2 backdrop-blur-lg border-card-foreground/10 rounded-xl transition-all duration-500 ease-in-out ">
-            {/* <section className=" pt-4 pr-2 pl-4 pb-2 h-fit max-h-[400px] overflow-auto  bg-accent/0 hover:bg-accent/50 border  border-secondary-foreground/20 rounded-xl transition-all duration-500 ease-in-out "> */}
+        <motion.section 
+            ref={scope}
+            drag="x"
+            dragDirectionLock
+            onDragEnd={handleDragEnd}
+            className="pt-4 pr-2 pl-4 pb-2 h-fit max-h-[400px] overflow-auto text-card-foreground border-2 backdrop-blur-lg border-card-foreground/10 rounded-xl transition-all duration-500 ease-in-out cursor-grab active:cursor-grabbing"
+        >
             <div className="space-y-2">
                 <div className="flex justify-between">
                     <h4 className="w-20 md:w-24 lg:w-36 text-card-foreground break-words">{title}</h4>
-                    {/* <Button variant="icon" className="rounded-xl px-3 relative bottom-1.5 " onClick={deleteNoteOperation}>
-                        <DeleteOutlineOutlined sx={{ fontSize: 16 }} className="text-secondary-foreground" />
-                    </Button> */}
+                    
                     {timeLeft && (
-                        <div className="  ">
-                            {/* <div className='w-full relative left-4'> */}
-                            <span className="">
+                        <div>
+                            <span>
                                 <Badge className="font-[700] text-2xs text-primary bg-primary/15 hover:bg-primary/20 rounded-full py-1 pl-2" variant="secondary">
-                                    {/* <Badge className="badgeText text-2xs text-amber-700 bg-amber-400/30 dark:text-amber-500 dark:bg-amber-800/30 rounded-full py-1 pl-2" variant="secondary"> */}
                                     <LocalFireDepartmentOutlined className="mr-0.5 " sx={{ fontSize: 14, strokeWidth: 24 }} />
                                     {tleftString}
                                 </Badge>
@@ -98,29 +129,17 @@ const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
                         </div>
                     )}
                 </div>
-                <p className="text-sm text-card-foreground dark:text-card-foreground/70 break-words text-balance">{parse(content)}</p>
+                
+                <p className="text-sm text-card-foreground dark:text-card-foreground/70 break-words text-balance">
+                    {parse(content)}
+                </p>
 
                 <div className="flex flex-col text-xs text-card-foreground/30 break-all">
-                    {/* <span>Created: {formatDate(noteCreated)} </span>
-                    <span>Burn: {formatDate(noteBurn)} </span>
-                    <span>Now: {moment().format('MMM DD, YYYY HH:mm')} </span> */}
                     <span>Created {moment(noteCreated).fromNow()} </span>
-                    {/* <span>Note ID: {noteId} </span> */}
                 </div>
-
-                {/* {timeLeft && (
-                    <div>
-                        <span className="inline-flex gap-1 text-xs">
-                            <Badge className="mt-2 mb-1 text-2xs text-xs font-bold text-amber-700 bg-amber-400/30 dark:text-amber-500 dark:bg-amber-800/30 rounded-full py-1 pl-2" variant="secondary">
-                                <LocalFireDepartmentOutlined className="mr-0.5" sx={{ fontSize: 14,  strokeWidth: 20 }} />
-                                {tleftString}
-                            </Badge>
-                        </span>
-                    </div>
-                )} */}
             </div>
-            <Toaster />
-        </section>
+            
+        </motion.section>
     );
 };
 

@@ -20,7 +20,8 @@ export default defineConfig({
                 name: 'Mistwrite',
                 short_name: 'Mistwrite',
                 description: 'A minimalist digital notebook for jotting down quick thoughts and organizing your mind.',
-                theme_color: '#111827',
+                theme_color: '#020617',
+                background_color: "#2563eb",
                 display: 'standalone', // from resources
                 icons: [
                     {

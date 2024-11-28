@@ -15,6 +15,7 @@
 - Shortcuts to directly create new note
  
 # tasks
+list on product hunt
 pickup and make fatafat landing page
 move bottom nav bar to side in desktop
 - promotional landing pge shadcn blocks transport here 

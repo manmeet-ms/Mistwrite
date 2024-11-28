@@ -1,7 +1,6 @@
 * {
     font-family: var(--paraFont);
 
-    
     letter-spacing: 0.1px;
     font-weight: 400;
 }
@@ -23,22 +22,8 @@ button {
     border-radius: 40rem !important;
 }
 
-
-.badgeText{
-font-family: var(--paraFont);
+.badgeText {
+    font-family: var(--paraFont);
     font-weight: 800;
 }
 
-
-
-
-::-webkit-scrollbar {
-    width: 4px;
-    border-radius: 999px;
-    /* background-color: ; */
-}
-
-::-webkit-scrollbar-thumb {
-    border-radius: 999px;
-    /* background-color: ; */
-}

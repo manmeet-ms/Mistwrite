@@ -1,3 +1,5 @@
+import { ThemeProvider } from '@/components/theme-provider';
+
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -18,13 +20,13 @@ const Changelog = () => {
   return (
 
     <>
-    
+<ThemeProvider>
     <Header pagename="Changelog"/>
       <section  className={`${globalStyle.pageBodyPaddingX} monoType`  }>
  
 <section className="container py-2 ">
             <h1 className=" monoType  scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">Changelog</h1>
-                    <p className=" monoType  [&:not(:first-child)]:mt-6">
+                    <p className="  [&:not(:first-child)]:mt-4">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora in unde itaque quam eum officia harum. Quis voluptatibus enim possimus beatae aliquam impedit obcaecati odio. 
                     </p>
     <LatestUpdatesAsPage/>
@@ -32,6 +34,8 @@ const Changelog = () => {
 
       </section>
     <BottomToolbar/>
+</ThemeProvider>
+
     </>
   )
 }

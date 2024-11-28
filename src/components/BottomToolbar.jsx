@@ -73,7 +73,10 @@ const BottomToolbar = () => {
 
     return (
         <>
-        <div className="h-16"></div>
+                    <Link to="/add-note" className='fixed bottom-8 right-4 rounded-full bg-primary  text-primary-foreground p-4 ' ><Add sx={{fontSize:28}} /></Link>
+
+<main className="hidden">
+<div className="h-16"></div>
             <footer className="fixed bottom-0 px-4 py-2 container bg-background text-secondary-foreground/90  border-t border-accent rounded-tl-xl rounded-tr-xl ">
                 <div className="flex justify-between text-xs   font-semibold  items-center">
                     {bottomNavItems.map((item) => (
@@ -84,6 +87,7 @@ const BottomToolbar = () => {
                     ))}
                 </div>
             </footer>
+</main>
         </>
     );
 };

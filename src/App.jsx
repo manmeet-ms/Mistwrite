@@ -1,6 +1,6 @@
 import { ThemeProvider } from '@/components/theme-provider';
 import { Button } from '@/components/ui/button';
-import { AutoFixHighSharp, Cached } from '@mui/icons-material';
+import { Add, AutoFixHighSharp, Cached } from '@mui/icons-material';
 import Masonry from '@mui/lab/Masonry';
 import { Query } from 'appwrite';
 import moment from 'moment';
@@ -15,6 +15,7 @@ import LoginFormUnit from './components/LoginFormUnit';
 import NoteCard from './components/NoteCard';
 import globalStyle from './conf/globalStyle';
 import { login, logout } from './store/authSlice';
+import { Link } from 'react-router-dom';
 function App() {
     const ref = useRef(null);
     const authStatus = useSelector((state) => state.auth.status);
@@ -159,12 +160,13 @@ function App() {
                             <span className="text-primary font-semibold">{moment().format('LLL')} </span>
                         </span>
 
-                        <div className="flex gap-4">
-                        <Button className="px-0 my-2" variant="icon" onClick={fetchNotes}>
-                                            <Cached sx={{ fontSize: 24 }} />
-                                        </Button>
-                        <Button className="px-0 my-2" variant="icon" onClick={generateTestData}>
+                        <div className="flex gap-4 mr-2">
+                 
+                        <Button className="px-0 my-2 opacity-0" variant="icon" onClick={generateTestData}>
                                             <AutoFixHighSharp sx={{ fontSize: 24 }} />
+                                        </Button>
+                                        <Button className="px-0 my-2" variant="icon" onClick={fetchNotes}>
+                                            <Cached sx={{ fontSize: 24 }} />
                                         </Button>
                 
                         </div>
@@ -177,9 +179,9 @@ function App() {
                             ))}
                         </Masonry>
                     </div>
-                    {/* <AddNote onNoteCreate={handleNoteCreate} /> */}
                 
                 </section>
+                
                     <BottomToolbar/>
                     </main>
                     </>
