@@ -1,5 +1,5 @@
 git status --short
 git add -A
-git commit -m "added: dynamix display of note details "
+git commit -m "removed update bubble "
 git push origin main
 

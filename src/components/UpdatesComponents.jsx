@@ -37,7 +37,7 @@ return(
                 <div className="relative">
                 {/* <TipsAndUpdatesOutlined /> */}
                 <NotificationsOutlined/>
-                <div className="w-3 h-3 absolute top-0 -right-0.5 rounded-full bg-foreground/50 border-[3.5px] border-white dark:border-black"></div>
+                {/* <div className="w-3 h-3 absolute top-0 -right-0.5 rounded-full bg-foreground/50 border-[3.5px] border-white dark:border-black"></div> */}
             </div>
             </Link>
     {/* <Popover  >
