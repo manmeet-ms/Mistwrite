@@ -1,6 +1,6 @@
 import { Loader2 } from 'lucide-react'
 import React from 'react'
-import * as Loaders from 'react-spinners'
+
 import { ThemeProvider } from "@/components/theme-provider";
 import { Skeleton } from "@/components/ui/skeleton"
 import { Masonry } from '@mui/lab';

@@ -1,5 +1,4 @@
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
-import { ArticleOutlined } from '@mui/icons-material';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
@@ -7,6 +6,7 @@ import BottomToolbar from '../components/BottomToolbar';
 import Header from '../components/Header/Header';
 import LogoutButton from '../components/Header/LogoutButton';
 import globalStyle from '../conf/globalStyle';
+import { Home } from 'lucide-react';
 
 const About = () => {
     const authStatus = useSelector((state) => state.auth.status);
@@ -14,7 +14,7 @@ const About = () => {
     const settingPageItems = [
         {
             name: 'About',
-            icon: <ArticleOutlined sx={{ fontSize: 20 }} className={settingPageItemsStyle} />,
+            icon: <Home sx={{ fontSize: 20 }} className={settingPageItemsStyle} />,
         },
     ];
 

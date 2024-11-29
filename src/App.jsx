@@ -1,6 +1,5 @@
 import { ThemeProvider } from '@/components/theme-provider';
 import { Button } from '@/components/ui/button';
-import { Add, AutoFixHighSharp, Cached } from '@mui/icons-material';
 import Masonry from '@mui/lab/Masonry';
 import { Query } from 'appwrite';
 import moment from 'moment';
@@ -16,6 +15,7 @@ import NoteCard from './components/NoteCard';
 import globalStyle from './conf/globalStyle';
 import { login, logout } from './store/authSlice';
 import { Link } from 'react-router-dom';
+import { RefreshCcw, Sparkle, Sparkles } from 'lucide-react';
 function App() {
     const ref = useRef(null);
     const authStatus = useSelector((state) => state.auth.status);
@@ -196,11 +196,11 @@ function App() {
 
                         <div className="flex gap-4 mr-2">
                  
-                        <Button className="px-0 my-2 opacity-0" variant="icon" onClick={generateTestData}>
-                                            <AutoFixHighSharp sx={{ fontSize: 24 }} />
+                        <Button className="px-0 my-2 opacity-5" variant="icon" onClick={generateTestData}>
+                                            <Sparkles className='w-5 h-5'     />
                                         </Button>
                                         <Button className=" text-muted-foreground px-0 my-2" variant="icon" onClick={fetchNotes}>
-                                            <Cached sx={{ fontSize: 24 }} />
+                                            <RefreshCcw  className='w-5 h-5'  strokeWidth={2.5}   />
                                         </Button>
                 
                         </div>

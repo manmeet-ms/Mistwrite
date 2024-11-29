@@ -1,19 +1,13 @@
 
 
-import { Button } from '@/components/ui/button';
-import React, { useState, useEffect } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import authService from '../appwrite/auth';
-import { useParams } from 'react-router-dom';
-import Header from '../components/Header/Header';
 import { ThemeProvider } from '@/components/theme-provider';
-import BottomToolbar from '../components/BottomToolbar';
-import appwriteNoteService from '../appwrite/config';
 import parse from 'html-react-parser';
-import { useCallback } from 'react';
-import moment from 'moment/moment';
-import { ContentCopy, ContentCopyOutlined, CopyAll, Delete, DeleteOutline, LocalFireDepartmentOutlined } from '@mui/icons-material';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import appwriteNoteService from '../appwrite/config';
+import BottomToolbar from '../components/BottomToolbar';
+import Header from '../components/Header/Header';
+import { Copy } from 'lucide-react';
 const ViewNote = () => {
     const params = useParams();
     const [note, setNote] = useState(null);
@@ -60,7 +54,7 @@ const copyToClipboard=async ()=>{
                                         {/* <span className="inline-block py-1 px-2 rounded bg-gray-800 text-gray-400 text-opacity-75 text-xs font-medium tracking-widest">{tleftString}</span> */}
 <div className="flex w-full  justify-between items-center ">
                                         <h2 className="sm:text-3xl text-2xl title-font font-medium text-card-foreground mt-4 mb-4">{note.title}</h2>
-<ContentCopyOutlined sx={{fontSize:20}} onClick={copyToClipboard} className='opacity-0 md:opacity-100' />
+<Copy sx={{fontSize:20}} onClick={copyToClipboard} className='opacity-0 md:opacity-100' />
 </div>
                                         <p className="leading-relaxed mb-8">{parse(note.content)}</p>
                                         {/* <div className="flex items-center justify-between flex-wrap pb-4 mb-4 border-b border-accent  mt-auto w-full">

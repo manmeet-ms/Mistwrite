@@ -1,13 +1,10 @@
-import { ExternalLink } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
 
-import { CircleArrowRight, Files, Settings } from 'lucide-react';
 
-import { Star } from 'lucide-react';
 
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
-import { Book, Menu, Sunset, Trees, Zap } from 'lucide-react';
+import { Star,BookA, ExternalLink, ListTree ,CircleArrowRight, Files, Settings,Book, Menu, Sunset, Trees, Zap } from 'lucide-react';
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Button, buttonVariants } from '@/components/ui/button';
@@ -18,7 +15,6 @@ import AutoScroll from 'embla-carousel-auto-scroll';
 import React from 'react';
 
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
-import { Facebook, Instagram, LinkedIn, Twitter } from '@mui/icons-material';
 
 const logos = [
     {
@@ -96,22 +92,22 @@ const subMenuItemsOne = [
     {
         title: 'Blog',
         description: 'The latest industry news, updates, and info',
-        icon: <Book className="size-5 shrink-0" />,
+        icon: <ListTree className="size-5 shrink-0" />,
     },
     {
         title: 'Compnay',
         description: 'Our mission is to innovate and empower the world',
-        icon: <Trees className="size-5 shrink-0" />,
+        icon: <ListTree className="size-5 shrink-0" />,
     },
     {
         title: 'Careers',
         description: 'Browse job listing and discover our workspace',
-        icon: <Sunset className="size-5 shrink-0" />,
+        icon: <ListTree className="size-5 shrink-0" />,
     },
     {
         title: 'Support',
         description: 'Get in touch with our support team or visit our community forums',
-        icon: <Zap className="size-5 shrink-0" />,
+        icon: <ListTree className="size-5 shrink-0" />,
     },
 ];
 
@@ -119,22 +115,22 @@ const subMenuItemsTwo = [
     {
         title: 'Help Center',
         description: 'Get all the answers you need right here',
-        icon: <Zap className="size-5 shrink-0" />,
+        icon: <ListTree className="size-5 shrink-0" />,
     },
     {
         title: 'Contact Us',
         description: 'We are here to help you with any questions you have',
-        icon: <Sunset className="size-5 shrink-0" />,
+        icon: <ListTree className="size-5 shrink-0" />,
     },
     {
         title: 'Status',
         description: 'Check the current status of our services and APIs',
-        icon: <Trees className="size-5 shrink-0" />,
+        icon: <ListTree className="size-5 shrink-0" />,
     },
     {
         title: 'Terms of Service',
         description: 'Our terms and conditions for using our services',
-        icon: <Book className="size-5 shrink-0" />,
+        icon: <ListTree className="size-5 shrink-0" />,
     },
 ];
 
@@ -406,7 +402,7 @@ const LandingPage = () => {
                                     mask="url(#b)"
                                     style={{
                                         transformOrigin: 'center center',
-                                        opacity:0.12,
+                                        opacity: 0.12,
                                     }}>
                                     <path fill="none" d="M0 0h111.111v111.111H0zm111.111 0h111.111v111.111H111.111zm111.111 0h111.111v111.111H222.222zm111.111 0h111.111v111.111H333.333z" />
                                     <path fill="#eeeeeeaf" d="M444.444 0h111.111v111.111H444.444z" />
@@ -597,12 +593,11 @@ const LandingPage = () => {
                 </section>
                 <section className="py-24">
                     <div className="container text-center">
-                      
                         <div className="mx-auto flex max-w-screen-lg flex-col gap-6">
                             <h1 className="text-3xl font-extrabold lg:text-6xl">A Collection of Components Built With Shadcn & Tailwind</h1>
                             <p className="text-balance text-muted-foreground lg:text-lg">Finely crafted components built with React, Tailwind and Shadcn UI. Developers can copy and paste these blocks directly into their project.</p>
                         </div>
-                        
+
                         <Button size="lg" className="mt-10">
                             Discover all components
                         </Button>

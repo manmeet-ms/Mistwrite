@@ -1,13 +1,13 @@
 'use client';
+import Balancer from 'react-wrap-balancer'
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { LocalFireDepartmentOutlined } from '@mui/icons-material';
+import { motion, useAnimate } from 'framer-motion';
 import parse from 'html-react-parser';
+import { Slice } from 'lucide-react';
 import moment from 'moment';
 import React, { useCallback, useEffect, useState } from 'react';
-import { motion, useAnimate } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import appwriteNoteService from '../appwrite/config';
-import { Link, useParams } from 'react-router-dom';
 
 const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
     const [scope, animate] = useAnimate();
@@ -114,7 +114,7 @@ const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
             drag="x"
             dragDirectionLock
             onDragEnd={handleDragEnd}
-            className="pt-4 pr-2 pl-4 pb-2 h-fit max-h-[400px] overflow-auto text-card-foreground border-2 backdrop-blur-lg border-card-foreground/10 rounded-xl transition-all duration-500 ease-in-out cursor-grab active:cursor-grabbing">
+            className="pt-4 pr-2 pl-4 pb-2 h-fit max-h-[400px] overflow-auto text-card-foreground border-2 backdrop-blur-lg border-card-foreground/10 rounded-md transition-all duration-500 ease-in-out cursor-grab active:cursor-grabbing">
             <Link to={`/n/${noteId}`}>
                 {' '}
                 <div   className="space-y-2">
@@ -125,7 +125,7 @@ const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
                             <div>
                                 <span>
                                     <Badge className="font-[700] text-2xs text-primary bg-primary/15 hover:bg-primary/20 rounded-full py-1 pl-2" variant="secondary">
-                                        <LocalFireDepartmentOutlined className="mr-0.5 " sx={{ fontSize: 14, strokeWidth: 24 }} />
+                                        <Slice className="mr-1" size={12} strokeWidth={2.5} />
                                         {tleftString}
                                     </Badge>
                                 </span>

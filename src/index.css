@@ -212,3 +212,14 @@ button {
   font-family: var(--monoFont);
   
 }
+
+::-webkit-scrollbar{
+  width: 2px;
+  height: 0;
+  /* background-color: inherit; */
+}
+/* 
+::-webkit-scrollbar-thumb{
+
+  background-color: #64748b;
+} */

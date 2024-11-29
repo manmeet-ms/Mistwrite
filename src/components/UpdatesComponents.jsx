@@ -1,11 +1,6 @@
-import { Badge } from '@/components/ui/badge';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Bell } from 'lucide-react';
 import moment from 'moment/moment';
 import React from 'react';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { BatchPredictionOutlined, Event, EventOutlined, KeyboardDoubleArrowRight, LogoDevOutlined, NotificationsOutlined, TipsAndUpdatesOutlined, Today, Update } from '@mui/icons-material';
-import Header from './Header/Header';
-import BottomToolbar from './BottomToolbar';
 import { Link } from 'react-router-dom';
 
 const updateBullets = [
@@ -36,7 +31,7 @@ return(
                 <Link to="/changelog" >
                 <div className="relative">
                 {/* <TipsAndUpdatesOutlined /> */}
-                <NotificationsOutlined/>
+                <Bell className='w-5 h-5'   />
                 {/* <div className="w-3 h-3 absolute top-0 -right-0.5 rounded-full bg-foreground/50 border-[3.5px] border-white dark:border-black"></div> */}
             </div>
             </Link>
@@ -122,4 +117,5 @@ const LatestUpdatesAsPage = () => {
         </>
     );
 };
-export { LatestUpdatesAsPopover, LatestUpdatesAsPage };
+export { LatestUpdatesAsPage, LatestUpdatesAsPopover };
+

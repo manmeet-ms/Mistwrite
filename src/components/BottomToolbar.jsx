@@ -8,7 +8,7 @@
 
 // export default BottomToolbar
 
-import { Add, HomeOutlined, InfoOutlined, PostAdd, TuneOutlined } from '@mui/icons-material';
+import { Bolt, Home, Info, SquarePlus } from 'lucide-react';
 
 import React from 'react';
 import { useSelector } from 'react-redux';
@@ -25,30 +25,30 @@ const BottomToolbar = () => {
         {
             name: 'Home',
             slug: '/',
-            icon: <HomeOutlined />,
+            icon: <Home />,
         },
         {
             name: 'Create',
             slug: '/add-note',
-            icon: <PostAdd />,
+            icon: <SquarePlus />,
         },
 
         {
             name: 'Info',
             slug: '/about',
-            icon: <InfoOutlined />,
+            icon: <Info />,
         },
         {
             name: 'Settings',
             slug: '/settings',
-            icon: <TuneOutlined />,
+            icon: <Bolt />,
         },
     ];
 
     return (
         <>
             <Link to="/add-note" className="fixed bottom-8 right-4 rounded-full bg-primary  text-primary-foreground p-4 ">
-                <Add sx={{ fontSize: 28 }} />
+                <SquarePlus sx={{ fontSize: 28 }} />
             </Link>
 
             <main className="hidden">
