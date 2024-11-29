@@ -203,7 +203,7 @@ function App() {
                         <Button className="px-0 my-2 opacity-0" variant="icon" onClick={generateTestData}>
                                             <AutoFixHighSharp sx={{ fontSize: 24 }} />
                                         </Button>
-                                        <Button className="px-0 my-2" variant="icon" onClick={fetchNotes}>
+                                        <Button className=" text-muted-foreground px-0 my-2" variant="icon" onClick={fetchNotes}>
                                             <Cached sx={{ fontSize: 24 }} />
                                         </Button>
                 

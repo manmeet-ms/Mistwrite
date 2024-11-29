@@ -305,7 +305,7 @@ const Header = ({ pagename }) => {
                                 </span>
                             </Link>
 {/* Announcement */}
-                            <Link to="#" className="ml-3 text-xs leading-5 font-medium text-primary bg-primary/10 rounded-full py-1 px-3 hidden xl:flex items-center  hover:bg-sky-400/20">
+                            <Link to="#" className="ml-3 text-xs leading-5 font-medium text-primary bg-primary/10 rounded-full py-1 px-3 hidden xl:flex items-center  hover:bg-primary/20">
                                 <strong className="font-semibold">Introducing Mistwrite</strong>
                                 <svg width={2} height={2} fill="currentColor" aria-hidden="true" className="ml-2 text-primary dark:text-primary/70">
                                     <circle cx={1} cy={1} r={1} />
@@ -335,12 +335,12 @@ const Header = ({ pagename }) => {
                                     </ul>
                                 </nav>
                                 <div className="flex items-center space-x-4 text-muted-foreground transition-colors duration-500 ease ">
-                                    <span className='hover:text-accent-foreground'>
+                                    <span className=''>
 
                                     <LatestUpdatesAsPopover />
                                     </span>
 
-                                    <div className="flex flex-col hover:text-accent-foreground">
+                                    <div className="flex flex-col ">
                                         <Button variant="icon" onClick={() => setTheme('light')} className="px-0 absolute opacity-0 dark:opacity-100  scale-0 dark:scale-100 ">
                                             <DarkModeOutlined />
                                         </Button>
@@ -348,7 +348,7 @@ const Header = ({ pagename }) => {
                                             <WbSunnyOutlined />
                                         </Button>
                                     </div>
-                                    <button type="button" className="hidden md:hidden lg:block hover:text-accent-foreground">
+                                    <button type="button" className="hidden md:hidden lg:block ">
                         <span className="sr-only">Navigation</span>
                         {<Sheet>
                             <SheetTrigger asChild>
