@@ -16,12 +16,35 @@ const Setting = () => {
             name: 'About',
             icon: <ArticleOutlined sx={{ fontSize: 20 }} className={settingPageItemsStyle} />,
         },
+        {
+            name: 'set Theme ',
+            icon: <ArticleOutlined sx={{ fontSize: 20 }} className={settingPageItemsStyle} />,
+        },
+        {
+            name: 'Delete all notes',
+            icon: <ArticleOutlined sx={{ fontSize: 20 }} className={settingPageItemsStyle} />,
+        },
+        {
+            name: 'logout ',
+            icon: <ArticleOutlined sx={{ fontSize: 20 }} className={settingPageItemsStyle} />,
+        },
+        {
+            name: 'Changelog',
+            icon: <ArticleOutlined sx={{ fontSize: 20 }} className={settingPageItemsStyle} />,
+        },
     ];
-
+const commonItemStyle="px-2"
     return (
         <>
             <Header pagename="Settings" />
       <section className={globalStyle.pageBodyPaddingX}>
+
+{settingPageItems.map((item)=>(
+    <p className={`${commonItemStyle}`} >{item.name}</p>
+))}
+
+
+
 
       
             </section>

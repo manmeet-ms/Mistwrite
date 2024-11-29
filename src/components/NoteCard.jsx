@@ -115,9 +115,9 @@ const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
             dragDirectionLock
             onDragEnd={handleDragEnd}
             className="pt-4 pr-2 pl-4 pb-2 h-fit max-h-[400px] overflow-auto text-card-foreground border-2 backdrop-blur-lg border-card-foreground/10 rounded-xl transition-all duration-500 ease-in-out cursor-grab active:cursor-grabbing">
-            <Link to={`/n/:${noteId}`}>
+            <Link to={`/n/${noteId}`}>
                 {' '}
-                <div className="space-y-2">
+                <div   className="space-y-2">
                     <div className="flex justify-between">
                         <h4 className="w-20 md:w-24 lg:w-36 text-card-foreground break-words">{title}</h4>
 
@@ -133,9 +133,9 @@ const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
                         )}
                     </div>
 
-                    <p className="text-sm text-card-foreground dark:text-card-foreground/70 break-words text-balance">{parse(content)}</p>
+                    <p className="text-sm text-muted-foreground  break-words text-balance">{parse(content)}</p>
 
-                    <div className="flex flex-col text-xs text-card-foreground/30 break-all">
+                    <div className="flex flex-col text-xs text-muted-foreground/50 break-all">
                         <span>Created {moment(noteCreated).fromNow()} </span>
                     </div>
                 </div>

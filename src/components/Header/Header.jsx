@@ -5,7 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { AccountCircle, AccountTree, DarkModeOutlined, Email, FavoriteOutlined, GitHub, Home, Instagram, LinkedIn, MenuOutlined, PersonAddAlt, RateReview, Store, VolunteerActivism, WbSunnyOutlined, WidgetsOutlined } from '@mui/icons-material';
+import { AccountCircle, AccountTree, Brightness6Outlined, DarkModeOutlined, Email, FavoriteOutlined, GitHub, Home, Instagram, LinkedIn, MenuOutlined, PersonAddAlt, RateReview, Store, VolunteerActivism, WbSunnyOutlined, WidgetsOutlined } from '@mui/icons-material';
 import moment from 'moment/moment';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -345,7 +345,8 @@ const Header = ({ pagename }) => {
                                             <DarkModeOutlined />
                                         </Button>
                                         <Button variant="icon" onClick={() => setTheme('dark')} className="px-0   scale-100 dark:scale-0 ">
-                                            <WbSunnyOutlined />
+                                            {/* <WbSunnyOutlined /> */}
+                                            <Brightness6Outlined />
                                         </Button>
                                     </div>
                                     <button type="button" className="hidden md:hidden lg:block ">

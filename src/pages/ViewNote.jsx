@@ -18,13 +18,15 @@ const ViewNote = () => {
     const params = useParams();
     const [note, setNote] = useState(null);
 
-    const slug = String(params.id).replace(':', '');
-    console.log(slug);
+    const slug_NoteIdReceived = String(params.id);
+    console.log(params);
+    console.log("slug", slug_NoteIdReceived);
+    console.log("params.id", params.id);
 
     useEffect(() => {
         const displayNote = async () => {
             try {
-                const result = await appwriteNoteService.readNote(slug);
+                const result = await appwriteNoteService.readNote(slug_NoteIdReceived);
                 setNote(result);
 
                 console.log(result);
@@ -51,11 +53,7 @@ const copyToClipboard=async ()=>{
                     // Render note details once note is loaded
                     <>
                         <Header pagename={note.title} />
-
-    
-    
-
-                        <section className="text-card-foreground bg-card-background   overflow-hidden">
+                        <section className="text-muted-foreground bg-card-background  overflow-hidden">
                             <div className="container px-5  mx-auto">
                                 <div className="flex flex-wrap -m-12">
                                     <div className="p-12 md:w-1/2 flex flex-col items-start">

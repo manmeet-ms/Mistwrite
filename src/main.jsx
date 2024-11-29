@@ -1,26 +1,23 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import store from './store/store.js';
 
 import App from './App.jsx';
 import AuthLayout from './components/AuthLayout';
-import NoteCard from './components/NoteCard';
 import './index.css';
-import './style.css';
-import AddNote from './pages/AddNote';
-import EditNotes from './pages/EditPosts';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
-import Setting from './pages/Setting';
-import { LatestUpdatesAsPage } from './components/UpdatesComponents.jsx';
-import CHangelog from './pages/Changelog.jsx';
-import Changelog from './pages/Changelog.jsx';
 import About from './pages/About.jsx';
+import AddNote from './pages/AddNote';
+import Changelog from './pages/Changelog.jsx';
 import Contact from './pages/Contact.jsx';
 import LandingPage from './pages/LandingPage/LandingPage.jsx';
+import Login from './pages/Login';
+import Setting from './pages/Setting';
+import Signup from './pages/Signup';
+import Test from './pages/Test/Test.jsx';
 import ViewNote from './pages/ViewNote.jsx';
+import './style.css';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const router = createBrowserRouter([
     {
@@ -82,9 +79,9 @@ const router = createBrowserRouter([
     {
         path: '/contact',
         element: (
-            <AuthLayout authentication>
+            //<AuthLayout authentication>
             <Contact />
-            </AuthLayout>
+            //</AuthLayout>
         ),
     },
     {
@@ -97,15 +94,23 @@ const router = createBrowserRouter([
     },
     {
         path: '/n/:id',
-        element: <ViewNote />,
+        element: (
+            <AuthLayout authentication>
+                <ViewNote />,
+            </AuthLayout>
+        ),
+    },
+    {
+        path: '/t/:title',
+        element: <Test />,
     },
     {
         path: '/home',
         element: (
             <AuthLayout authentication={false}>
-            <LandingPage />
-        </AuthLayout>
-            ),
+                <LandingPage />
+            </AuthLayout>
+        ),
     },
 ]);
 

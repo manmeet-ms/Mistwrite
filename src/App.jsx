@@ -116,10 +116,6 @@ function App() {
                 content: `Check <a href="https://example.com/resources" target="_blank">this link</a> for study resources. Highlight key points from Chapters 3-5.`,
             },
             {
-                title: `Weekend Motivation`,
-                content: `“<blockquote>Success usually comes to those who are too busy to be looking for it.</blockquote>” - Henry David Thoreau`,
-            },
-            {
                 title: `Prep for Team Meet`,
                 content: `<ul>
                     <li>Review all action items from last week.</li>
