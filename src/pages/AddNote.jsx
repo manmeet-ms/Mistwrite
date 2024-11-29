@@ -7,7 +7,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 // import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { ThemeProvider } from '@/components/theme-provider';
-import { toast } from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 import appwriteNoteService from '../appwrite/config';
 import Header from '../components/Header/Header';
@@ -64,11 +63,9 @@ export default function AddNote({ onNoteCreate }) {
                 // Close dialog
                 setIsOpen(false);
 
-                toast.success('Note created successfully');
             }
         } catch (error) {
             console.error('Error creating note:', error);
-            toast.error('Failed to create note');
         } finally {
             setIsSubmitting(false);
             navigate("/")
