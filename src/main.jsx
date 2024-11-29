@@ -20,6 +20,7 @@ import Changelog from './pages/Changelog.jsx';
 import About from './pages/About.jsx';
 import Contact from './pages/Contact.jsx';
 import LandingPage from './pages/LandingPage/LandingPage.jsx';
+import ViewNote from './pages/ViewNote.jsx';
 
 const router = createBrowserRouter([
     {
@@ -95,8 +96,8 @@ const router = createBrowserRouter([
         ),
     },
     {
-        path: '/n/:slug',
-        element: <NoteCard />,
+        path: '/n/:id',
+        element: <ViewNote />,
     },
     {
         path: '/home',

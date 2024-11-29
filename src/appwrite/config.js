@@ -70,8 +70,8 @@ export class AppwriteNoteService {
 async readNote(slug) {
     try {
       return await this.database.getDocument(
-        appwriteDatabaseId,
-        appwriteCollectionId,
+        conf.appwriteDatabaseId,
+        conf.appwriteCollectionId,
         slug
       );
     } catch (errorFound) {

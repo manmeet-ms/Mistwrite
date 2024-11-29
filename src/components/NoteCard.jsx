@@ -7,22 +7,15 @@ import moment from 'moment';
 import React, { useCallback, useEffect, useState } from 'react';
 import { motion, useAnimate } from 'framer-motion';
 import appwriteNoteService from '../appwrite/config';
+import { Link, useParams } from 'react-router-dom';
 
-
-const NoteCard = ({ 
-    title, 
-    noteId, 
-    content, 
-    createdAt, 
-    onDelete 
-}) => {
-    const [tleftString, settleftString] = useState('NaN');
+const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
     const [scope, animate] = useAnimate();
-
     // const formatDate = useCallback((dateString) => {
     //     return dateString ? `${moment(dateString).format('MMM DD, YYYY')} at ${moment(dateString).format('HH:mm')}` : 'Invalid Date';
     // }, []);
 
+    const [tleftString, settleftString] = useState('00h 00m');
     const deleteNoteOperation = async () => {
         if (!noteId) {
             console.error('No noteId provided');
@@ -43,26 +36,35 @@ const NoteCard = ({
     const handleDragEnd = async (_, info) => {
         const offset = info.offset.x;
         const velocity = info.velocity.x;
-        
+
         if (offset < -100 || offset > 100 || velocity < -500) {
             // Swipe to delete
-            await animate(scope.current, { 
-                x: offset, 
-                opacity: 0 
-            }, { 
-                duration: 0.2 
-            });
-            
+            await animate(
+                scope.current,
+                {
+                    x: offset,
+                    opacity: 0,
+                },
+                {
+                    duration: 0.2,
+                },
+            );
+
             // Wait for animation to complete before deleting
-            setTimeout(deleteNoteOperation, 200);
+            deleteNoteOperation();
+            // setTimeout(deleteNoteOperation, 100);
         } else {
             // Snap back if not swiped far enough
-            await animate(scope.current, { 
-                x: 0, 
-                opacity: 1 
-            }, { 
-                duration: 0.5 
-            });
+            await animate(
+                scope.current,
+                {
+                    x: 0,
+                    opacity: 1,
+                },
+                {
+                    duration: 0.2,
+                },
+            );
         }
     };
 
@@ -107,38 +109,37 @@ const NoteCard = ({
     const timeLeft = calculateTimeLeft(noteCreated, noteBurn);
 
     return (
-        <motion.section 
+        <motion.section
             ref={scope}
             drag="x"
             dragDirectionLock
             onDragEnd={handleDragEnd}
-            className="pt-4 pr-2 pl-4 pb-2 h-fit max-h-[400px] overflow-auto text-card-foreground border-2 backdrop-blur-lg border-card-foreground/10 rounded-xl transition-all duration-500 ease-in-out cursor-grab active:cursor-grabbing"
-        >
-            <div className="space-y-2">
-                <div className="flex justify-between">
-                    <h4 className="w-20 md:w-24 lg:w-36 text-card-foreground break-words">{title}</h4>
-                    
-                    {timeLeft && (
-                        <div>
-                            <span>
-                                <Badge className="font-[700] text-2xs text-primary bg-primary/15 hover:bg-primary/20 rounded-full py-1 pl-2" variant="secondary">
-                                    <LocalFireDepartmentOutlined className="mr-0.5 " sx={{ fontSize: 14, strokeWidth: 24 }} />
-                                    {tleftString}
-                                </Badge>
-                            </span>
-                        </div>
-                    )}
-                </div>
-                
-                <p className="text-sm text-card-foreground dark:text-card-foreground/70 break-words text-balance">
-                    {parse(content)}
-                </p>
+            className="pt-4 pr-2 pl-4 pb-2 h-fit max-h-[400px] overflow-auto text-card-foreground border-2 backdrop-blur-lg border-card-foreground/10 rounded-xl transition-all duration-500 ease-in-out cursor-grab active:cursor-grabbing">
+            <Link to={`/n/:${noteId}`}>
+                {' '}
+                <div className="space-y-2">
+                    <div className="flex justify-between">
+                        <h4 className="w-20 md:w-24 lg:w-36 text-card-foreground break-words">{title}</h4>
 
-                <div className="flex flex-col text-xs text-card-foreground/30 break-all">
-                    <span>Created {moment(noteCreated).fromNow()} </span>
+                        {timeLeft && (
+                            <div>
+                                <span>
+                                    <Badge className="font-[700] text-2xs text-primary bg-primary/15 hover:bg-primary/20 rounded-full py-1 pl-2" variant="secondary">
+                                        <LocalFireDepartmentOutlined className="mr-0.5 " sx={{ fontSize: 14, strokeWidth: 24 }} />
+                                        {tleftString}
+                                    </Badge>
+                                </span>
+                            </div>
+                        )}
+                    </div>
+
+                    <p className="text-sm text-card-foreground dark:text-card-foreground/70 break-words text-balance">{parse(content)}</p>
+
+                    <div className="flex flex-col text-xs text-card-foreground/30 break-all">
+                        <span>Created {moment(noteCreated).fromNow()} </span>
+                    </div>
                 </div>
-            </div>
-            
+            </Link>
         </motion.section>
     );
 };

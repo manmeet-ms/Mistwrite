@@ -15,6 +15,7 @@
 - Shortcuts to directly create new note
  
 # tasks
+copy to clipcoard and delete now upon hovering on noteCard and NoteView by default 
 list on product hunt
 pickup and make fatafat landing page
 move bottom nav bar to side in desktop
