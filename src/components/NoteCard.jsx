@@ -3,7 +3,7 @@ import Balancer from 'react-wrap-balancer'
 import { Badge } from '@/components/ui/badge';
 import { motion, useAnimate } from 'framer-motion';
 import parse from 'html-react-parser';
-import { Slice } from 'lucide-react';
+import { PackageMinus, Slice } from 'lucide-react';
 import moment from 'moment';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -124,8 +124,8 @@ const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
                         {timeLeft && (
                             <div>
                                 <span>
-                                    <Badge className="font-[700] text-2xs text-primary bg-primary/15 hover:bg-primary/20 rounded-full py-1 pl-2" variant="secondary">
-                                        <Slice className="mr-1" size={12} strokeWidth={2.5} />
+                                    <Badge className="font-[700] text-2xs text-primary bg-primary/15   rounded-full py-1 pl-2" variant="secondary">
+                                        <PackageMinus className="mr-1" size={12} strokeWidth={2.5} />
                                         {tleftString}
                                     </Badge>
                                 </span>
@@ -136,8 +136,8 @@ const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
                     <p className="text-sm text-muted-foreground  break-words text-balance">{parse(content)}</p>
 
                     <div className="flex flex-col text-xs text-muted-foreground/50 break-all">
-                        <span>Created {moment(noteCreated).fromNow()} </span>
                     </div>
+                        <span>Created {moment(noteCreated).fromNow()} </span>
                 </div>
             </Link>
         </motion.section>

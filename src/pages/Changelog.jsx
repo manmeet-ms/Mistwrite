@@ -1,20 +1,10 @@
 import { ThemeProvider } from '@/components/theme-provider';
 
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-  BreadcrumbEllipsis,
-} from "@/components/ui/breadcrumb"
-import React from 'react'
-import { LatestUpdatesAsPage } from '../components/UpdatesComponents'
-import BottomToolbar from '../components/BottomToolbar'
-import Header from '../components/Header/Header'
-import { Link } from "react-router-dom"
-import globalStyle from "../conf/globalStyle"
+import React from 'react';
+import BottomToolbar from '../components/BottomToolbar';
+import Header from '../components/Header/Header';
+import { LatestUpdatesAsPage } from '../components/UpdatesComponents';
+import globalStyle from "../conf/globalStyle";
 
 const Changelog = () => {
   return (
@@ -25,8 +15,8 @@ const Changelog = () => {
       <section  className={`${globalStyle.pageBodyPaddingX} monoType`  }>
  
 <section className="container py-2 ">
-            <h1 className=" monoType  scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">Changelog</h1>
-                    <p className="  [&:not(:first-child)]:mt-4">
+            <h1 className="  scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">Changelog</h1>
+                    <p className=" text-muted-foreground [&:not(:first-child)]:mt-4">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora in unde itaque quam eum officia harum. Quis voluptatibus enim possimus beatae aliquam impedit obcaecati odio. 
                     </p>
     <LatestUpdatesAsPage/>

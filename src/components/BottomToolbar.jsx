@@ -8,7 +8,7 @@
 
 // export default BottomToolbar
 
-import { Bolt, Home, Info, SquarePlus } from 'lucide-react';
+import { Bolt, Home, Info, Plus, SquarePlus } from 'lucide-react';
 
 import React from 'react';
 import { useSelector } from 'react-redux';
@@ -47,8 +47,9 @@ const BottomToolbar = () => {
 
     return (
         <>
-            <Link to="/add-note" className="fixed bottom-8 right-4 rounded-full bg-primary  text-primary-foreground p-4 ">
-                <SquarePlus sx={{ fontSize: 28 }} />
+            {/* <Link to="/add-note" className="fixed bottom-8 right-4 rounded-xl bg-blue-900  text-blue-300 dark:bg-blue-400  dark:text-blue-950 p-4 "> */}
+            <Link to="/add-note" className="fixed bottom-8 right-4 rounded-xl  bg-primary  text-primary-foreground p-4 ">
+                <Plus size={24} strokeWidth={2.5} />
             </Link>
 
             <main className="hidden">

@@ -316,10 +316,13 @@ const Header = ({ pagename }) => {
 
                                     <h1 className="flex  tracking-tight items-center text-xl  text-foreground">
                                         Mistwrite
+                                        <Link to="/changelog">
                                         <span className="monoType text-xs ml-2 bg-muted border border-primary-foreground px-3 py-1 rounded-full">v1.0.0</span>
+                                        </Link>
                                     </h1>
                                 </span>
                             </Link>
+                      
                             {/* Announcement */}
                             <Link to="/changelog" className="ml-3 text-xs leading-5 font-medium text-primary bg-primary/10 rounded-full py-1 px-3 hidden xl:flex items-center  hover:bg-primary/20">
                                 <strong className="font-semibold">Introducing Mistwrite</strong>
