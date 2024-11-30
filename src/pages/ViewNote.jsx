@@ -46,7 +46,7 @@ const copyToClipboard=async ()=>{
                 {note && (
                     // Render note details once note is loaded
                     <>
-                        <Header pagename={note.title} />
+                        <Header pagename={note.title} isNoteView={true} />
                         <section className="text-muted-foreground bg-card-background  overflow-hidden">
                             <div className="container px-5  mx-auto">
                                 <div className="flex flex-wrap -m-12">

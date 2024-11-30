@@ -136,8 +136,8 @@ const NoteCard = ({ title, noteId, content, createdAt, onDelete }) => {
                     <p className="text-sm text-muted-foreground  break-words text-balance">{parse(content)}</p>
 
                     <div className="flex flex-col text-xs text-muted-foreground/50 break-all">
-                    </div>
                         <span>Created {moment(noteCreated).fromNow()} </span>
+                    </div>
                 </div>
             </Link>
         </motion.section>
